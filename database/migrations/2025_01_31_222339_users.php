@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('photo', 255)->nullable();
             // Timestamps para created_at y updated_at
             $table->timestamps();
-            });
+        });
     }
 
     /**

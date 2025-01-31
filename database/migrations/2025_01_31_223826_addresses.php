@@ -14,12 +14,12 @@ return new class extends Migration
         //
         Schema::create('addresses', function (Blueprint $table) {
             $table->id('idAddres'); // Clave Primaria
-            $table->string('street', 100);
-            $table->integer('number');
-            $table->string('neighborhood', 100);
-            $table->string('house', 100);
-            $table->string('streetBlock', 100);
-            $table->string('sector', 100);
+            $table->string('street', 100)->unique();
+            $table->integer('number')->unique();
+            $table->string('neighborhood', 100)->unique();
+            $table->string('house', 100)->unique();
+            $table->string('streetBlock', 100)->unique();
+            $table->string('sector', 100)->unique();
             // Timestamps para created_at y updated_at
             $table->timestamps();
         });
