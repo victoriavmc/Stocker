@@ -13,7 +13,7 @@ return new class extends Migration
     {
         //
         Schema::create('userhistories', function (Blueprint $table) {
-            $table->id('idUserHistory '); // Clave Primaria
+            $table->id('idUserHistory'); // Clave Primaria
             $table->string('statusLogic', 100); //Activo Inactivo Suspendido
 
             // Timestamps para created_at y updated_at
