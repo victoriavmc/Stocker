@@ -12,11 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pricehistory', function (Blueprint $table) {
-            $table->id('IdPriceHistory');
+            $table->id('idPriceHistory');
             $table->float('unitPrice');
             $table->date('startSeason');
             $table->date('endSeason');
-            $table->foreignId('IdProduct')->references('IdProduct')->on('products');
+
+            //Products
+            $table->foreignId('idProduct')->references('idProduct')->on('products');
+
+            //Tiempo
             $table->timestamps();
         });
     }

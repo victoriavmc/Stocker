@@ -12,9 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('movements', function (Blueprint $table) {
-            $table->id('IdMovement');
-            $table->string('statusLogic');
-            $table->foreignId('IdArchivist')->references('IdArchivist')->on('archivist');
+            $table->id('idMovement');
+            $table->string('statusLogic', 50);
+
+            //Archivist
+            $table->foreignId('idArchivist')->references('idArchivist')->on('archivist');
+
+            //Tiempo
             $table->timestamps();
         });
     }

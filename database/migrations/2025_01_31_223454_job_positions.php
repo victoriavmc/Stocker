@@ -12,15 +12,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('jobposition', function (Blueprint $table) {
-            $table->id('IdJobPosition');
+            $table->id('idJobPosition');
             $table->date('startDate');
-            $table->date('endDate');
-            $table->string('position');
-            $table->string('status');
-            $table->string('statusLogic');
-            $table->string('observation');
-            $table->foreignId('IdPerson')->references('IdPerson')->on('persons');
+            $table->date('endDate')->nullable();
+            $table->string('position', 100);
+            $table->string('status',60); // Activo, Inactivo, Suspendido
+            $table->string('statusLogic',60); // No, Eliminado
+            $table->string('observation',100)->nullable();
+
+            //Tiempo
             $table->timestamps();
+
+            //Persons
+            $table->foreignId('idPerson')->references('idPerson')->on('persons');
         });
     }
 

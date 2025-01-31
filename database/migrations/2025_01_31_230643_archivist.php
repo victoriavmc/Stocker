@@ -12,11 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('archivist', function (Blueprint $table) {
-            $table->id('IdArchivist');
+            $table->id('idArchivist');
             $table->date('date');
-            $table->string('movementType');
-            $table->integer('invoiceNumber');
-            $table->foreignId('IdInventoryData')->references('IdInventoryData')->on('inventorydata');
+            $table->string('movementType', 60); //Entrada (COMPRA DONACION) - Salida (VENTA PERDIDA)
+            $table->integer('invoiceNumber'); //numeroFactura
+
+            // InventoryData
+            $table->foreignId('idInventoryData')->references('idInventoryData')->on('inventorydata');
+
+            // Tiempo
             $table->timestamps();
         });
     }
