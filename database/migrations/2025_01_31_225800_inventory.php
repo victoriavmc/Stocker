@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('idInventory');
             $table->integer('maxQuantity');
             $table->integer('minQuantity');
-            $table->interger('stock');
+            $table->integer('stock');
 
             //Products
             $table->foreignId('idProduct')->references('idProduct')->on('products');
