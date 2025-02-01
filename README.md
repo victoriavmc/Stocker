@@ -1,27 +1,27 @@
 # 📦 **Stocker: Sistema Integral de Gestión de Inventarios**
 
 <p align="center">
-  <img src="/z-Readme/stocker.png" alt="logoSistema">
+  <img src="/z-Readme/stocker.png" alt="logoSistema" width='200'>
 </p>
 
 ---
 
 ## 📑 **Índice**  
-- [🔍 Descripción](#descripción)  
+- [🔍 Descripción](#descripcion)  
 - [🎯 Objetivos](#objetivos)  
 - [📋 Requerimientos](#requerimientos)  
   - [🔧 Funcionales](#funcionales)  
   - [🚀 No Funcionales](#no-funcionales)  
-- [📏 Límites](#límites)  
+- [📏 Límites](#limites)  
 - [📊 Alcance](#alcance)  
-- [💻 Tecnologías](#tecnologías)  
-- [📚 Librerías](#librerías)  
+- [💻 Tecnologías](#tecnologias)  
+- [📚 Librerías](#librerias)  
 - [🧩 Biblioteca de Componentes](#biblioteca-de-componentes)  
-- [⚙️ Definición de la Tecnología](#definición-de-la-tecnología-a-utilizar)  
+- [⚙️ Definición de la Tecnología](#definicion-de-la-tecnologia-a-utilizar)  
 
 ---
 
-## 🔍 **Descripción**  
+## 🔍 <a name="descripcion"></a> **Descripción**  
 "**Stocker**" es una **plataforma modular** diseñada para **pequeñas y medianas empresas** que buscan gestionar de manera eficiente:  
 - 📦 **Inventario y movimientos de productos**  
 - 🧾 **Facturación**  
@@ -34,20 +34,20 @@ Ofrece un control exhaustivo de los procesos internos de stock:
 
 ---
 
-## 🎯 **Objetivos**  
+## 🎯 <a name="objetivos"></a> **Objetivos**  
 - ✅ Desarrollar un sistema integral de gestión de inventarios con control de productos, movimientos y roles.  
 - ✅ Incorporar funcionalidades de **facturación**, **historial de precios** y **notificaciones automáticas** por niveles de stock.  
 - ✅ Generar **reportes exportables** en PDF y Excel para un análisis eficiente.  
 
 ---
 
-## 📋 **Requerimientos**
+## 📋 <a name="requerimientos"></a> **Requerimientos**
 
-### 🔧 **Funcionales:**  
+### 🔧 <a name="funcionales"></a> **Funcionales:**  
 - 🔄 **CRUD** para usuarios, roles, inventarios y facturación.  
 - 📤 **Generación de reportes exportables** (PDF/Excel).  
 
-### 🚀 **No Funcionales:**  
+### 🚀 <a name="no-funcionales"></a> **No Funcionales:**  
 - 🔐 **Seguridad:** Autenticación robusta con Laravel Sanctum.  
 - ⚡ **Escalabilidad:** Preparado para crecer junto con tu negocio.  
 - 🚀 **Rendimiento:** Optimización para altas cargas de datos.  
@@ -55,13 +55,13 @@ Ofrece un control exhaustivo de los procesos internos de stock:
 
 ---
 
-## 📏 **Límites**  
+## 📏 <a name="limites"></a> **Límites**  
 - 🚫 **Sin funcionalidades avanzadas** de contabilidad ni comercio electrónico.  
 - 🌐 Solo disponible como **plataforma web** (sin app móvil en esta fase).  
 
 ---
 
-## 📊 **Alcance**  
+## 📊 <a name="alcance"></a> **Alcance**  
 - 👥 Gestión de usuarios con permisos personalizados.  
 - 📦 Control exhaustivo de inventarios.  
 - 🧾 Módulo de facturación simple y eficaz.  
@@ -69,7 +69,7 @@ Ofrece un control exhaustivo de los procesos internos de stock:
 
 ---
 
-## 💻 **Tecnologías**  
+## 💻 <a name="tecnologias"></a> **Tecnologías**  
 - **Frontend:** `Tailwind CSS`, `Blade (Laravel)`  
 - **Backend:** `Laravel`, `Laravel Sanctum`  
 - **Base de datos:** `MySQL` con `Laravel Eloquent`  
@@ -77,7 +77,7 @@ Ofrece un control exhaustivo de los procesos internos de stock:
 
 ---
 
-## 📚 **Librerías**  
+## 📚 <a name="librerias"></a> **Librerías**  
 - **Laravel Sanctum** (Seguridad y autenticación)  
 - **Spatie Laravel Permissions** (Gestión de roles y permisos)  
 - **Laravel Lang** (Soporte multilenguaje)  
@@ -87,7 +87,7 @@ Ofrece un control exhaustivo de los procesos internos de stock:
 
 ---
 
-## 🧩 **Biblioteca de Componentes**  
+## 🧩 <a name="biblioteca-de-componentes"></a> **Biblioteca de Componentes**  
 - 🎨 **Tailwind CSS** (Estilos rápidos y personalizables)  
 - 🗂️ **Laravel UI** (Interfaz de usuario básica)  
 - ⚡ **MaryUI** y **DaisyUI** (Componentes UI predefinidos)  
@@ -95,7 +95,7 @@ Ofrece un control exhaustivo de los procesos internos de stock:
 
 ---
 
-## ⚙️ **Definición de la Tecnología a Utilizar**  
+## ⚙️ <a name="definicion-de-la-tecnologia-a-utilizar"></a> **Definición de la Tecnología a Utilizar**  
 
 <p align="center">  
   <img src="https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL">  
