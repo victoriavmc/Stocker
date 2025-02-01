@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('idPriceHistory');
             $table->float('unitPrice');
             $table->date('startSeason');
-            $table->date('endSeason');
+            $table->date('endSeason')->nullable();
 
             //Products
             $table->foreignId('idProduct')->references('idProduct')->on('products');
