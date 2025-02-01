@@ -26,8 +26,8 @@ return new class extends Migration
             $table->timestamps();
 
             // Tiempo
-            $table->softDeletes();
             $table->string('statusLogic',50); // Eliminado, No
+            $table->softDeletes();
         });
     }
 
