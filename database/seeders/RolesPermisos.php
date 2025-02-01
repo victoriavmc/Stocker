@@ -98,57 +98,56 @@ class RolesPermisos extends Seeder
 
         // 🚩 Trabajador: permisos limitados, enfocados en tareas operativas (ajustable individualmente)
         $trabajador->givePermissionTo([
-        #1
-            // RRHH
-            'Crear - area de trabajo',
-            'Modificar - area de trabajo',
-            'Ver - area de trabajo',
-            'Ver - historial de trabajo',
-            'Modificar - datos personales',
-            'Ver - datos personales',
-            // Asignación de permisos
-            'Asignar - permiso',
-            'Crear - permiso',
-            'Modificar - permiso',
-            'Eliminar - permiso',
-            'Ver - permiso',
+            #1
+                // RRHH
+                'Crear - area de trabajo',
+                'Modificar - area de trabajo',
+                'Ver - area de trabajo',
+                'Ver - historial de trabajo',
+                'Modificar - datos personales',
+                'Ver - datos personales',
+                // Asignación de permisos
+                'Asignar - permiso',
+                'Crear - permiso',
+                'Modificar - permiso',
+                'Eliminar - permiso',
+                'Ver - permiso',
 
-            //(TODO LO ANTERIOR) y Solo Jefe RRHH
-            'Eliminar - area de trabajo',
-            'Modificar - historial de trabajo',
-            'Eliminar - datos personales',
-        #2
-            // Operario y Jefe de Operarios
-            'Crear - producto',
-            'Modificar - producto',
-            'Eliminar - producto',
-            'Ver - producto',
-            'Ver - inventario',
-            'Crear - reporte',
-            'Modificar - reporte',
+                //(TODO LO ANTERIOR) y Solo Jefe RRHH
+                'Eliminar - area de trabajo',
+                'Modificar - historial de trabajo',
+                'Eliminar - datos personales',
+            #2
+                // Operario y Jefe de Operarios
+                'Crear - producto',
+                'Modificar - producto',
+                'Eliminar - producto',
+                'Ver - producto',
+                'Ver - inventario',
+                'Crear - reporte',
+                'Modificar - reporte',
 
-            //(TODO LO ANTERIOR) y Solo el Jefe de Operarios
-            'Crear - inventario',
-            'Modificar - inventario',
-            'Eliminar - inventario',
-            'Eliminar - reporte',
-            'Ver - reporte',
-        #3
-            // Finanzas u Operario
-            'Crear - archivero',
-            'Modificar - archivero',
-            'Eliminar - archivero',
-            'Ver - archivero',
+                //(TODO LO ANTERIOR) y Solo el Jefe de Operarios
+                'Crear - inventario',
+                'Modificar - inventario',
+                'Eliminar - inventario',
+                'Eliminar - reporte',
+                'Ver - reporte',
+            #3
+                // Finanzas u Operario
+                'Crear - archivero',
+                'Modificar - archivero',
+                'Eliminar - archivero',
+                'Ver - archivero',
 
-            // Jefe de Finanzas
-            'Crear - precios de venta',
-            'Modificar - precios de venta',
-            'Eliminar - precios de venta',
-            'Ver - precios de venta',
-            // 'Ver - archivero',
-            // 'Ver - inventario',
-            // 'Ver - reporte',
-
+                // Jefe de Finanzas
+                'Crear - precios de venta',
+                'Modificar - precios de venta',
+                'Eliminar - precios de venta',
+                'Ver - precios de venta',
+                // 'Ver - archivero',
+                // 'Ver - inventario',
+                // 'Ver - reporte',
         ]);
 
         // 🚩 Recluta: permisos muy básicos, solo de lectura y creación limitada
