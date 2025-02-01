@@ -4,6 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use function Pest\Laravel\delete;
+
 return new class extends Migration
 {
     /**
@@ -16,16 +18,26 @@ return new class extends Migration
             $table->string('observation',200);
             $table->string('statusLogic',50);
 
-            //Movements
-            $table->foreignId('idMovement')->references('idMovement')->on('movements');
+            //Archivist
+            $table->foreignId('idArchivist')->references('idArchivist')->on('archivist');
 
-            //Tiempo
+            //Tiempo creado/modificado
             $table->timestamps();
+
+            // Tiempo de eliminado
+            $table->softDeletes();
         });
     }
 
     /**
      * Reverse the migrations.
      */
-    public function down(): void {}
+    public function down(): void {
+        // Eliminar la clave foránea antes de eliminar la tabla
+        Schema::table('reports', function (Blueprint $table) {
+            $table->dropForeign(['idArchivist']);  // Eliminar la clave foránea
+        });
+        Schema::dropIfExists('reports');
+
+}
 };

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->date('date');
             $table->string('movementType', 60); //Entrada (COMPRA DONACION) - Salida (VENTA PERDIDA)
             $table->integer('invoiceNumber'); //numeroFactura
+            $table->string('statusLogic', 50);
 
             // InventoryData
             $table->foreignId('idInventoryData')->references('idInventoryData')->on('inventorydata');
@@ -28,5 +29,12 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down(): void {}
+    public function down(): void {
+                // Eliminar la clave foránea antes de eliminar la tabla
+                Schema::table('archivist', function (Blueprint $table) {
+                    $table->dropForeign(['idInventoryData']);  // Eliminar la clave foránea
+                });
+                Schema::dropIfExists('archivist');
+
+    }
 };
