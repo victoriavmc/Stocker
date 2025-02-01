@@ -17,11 +17,11 @@ return new class extends Migration
             $table->float('price');
             $table->float('totalMovement');
 
-            //Products
-            $table->foreignId('idProduct')->references('idProduct')->on('products');
-
             //Tiempo
             $table->timestamps();
+
+            //Products
+            $table->foreignId('idProduct')->references('idProduct')->on('products');
         });
     }
 

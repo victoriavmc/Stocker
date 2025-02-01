@@ -17,15 +17,15 @@ return new class extends Migration
             $table->id('idReport');
             $table->string('observation',200);
 
-            //Archivist
-            $table->foreignId('idArchivist')->references('idArchivist')->on('archivist');
-
             //Tiempo creado/modificado
             $table->timestamps();
 
             // Timestamps para deleted_at
             $table->string('statusLogic',60); // No, Eliminado
             $table->softDeletes();
+
+            //Archivist
+            $table->foreignId('idArchivist')->references('idArchivist')->on('archivist');
         });
     }
 

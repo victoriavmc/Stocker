@@ -18,16 +18,15 @@ return new class extends Migration
             $table->string('productType',100);
             $table->string('photo',255)->nullable();
 
-
-            //BaseProduc
-            $table->foreignId('idBaseProduct')->references('idBaseProduct')->on('baseproducts');
-
             // Tiempo
             $table->timestamps();
 
             // Tiempo
             $table->string('statusLogic',50); // Eliminado, No
             $table->softDeletes();
+
+            //BaseProduc
+            $table->foreignId('idBaseProduct')->references('idBaseProduct')->on('baseproducts');
         });
     }
 

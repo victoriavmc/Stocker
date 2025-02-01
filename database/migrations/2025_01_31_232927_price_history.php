@@ -17,11 +17,11 @@ return new class extends Migration
             $table->date('startSeason');
             $table->date('endSeason')->nullable();
 
-            //Products
-            $table->foreignId('idProduct')->references('idProduct')->on('products');
-
             //Tiempo
             $table->timestamps();
+
+            //Products
+            $table->foreignId('idProduct')->references('idProduct')->on('products');
         });
     }
 

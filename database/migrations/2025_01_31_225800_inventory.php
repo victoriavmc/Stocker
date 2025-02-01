@@ -17,11 +17,11 @@ return new class extends Migration
             $table->integer('minQuantity');
             $table->integer('stock')->nullable();
 
-            //Products
-            $table->foreignId('idProduct')->references('idProduct')->on('products');
-
             //Tiempo
             $table->timestamps();
+
+            //Products
+            $table->foreignId('idProduct')->references('idProduct')->on('products');
         });
     }
 

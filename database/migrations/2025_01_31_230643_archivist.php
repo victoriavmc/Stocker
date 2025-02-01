@@ -17,15 +17,15 @@ return new class extends Migration
             $table->string('movementType', 60); //Entrada (COMPRA DONACION) - Salida (VENTA PERDIDA)
             $table->integer('invoiceNumber'); //numeroFactura
 
-            // InventoryData
-            $table->foreignId('idInventoryData')->references('idInventoryData')->on('inventorydata');
-
             // Tiempo
             $table->timestamps();
 
             // Timestamps para deleted_at
             $table->string('statusLogic',60); // No, Eliminado
             $table->softDeletes();
+
+            // InventoryData
+            $table->foreignId('idInventoryData')->references('idInventoryData')->on('inventorydata');
         });
     }
 
