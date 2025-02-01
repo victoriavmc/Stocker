@@ -30,7 +30,6 @@ class Archivist extends Model
     //Relacion enviando a otros modelos
     public function reports()
     {
-        return $this->hasMany(Reports::class, 'idArchivist', 'idArchivist');
+        return $this->hasMany(Report::class, 'idArchivist', 'idArchivist');
     }
-
 }

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Products extends Model
+class Product extends Model
 {
     // Definir el nombre de la tabla
     protected $table = 'products';
@@ -25,7 +25,7 @@ class Products extends Model
     // Relación recibiendo de otros modelos
     public function baseProduct()
     {
-        return $this->belongsTo(BaseProducts::class, 'idBaseProduct', 'idBaseProduct');
+        return $this->belongsTo(BaseProduct::class, 'idBaseProduct', 'idBaseProduct');
     }
 
     //Relacion enviando a otros modelos
@@ -43,5 +43,4 @@ class Products extends Model
     {
         return $this->hasMany(PriceHistory::class, 'idProduct', 'idProduct');
     }
-
 }

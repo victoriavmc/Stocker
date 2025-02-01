@@ -44,13 +44,11 @@ class Person extends Model
 
     public function audits()
     {
-        return $this->hasMany(Audits::class, 'idPerson', 'idPerson');
+        return $this->hasMany(Audit::class, 'idPerson', 'idPerson');
     }
 
     public function jobPositions()
     {
         return $this->hasMany(JobPosition::class, 'idPerson', 'idPerson');
     }
-
-
 }

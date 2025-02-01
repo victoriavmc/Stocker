@@ -20,15 +20,29 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
+    //Definir el nombre de la tabla
+    protected $table = 'users';
+
+    // Especifico la clave primaria
+    protected $primaryKey = 'idUser';
+
+    // Relación con el modelo Person
+    public function person()
+    {
+        return $this->hasOne(Person::class, 'idUser', 'idUser');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'username',
         'email',
         'password',
+        'pin',
+        'photo'
     ];
 
     /**
@@ -38,9 +52,7 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
-        'two_factor_recovery_codes',
-        'two_factor_secret',
+        'pin',
     ];
 
     /**
@@ -49,7 +61,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $appends = [
-        'profile_photo_url',
+        'photo',
     ];
 
     /**
@@ -60,7 +72,6 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
     }

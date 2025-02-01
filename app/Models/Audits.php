@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Audits extends Model
+class Audit extends Model
 {
-     // Definir el nombre de la tabla
+    // Definir el nombre de la tabla
     protected $table = 'audits';
 
     // Especifico la clave primaria

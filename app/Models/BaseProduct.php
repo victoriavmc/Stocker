@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class BaseProducts extends Model
+class BaseProduct extends Model
 {
     // Definir el nombre de la tabla
     protected $table = 'baseproducts';
@@ -21,8 +21,6 @@ class BaseProducts extends Model
     // Relación enviando de otros modelos
     public function products()
     {
-        return $this->hasMany(Products::class, 'idBaseProduct', 'idBaseProduct');
+        return $this->hasMany(Product::class, 'idBaseProduct', 'idBaseProduct');
     }
-
-
 }

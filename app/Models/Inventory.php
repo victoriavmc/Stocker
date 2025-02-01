@@ -23,6 +23,6 @@ class Inventory extends Model
     // Relación recibiendo de otros modelos
     public function product()
     {
-        return $this->belongsTo(Products::class, 'idProduct', 'idProduct');
+        return $this->belongsTo(Product::class, 'idProduct', 'idProduct');
     }
 }

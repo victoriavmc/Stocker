@@ -23,7 +23,7 @@ class InventoryData extends Model
     // Relación recibiendo de otros modelos
     public function product()
     {
-        return $this->belongsTo(Products::class, 'idProduct', 'idProduct');
+        return $this->belongsTo(Product::class, 'idProduct', 'idProduct');
     }
 
     //Relacion enviando a otros modelos
@@ -31,5 +31,4 @@ class InventoryData extends Model
     {
         return $this->hasMany(Archivist::class, 'idInventoryData', 'idInventoryData');
     }
-
 }
