@@ -19,7 +19,6 @@ class RolesPermisos extends Seeder
         $trabajador = Role::firstOrCreate(['name' => 'Trabajador']);
         $recluta = Role::firstOrCreate(['name' => 'Recluta']);
 
-
         // Permisos Generales
         $permisos = [
             // Job Positions
