@@ -75,8 +75,6 @@ Ofrece un control exhaustivo de los procesos internos de stock:
 - **Base de datos:** `MySQL` con `Laravel Eloquent`  
 - **Herramientas:** `Git`, `GitHub`, `Apache`, `Maatwebsite/Laravel-Excel`, `Spatie Laravel Permissions`  
 
----
-
 ### 📚 <a name="librerias"></a> **Librerías**  
 - **Laravel Sanctum** (Seguridad y autenticación)  
 - **Spatie Laravel Permissions** (Gestión de roles y permisos)  
@@ -84,8 +82,6 @@ Ofrece un control exhaustivo de los procesos internos de stock:
 - **Maatwebsite/Laravel-Excel** (Exportación de datos)  
 - **Laravel DOMPDF** (Generación de PDF)  
 - **Laravel Intervention Image** (Manipulación de imágenes)  
-
----
 
 ### 🧩 <a name="biblioteca-de-componentes"></a> **Biblioteca de Componentes**  
 - 🎨 **Tailwind CSS** (Estilos rápidos y personalizables)  
