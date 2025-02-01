@@ -15,8 +15,8 @@
 - [📏 Límites](#limites)  
 - [📊 Alcance](#alcance)  
 - [💻 Tecnologías](#tecnologias)  
-- [📚 Librerías](#librerias)  
-- [🧩 Biblioteca de Componentes](#biblioteca-de-componentes)  
+  - [📚 Librerías](#librerias)  
+  - [🧩 Biblioteca de Componentes](#biblioteca-de-componentes)  
 - [⚙️ Definición de la Tecnología](#definicion-de-la-tecnologia-a-utilizar)  
 
 ---
@@ -49,7 +49,7 @@ Ofrece un control exhaustivo de los procesos internos de stock:
 
 ### 🚀 <a name="no-funcionales"></a> **No Funcionales:**  
 - 🔐 **Seguridad:** Autenticación robusta con Laravel Sanctum.  
-- ⚡ **Escalabilidad:** Preparado para crecer junto con tu negocio.  
+- ⚡ **Escalabilidad:** Preparado para crecer.  
 - 🚀 **Rendimiento:** Optimización para altas cargas de datos.  
 - 🖥️ **Usabilidad:** Interfaz intuitiva para una experiencia fluida.  
 
@@ -77,7 +77,7 @@ Ofrece un control exhaustivo de los procesos internos de stock:
 
 ---
 
-## 📚 <a name="librerias"></a> **Librerías**  
+### 📚 <a name="librerias"></a> **Librerías**  
 - **Laravel Sanctum** (Seguridad y autenticación)  
 - **Spatie Laravel Permissions** (Gestión de roles y permisos)  
 - **Laravel Lang** (Soporte multilenguaje)  
@@ -87,7 +87,7 @@ Ofrece un control exhaustivo de los procesos internos de stock:
 
 ---
 
-## 🧩 <a name="biblioteca-de-componentes"></a> **Biblioteca de Componentes**  
+### 🧩 <a name="biblioteca-de-componentes"></a> **Biblioteca de Componentes**  
 - 🎨 **Tailwind CSS** (Estilos rápidos y personalizables)  
 - 🗂️ **Laravel UI** (Interfaz de usuario básica)  
 - ⚡ **MaryUI** y **DaisyUI** (Componentes UI predefinidos)  
