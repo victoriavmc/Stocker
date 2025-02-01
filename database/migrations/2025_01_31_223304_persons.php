@@ -31,6 +31,9 @@ return new class extends Migration
 
             // Timestamps para created_at y updated_at
             $table->timestamps();
+
+            // Timestamps para deleted_at
+            $table->softDeletes();
         });
     }
 

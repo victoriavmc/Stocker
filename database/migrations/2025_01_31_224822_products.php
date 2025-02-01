@@ -17,13 +17,17 @@ return new class extends Migration
             $table->string('measure',100);
             $table->string('productType',100);
             $table->string('photo',255)->nullable();
-            $table->string('statusLogic',50); // Eliminado, No
+
 
             //BaseProduc
             $table->foreignId('idBaseProduct')->references('idBaseProduct')->on('baseproducts');
 
             // Tiempo
             $table->timestamps();
+
+            // Tiempo
+            $table->softDeletes();
+            $table->string('statusLogic',50); // Eliminado, No
         });
     }
 

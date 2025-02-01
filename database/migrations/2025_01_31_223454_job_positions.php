@@ -17,11 +17,14 @@ return new class extends Migration
             $table->date('endDate')->nullable();
             $table->string('position', 100);
             $table->string('status',60); // Activo, Inactivo, Suspendido
-            $table->string('statusLogic',60); // No, Eliminado
             $table->string('observation',100)->nullable();
 
             //Tiempo
             $table->timestamps();
+
+            // Timestamps para deleted_at
+            $table->string('statusLogic',60); // No, Eliminado
+            $table->softDeletes();
 
             //Persons
             $table->foreignId('idPerson')->references('idPerson')->on('persons');

@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->id('idReport');
             $table->string('observation',200);
-            $table->string('statusLogic',50);
 
             //Archivist
             $table->foreignId('idArchivist')->references('idArchivist')->on('archivist');
@@ -24,7 +23,8 @@ return new class extends Migration
             //Tiempo creado/modificado
             $table->timestamps();
 
-            // Tiempo de eliminado
+            // Timestamps para deleted_at
+            $table->string('statusLogic',60); // No, Eliminado
             $table->softDeletes();
         });
     }

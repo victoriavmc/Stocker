@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('tableName', 100);
             $table->integer('recordId');
             $table->string('action');
-            $table->string('oldValue', 255);
+            $table->string('oldValue', 255)->nullable();
             $table->string('newValue', 255);
             // Timestamps para created_at y updated_at
             $table->timestamps();
