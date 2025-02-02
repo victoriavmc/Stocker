@@ -109,13 +109,13 @@ Ofrece un control exhaustivo de los procesos internos de stock:
   <tr>
     <td align="center">
       <a href="https://github.com/SantiAranda">
-        <img src="https://avatars.githubusercontent.com/u/78962948?s=100" width="100" /><br />
+        <img src="https://avatars.githubusercontent.com/u/134805510?v=4" width="100" alt="Avatar de Santi"><br />
         <sub><b>Santiago Aranda</b></sub>
       </a>
     </td>
     <td align="center">
       <a href="https://github.com/victoriavmc">
-        <img src="https://avatars.githubusercontent.com/u/78962948?s=100" width="100" /><br />
+        <img src="https://avatars.githubusercontent.com/u/94030658?v=4" width="100" alt="Avatar de VictoriaVMC"><br />
         <sub><b>Victoria VMC</b></sub>
       </a>
     </td>
