@@ -15,3 +15,7 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::get('/bienvenida', function () {
+    return view('emails.notiMensual');
+});
