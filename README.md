@@ -17,7 +17,8 @@
 - [💻 Tecnologías](#tecnologias)  
   - [📚 Librerías](#librerias)  
   - [🧩 Biblioteca de Componentes](#biblioteca-de-componentes)  
-- [⚙️ Definición de la Tecnología](#definicion-de-la-tecnologia-a-utilizar)  
+- [⚙️ Definición de la Tecnología](#definicion-de-la-tecnologia-a-utilizar)
+- [📢 Autores](#autores)  
 
 ---
 
@@ -100,3 +101,24 @@ Ofrece un control exhaustivo de los procesos internos de stock:
   <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS">  
   <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">  
 </p>  
+
+---
+
+## 📢 <a name="autores"></a> **Autores**  
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/SantiAranda">
+        <img src="https://avatars.githubusercontent.com/u/134805510?v=4" width="100" alt="Avatar de Santi"><br />
+        <sub><b>Santiago Aranda</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/victoriavmc">
+        <img src="https://avatars.githubusercontent.com/u/94030658?v=4" width="100" alt="Avatar de VictoriaVMC"><br />
+        <sub><b>Victoria VMC</b></sub>
+      </a>
+    </td>
+  </tr>
+</table>
+

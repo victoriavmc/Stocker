@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('email', 250)->unique();
             $table->string('photo', 255)->nullable();
             $table->rememberToken();
+            $table->string('add_tema_to_users_table', 55)->nullable();
             // Timestamps para created_at y updated_at
             $table->timestamps();
         });
