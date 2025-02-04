@@ -19,14 +19,14 @@
             </p>
 
             <strong><b>Detalles de los cambios:</b></strong>
-                <ul style="list-style-type: none; padding-left: 0; margin-top: 10px;">
-                    <li>
+                <ul class="lista">
+                    <li class="li">
                         <strong>Nombre de usuario:</strong> <span style="color: #1976d2;">[Nombre cambiado]</span>
                     </li>
-                    <li>
+                    <li class="li">
                         <strong>Correo electrónico:</strong> <span style="color: #1976d2;">[Correo cambiado]</span>
                     </li>
-                    <li>
+                    <li class="li">
                         <strong>Contraseña:</strong> <span style="color: #1976d2;">[Si fue un cambio de contraseña, se indica aquí]</span>
                     </li>
                 </ul>

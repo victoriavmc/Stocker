@@ -12,20 +12,12 @@
                 </div>
             </h1>
 
-            <p class="message">
-                A partir de
-                <div class="user-name">
-                    $FECHA
-                </div>, usted
-                <div class="user-name">
-                    $valorNombre
-                </div>
-                ocupará el puesto de
-                <div class="user-name">
-                    $PUESTO
-                </div>
-                y asumirá todas las responsabilidades asociadas a dicho puesto.<br><br>
-                Estamos muy seguros de que contribuirá al éxito de <strong>STOCKER.</strong><br><br>
+            <p class="text-content">
+                A partir de $FECHA, usted $valorNombre ocupará el puesto de $PUESTO
+                y asumirá todas las responsabilidades asociadas a dicho puesto.
+                <br>
+                Estamos muy seguros de que contribuirá al éxito de <strong>STOCKER.</strong>
+                <br>
                 Muchas gracias por su atención!
             </p>
         </div>

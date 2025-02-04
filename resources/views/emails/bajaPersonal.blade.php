@@ -53,17 +53,17 @@
     <div class="text-content">
         <p class="description">Hemos recibido una solicitud de baja por parte del usuario <span class="bold">nombre </span>. A continuación, los detalles de la cuenta para proceder con la baja: <span class="bold">STOCKER</span>. </p>
         <strong><b>Detalles de los cambios:</b></strong>
-                <ul style="list-style-type: none; padding-left: 0; margin-top: 10px;">
-                    <li>
+                <ul class="lista">
+                    <li class="li">
                         <strong>Nombre completo:</strong>  [Nombre completo]
                     </li>
-                    <li>
+                    <li class="li">
                         <strong>Correo electrónico: </strong> <span style="color: #1976d2;">[Correo electrónico]</span>
                     </li>
-                    <li>
+                    <li class="li">
                         <strong>Puesto: </strong> <span style="color: #1976d2;">[Puesto]</span>
                     </li>
-                    <li>
+                    <li class="li">
                         <strong>Fecha de solicitud: </strong> <span style="color: #1976d2;">[fecha]</span>
                     </li>
                 </ul>

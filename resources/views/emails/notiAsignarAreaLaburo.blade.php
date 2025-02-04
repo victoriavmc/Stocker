@@ -17,14 +17,14 @@
                 Es necesario que se le asigne un rol para completar el proceso de incorporación.<br><br>
 
                 <strong>Detalles del trabajador:</strong>
-                <ul style="list-style-type: none; padding-left: 0; margin-top: 10px;">
-                    <li style="padding: 8px 0;">
+                <ul class="lista">
+                    <li class="li">
                         <strong>Nombre completo:</strong> <span style="color: #1976d2;">[Nombre completo]</span>
                     </li>
-                    <li style="padding: 8px 0;">
+                    <li class="li">
                         <strong>Correo electrónico:</strong> <span style="color: #1976d2;">[Correo electrónico]</span>
                     </li>
-                    <li style="padding: 8px 0;">
+                    <li class="li">
                         <strong>Fecha de creación:</strong> <span style="color: #1976d2;">[Fecha]</span>
                     </li>
                 </ul>

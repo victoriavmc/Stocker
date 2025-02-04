@@ -52,7 +52,7 @@
     <h1 class="title">REESTABLECER CUENTA</h1>
     <div class="text-content">
         <p class="greeting">Hola, <span class="bold">Usuario</span>.</p>
-        <p class="description">Recibimos una solicitud para recuperar tu contraseña en <span class="bold">STOCKER</span>. Para restablecer, utiliza el siguiente código:</p>
+        <p class="description">Recibimos una solicitud para recuperar tu contraseña en <span class="bold">STOCKER</span>. Para restablecer, haga click al siguiente boton:</p>
         <div class="pin-box">
             <p class="pin-label">PIN de recuperación:</p>
             <p class="pin">123456</p>

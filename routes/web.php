@@ -31,5 +31,5 @@ Route::middleware([
 });
 
 Route::get('/bienvenida', function () {
-    return view('emails.notiMensual');
+    return view('emails.solicitudBaja');
 });
