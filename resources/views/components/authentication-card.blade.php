@@ -1,20 +1,20 @@
-<div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
+<div class="flex flex-col items-center min-h-screen pt-6 bg-gray-100 sm:justify-center sm:pt-0 dark:bg-gray-900">
 
-    <div class="w-full md:max-w-4xl mx-auto my-4 shadow-md overflow-hidden rounded-lg">
-        <div class="grid grid-cols-1 md:grid-cols-2 bg-white dark:bg-gray-800">
+    <div class="w-full mx-auto my-4 overflow-hidden rounded-lg shadow-md md:max-w-4xl">
+        <div class="grid grid-cols-1 bg-white md:grid-cols-2 dark:bg-gray-800">
             <div class="relative flex justify-center items-center min-h-[300px]">
-                <img class="absolute inset-0 w-full h-full object-cover" src="{{ asset('storage/image/web/register-bg.jpg') }}" alt="">
-                <h2 class="relative text-4xl md:text-6xl lg:text-7xl font-bold text-white text-center break-words z-10">{{ $text }}</h2>
+                <img class="absolute inset-0 object-cover w-full h-full" src="{{ asset('storage/image/web/register-bg.webp') }}" alt="ImagenBg">
+                <h2 class="relative z-10 text-4xl font-bold text-center text-white break-words md:text-6xl lg:text-7xl">{{ $text }}</h2>
             </div>
-    
-            <div class="flex justify-center py-10 lg:20 px-4 md:px-6">
+
+            <div class="flex justify-center px-4 py-10 lg:20 md:px-6">
                 <x-mary-form class="w-full max-w-sm lg:gap-6" method="POST" action="{{ route($action) }}">
                     @csrf
-    
-                    <div class="w-full flex justify-center mb-2">
-                        <a href="/"><img class="size-20 text-end" src="{{ asset('storage/image/web/stocker.ico') }}" alt=""></a>
+
+                    <div class="flex justify-center w-full mb-2">
+                        <a href="/"><img class="size-20 text-end" src="{{ asset('storage/image/web/stocker.ico') }}" alt="Logo"></a>
                     </div>
-                    
+
                     <x-mary-header title="{{ $title }}" class="mb-5" subtitle="{{ $subtitle }}" with-anchor />
                     {{ $slot }}
                 </x-mary-form>
