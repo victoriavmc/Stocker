@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <x-authentication-card text="¿Olvidaste tu contraseña?" title="Reestablecer cuenta" subtitle="No te preocupes! agrega tus datos para poder ayudarte">
+    <x-authentication-card text="¿Olvidaste tu contraseña?" title="Reestablecer cuenta" subtitle="No te preocupes! agrega tus datos para poder ayudarte" action="password.email">
         <div class="mb-3 text-sm text-gray-600 dark:text-gray-400">
             {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
         </div>

@@ -8,7 +8,7 @@
             </div>
     
             <div class="flex justify-center py-10 lg:20 px-4 md:px-6">
-                <x-mary-form class="w-full max-w-sm lg:gap-6" method="POST" action="{{ route('password.email') }}">
+                <x-mary-form class="w-full max-w-sm lg:gap-6" method="POST" action="{{ route($action) }}">
                     @csrf
     
                     <div class="w-full flex justify-center mb-2">

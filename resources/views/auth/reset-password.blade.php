@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <x-authentication-card text="Reestablece tu cuenta!" title="Reestablecer cuenta" subtitle="Ingresa tu correo actual y nueva contraseña para poder ayudarte!">
+    <x-authentication-card text="Reestablece tu cuenta!" title="Reestablecer cuenta" subtitle="Ingresa tu correo actual y nueva contraseña para poder ayudarte!" action="password.update">
         <x-validation-errors class="mb-3" />
 
         <input type="hidden" name="token" value="{{ $request->route('token') }}">

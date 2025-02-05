@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <x-authentication-card text="Bienvenido!" title="Login" subtitle="Bienvenido! Por favor inicia sesion para continuar">
+    <x-authentication-card text="Bienvenido!" title="Login" subtitle="Bienvenido! Por favor inicia sesion para continuar" action="login">
         <x-validation-errors class="mb-3" />
 
         @session('status')
