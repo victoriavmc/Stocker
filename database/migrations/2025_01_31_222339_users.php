@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id('idUser');
-            $table->string('username', 100);
+            $table->string('name', 100);
             $table->string('password', 255)->nullable();
             $table->string('email', 250)->unique();
-            $table->string('photo', 255)->nullable();
+            $table->string('profile_photo_path', 255)->nullable();
             $table->rememberToken();
             $table->string('add_tema_to_users_table', 55)->nullable();
             // Timestamps para created_at y updated_at

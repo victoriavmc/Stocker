@@ -38,11 +38,10 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'username',
+        'name',
         'email',
         'password',
-        'pin',
-        'photo'
+        'profile_photo_path'
     ];
 
     /**
@@ -52,7 +51,6 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'pin',
     ];
 
     /**
@@ -61,7 +59,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $appends = [
-        'photo',
+        'profile_photo_url',
     ];
 
     /**
