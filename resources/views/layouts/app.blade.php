@@ -32,6 +32,9 @@
                 </header>
             @endif
 
+            {{-- Tema --}}
+            @livewire('theme-selector')
+
             <!-- Page Content -->
             <main>
                 {{-- {{ $slot }} --}}
