@@ -59,6 +59,7 @@
                             </a>
 
                             {{-- Temas --}}
+                            @livewire('theme-selector')
                         </nav>
 
                     </header>

@@ -42,7 +42,8 @@ class User extends Authenticatable
         'email',
         'password',
         'pin',
-        'photo'
+        'photo',
+        'theme'
     ];
 
     /**
