@@ -138,6 +138,9 @@
                 </div>
             </header>
 
+            {{-- Tema --}}
+            @livewire('theme-selector')
+
             <!-- Page Content -->
             <main class="flex">
                 <!-- Barra Lateral (Sidebar) -->
