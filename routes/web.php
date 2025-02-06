@@ -34,9 +34,6 @@ Route::view('/history', 'history')
 Route::view('/about', 'about')
     ->name('about');
 
-Route::view('/products', 'products')
-    ->name('products');
-
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
