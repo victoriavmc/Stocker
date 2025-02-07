@@ -1,4 +1,4 @@
-<aside id="sidebar" class="fixed w-72 h-[92.8vh] mt-[4.1rem] sm:mt-0 p-4 transition-transform duration-200 ease-in-out transform -translate-x-full border-r lg:relative border-base-300 lg:translate-x-0 bg-white dark:bg-gray-800 shadow overflow-y-auto">
+<aside id="sidebar" class="fixed w-72 h-[92vh] mt-[4.1rem] sm:mt-0 p-4 bg-base-200 border-base-300 shadow overflow-y-auto transform translate-x-0 transition-transform duration-200 ease-in-out z-50">
     <!-- Logo y Nombre del Sistema -->
     <div class="flex items-center justify-center mb-6">
         <a class="text-xl btn btn-ghost">
@@ -8,9 +8,22 @@
     </div>
 
     <!-- Módulos -->
-    <div class="space-y-2">
+    <div class="space-y-4">
         <!-- Módulo: Auditoría (Solo Admin) -->
-        <details class="collapse dark:bg-gray-900">
+        <details class="collapse bg-base-100 hover:border-2 border-base-content">
+            <summary class="font-medium collapse-title">
+                <a wire:navigate href="{{ route('dashboard') }}" class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
+                        <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />
+                        <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" />
+                      </svg>                      
+                    Dashboard
+                </a>
+            </summary>
+        </details>
+
+        <!-- Módulo: Auditoría (Solo Admin) -->
+        <details class="collapse bg-base-100 hover:border-2 border-base-content">
             <summary class="font-medium collapse-title">
                 <a wire:navigate href="{{ route('auditoria') }}" class="flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
@@ -23,7 +36,7 @@
         </details>
 
         <!-- Módulo: Usuarios y Roles -->
-        <details class="collapse collapse-arrow dark:bg-gray-900">
+        <details class="collapse collapse-arrow bg-base-100 hover:border-2 border-base-content">
             <summary class="font-medium collapse-title">
                 <div class="flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
@@ -41,7 +54,7 @@
         </details>
 
         <!-- Módulo: Inventario -->
-        <details class="collapse collapse-arrow dark:bg-gray-900">
+        <details class="collapse collapse-arrow bg-base-100 hover:border-2 border-base-content">
             <summary class="font-medium collapse-title">
                 <div class="flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
@@ -59,7 +72,7 @@
         </details>
 
         <!-- Módulo: Facturación (Archivero) -->
-        <details class="collapse collapse-arrow dark:bg-gray-900">
+        <details class="collapse collapse-arrow bg-base-100 hover:border-2 border-base-content">
             <summary class="font-medium collapse-title">
                 <div class="flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
@@ -76,7 +89,7 @@
         </details>
 
         <!-- Módulo: Reportes -->
-        <details class="collapse collapse-arrow dark:bg-gray-900">
+        <details class="collapse collapse-arrow bg-base-100 hover:border-2 border-base-content">
             <summary class="font-medium collapse-title">
                 <div class="flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
@@ -92,7 +105,7 @@
         </details>
 
         <!-- Módulo: Métricas -->
-        <details class="collapse collapse-arrow dark:bg-gray-900">
+        <details class="collapse collapse-arrow bg-base-100 hover:border-2 border-base-content">
             <summary class="font-medium collapse-title">
                 <div class="flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
@@ -109,7 +122,7 @@
         </details>
 
         <!-- Módulo: Configuración -->
-        <details class="collapse collapse-arrow dark:bg-gray-900">
+        <details class="collapse collapse-arrow bg-base-100 hover:border-2 border-base-content">
             <summary class="font-medium collapse-title">
                 <div class="flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
@@ -131,19 +144,22 @@
         document.addEventListener("livewire:navigated", () => {
             const sidebarToggle = document.getElementById('sidebarToggle');
             const sidebar = document.getElementById('sidebar');
-            let isOpen = false;
+            const mainContent = document.getElementById('main-content');
+            let isOpen = true;
 
             function toggleSidebar() {
                 isOpen = !isOpen;
                 
-                // Toggle sidebar
-                sidebar.style.transform = isOpen ? 'translateX(0)' : 'translateX(-100%)';
+                // Alternar clases de Tailwind CSS
+                sidebar.classList.toggle('translate-x-0', isOpen);
+                sidebar.classList.toggle('-translate-x-full', !isOpen);
+                mainContent.classList.toggle('ml-72', isOpen); // Ajusta el margen del contenido principal
             }
 
             // Toggle button click handler
             sidebarToggle.addEventListener('click', toggleSidebar);
 
-            // Close sidebar on escape key
+            // Cerrar el sidebar con la tecla Escape
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && isOpen) {
                     toggleSidebar();

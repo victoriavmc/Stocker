@@ -20,11 +20,11 @@
     <body class="font-sans antialiased">
         <x-banner />
 
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+        <div class="min-h-screen">
             {{-- @livewire('navigation-menu') --}}
 
             <!-- Page Heading -->
-            <header class="navbar fixed sm:static bg-white dark:bg-gray-800 shadow">
+            <header class="navbar fixed sm:static bg-base-200 border-b border-b-base-content">
                 <div class="navbar-start">
                     <button class="dropdown" id="sidebarToggle">
                         <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
@@ -44,9 +44,9 @@
                     </button>
                 </div>
                 <div class="navbar-center">
-                    <a href="{{ route('dashboard') }}"class="btn btn-ghost text-xl rounded-none hover:rounded-lg border-b-2 border-b-indigo-600 hover:border-indigo-600 hover:border-2">
-                        Dashboard
-                    </a>
+                    <p class="btn btn-ghost text-xl rounded-none hover:rounded-lg border-b-2 border-b-base-content hover:border-base-content hover:border-2">
+                        {{ ucfirst(str_replace('-', ' ', Route::currentRouteName())) }}
+                    </p>
                 </div>
                 <div class="navbar-end">
                     <button class="btn btn-ghost btn-circle">
@@ -80,17 +80,21 @@
                             <span class="badge badge-xs badge-primary indicator-item"></span>
                         </div>
                     </button>
+                    {{-- Tema --}}
+                    <div class="ms-2">
+                        @livewire('theme-selector')
+                    </div>
                     <!-- Settings Dropdown -->
-                    <div class="ms-3 relative">
+                    <div class="ms-2 relative">
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
                                 @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-                                    <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
+                                    <button class="flex text-base-content bg-base-100 hover:bg-base-300 text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-base-300 transition">
                                         <img class="size-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
                                     </button>
                                 @else
                                     <span class="inline-flex rounded-md">
-                                        <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none focus:bg-gray-50 dark:focus:bg-gray-700 active:bg-gray-50 dark:active:bg-gray-700 transition ease-in-out duration-150">
+                                        <button type="button" class="inline-flex items-center px-3 py-2 border-2 border-transparent text-sm leading-4 font-medium rounded-lg text-base-content bg-base-100 hover:bg-base-300 border-base-content transition ease-in-out duration-150 focus:bg-base-300 active:bg-base-300">
                                             {{ Auth::user()->name }}
             
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="ms-2 size-8">
@@ -107,7 +111,7 @@
             
                             <x-slot name="content">
                                 <!-- Account Management -->
-                                <div class="block px-4 py-2 text-xs text-gray-400">
+                                <div class="block px-4 py-2 text-xs text-base-content">
                                     {{ __('Manage Account') }}
                                 </div>
             
@@ -121,7 +125,7 @@
                                     </x-dropdown-link>
                                 @endif
             
-                                <div class="border-t border-gray-200 dark:border-gray-600"></div>
+                                <div class="border-t border-base-content"></div>
             
                                 <!-- Authentication -->
                                 <form method="POST" action="{{ route('logout') }}" x-data>
@@ -138,15 +142,12 @@
                 </div>
             </header>
 
-            {{-- Tema --}}
-            @livewire('theme-selector')
-
             <!-- Page Content -->
-            <main class="flex">
+            <main class="flex min-h-[92vh]">
                 <!-- Barra Lateral (Sidebar) -->
                 @livewire('sidebar')
 
-                <div class="w-full">
+                <div id="main-content" class="w-full min-h-[92vh] ml-72 bg-base-content main-content transition-all duration-200 ease-in-out">
                     {{ $slot }}
                 </div>
                 

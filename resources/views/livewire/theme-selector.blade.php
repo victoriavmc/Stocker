@@ -1,6 +1,6 @@
 <div>
     <details id="theme-dropdown" class="dropdown">
-        <summary class="m-1 btn">
+        <summary class="m-1 btn bg-base-100 border-2 border-base-content hover:border-base-content">
             Temas
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2">
                 <polyline points="6 9 12 15 18 9"></polyline>
@@ -10,7 +10,7 @@
             <ul>
                 <li class="">
                     @foreach ($themes as $theme => $colors)
-                        <div class="flex flex-row justify-between p-3 w-30 mb-2" data-theme='{{ $theme }}' wire:click="updateSelectedTheme('{{ $theme }}')" onclick="applyTheme('{{ $theme }}'); closeDropdown(event)">
+                        <div class="flex flex-row justify-between hover:bg-green-100 p-3 w-30 mb-2" data-theme='{{ $theme }}' wire:click="updateSelectedTheme('{{ $theme }}')" onclick="applyTheme('{{ $theme }}'); closeDropdown(event)">
                             <div>
                                 <p>{{ ucfirst($theme) }}</p>
                             </div>
