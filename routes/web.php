@@ -3,10 +3,10 @@
 use App\Livewire\Ajustes\AjustesPagina;
 use App\Livewire\Ajustes\AjustesPersonal;
 use App\Livewire\Auditoria\Auditoria;
+use App\Livewire\Dashboard;
 use App\Livewire\Facturacion\ComprasDonaciones;
 use App\Livewire\Facturacion\PreciosPorTemporada;
 use App\Livewire\Facturacion\Ventas;
-use App\Livewire\Home;
 use App\Livewire\Inventario\Productos;
 use App\Livewire\Inventario\StockGeneral;
 use App\Livewire\Metricas\ProductosMasVendidos;
@@ -39,12 +39,12 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+
+    // Dashboard
+    Route::get('/dashboard', Dashboard::class)->name('dashboard');
 
     // Auditoria
-    Route::get('/auditoria', Auditoria::class)->name('auditoria');
+    Route::get('/auditoria', Auditoria::class)->name('auditoria')->middleware('can:Administrador');
 
     // Usuarios
     Route::get('/users/asignar-permisos', AsignarPermisos::class)->name('asignarPermisos');
