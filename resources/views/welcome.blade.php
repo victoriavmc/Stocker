@@ -3,7 +3,7 @@
 @section('content')
     <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
         <section class="flex justify-center">
-            <img class="" src="{{ asset('storage/image/web/stocker.ico') }}" alt="">
+            <img class="w-96 rounded" src="{{ asset('storage/image/web/welcome-image.webp') }}" alt="">
         </section>
 
         <section class="flex justify-center">

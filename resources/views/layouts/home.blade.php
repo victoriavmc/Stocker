@@ -767,12 +767,12 @@
                 line-height: 1.25rem
             }
 
-            .text-black {
+            . {
                 --tw-text-opacity: 1;
                 color: rgb(0 0 0 / var(--tw-text-opacity, 1))
             }
 
-            .text-black\/50 {
+            .\/50 {
                 color: #00000080
             }
 
@@ -915,12 +915,12 @@
                 color: rgb(255 255 255 / var(--tw-text-opacity, 1))
             }
 
-            .hover\:text-black:hover {
+            .hover\::hover {
                 --tw-text-opacity: 1;
                 color: rgb(0 0 0 / var(--tw-text-opacity, 1))
             }
 
-            .hover\:text-black\/70:hover {
+            .hover\:\/70:hover {
                 color: #000000b3
             }
 
@@ -1215,49 +1215,44 @@
     @livewireStyles
 </head>
 
-<body class="font-sans antialiased dark:bg-black dark:text-white/50">
-    <div class="bg-gray-50 text-black dark:bg-black dark:text-white">
-        {{-- <img id="background" class="absolute -left-20 top-0 max-w-[877px]" src="https://laravel.com/assets/img/welcome/background.svg" alt="Laravel background" /> --}}
-        <div
-            class="relative min-h-screen flex flex-col items-center justify-center selection:bg-[#127fa4] selection:text-white">
-            <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
-                <header
-                    class="fixed top-0 left-0 z-50 grid items-center w-full grid-cols-2 gap-2 px-6 pt-8 pb-4 lg:px-0">
-                    <div class="flex lg:justify-center">
-                        <h1 class="text-4xl font-medium transition-colors duration-300 hover:text-white">
-                            <a href="/">Stocker</a>
-                        </h1>
-                    </div>
-
-                    <nav class="flex flex-1 -mx-3 justify-evenly">
-                        {{-- Temas --}}
-                        @livewire('theme-selector')
-
-                        <a href="{{ route('history') }}"
-                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                            Historia
-                        </a>
-
-                        <a href="{{ route('about') }}"
-                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                            Nosotros
-                        </a>
-                    </nav>
-
-                </header>
-
-                <main class="mt-6">
-                    @yield('content')
-                </main>
-
-                <footer
-                    class="fixed bottom-0 left-0 z-50 w-full pt-4 pb-8 text-sm text-center text-black dark:text-white/70">
-                    <p>
-                        &copy; {{ date('Y') }} Stocker. All rights reserved.
-                    </p>
-                </footer>
+<body class="font-sans antialiased text-base-content">
+    <div class="relative w-full">
+        <header
+            class="sm:grid items-center w-full grid-cols-2 gap-2 px-4 sm:px-6 pt-4 sm:pt-4 pb-4 sm:pb-4 lg:px-0 bg-black/50 border-b border-base-content">
+            <div class="mb-2 sm:mb-0">
+                <a class="flex justify-center items-center" href="/">
+                    <img src="{{ asset('storage/image/web/stocker.ico') }}" alt="Stocker" class="w-16 h-16 mr-2">
+                    <h1 class="text-4xl font-medium transition-colors duration-300">
+                        Stocker
+                    </h1>
+                </a>
             </div>
-        </div>
+
+            <nav class="flex flex-1 justify-center gap-2 sm:gap-10 items-center">
+                {{-- Temas --}}
+                @livewire('theme-selector')
+
+                <a href="{{ route('history') }}"
+                    class="rounded-md px-3 py-2 ring-1 ring-transparent transition focus:outline-none focus-visible:ring-[#FF2D20]">
+                    Historia
+                </a>
+
+                <a href="{{ route('about') }}"
+                    class="rounded-md px-3 py-2 ring-1 ring-transparent transition focus:outline-none focus-visible:ring-[#FF2D20]">
+                    Nosotros
+                </a>
+            </nav>
+        </header>
+
+        <main class="min-h-[83.6vh] flex flex-col items-center justify-center bg-base-100 px-8 py-4">
+            @yield('content')
+        </main>
+
+        <footer class="w-full pt-4 pb-4 text-sm text-center bg-black/50 border-t border-base-content">
+            <p>
+                &copy; {{ date('Y') }} Stocker. All rights reserved.
+            </p>
+        </footer>
     </div>
     @livewireScripts
 </body>

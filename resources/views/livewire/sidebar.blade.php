@@ -1,5 +1,5 @@
 <aside id="sidebar"
-    class="absolute w-72 h-[92vh] mt-[73px] sm:mt-0 p-4 bg-base-200 border-r border-base-content shadow overflow-y-auto transform translate-x-0 transition-transform duration-200 ease-in-out z-50">
+    class="absolute w-72 h-[92vh] mt-[73px] sm:mt-0 p-4 bg-base-200 border-t border-base-content/10 shadow-lg overflow-y-auto transform translate-x-0 transition-transform duration-200 ease-in-out z-50">
     <!-- Logo y Nombre del Sistema -->
     <div class="flex items-center justify-center mb-6">
         <a class="text-xl btn btn-ghost">
@@ -11,7 +11,7 @@
     <!-- Módulos -->
     <div class="space-y-4">
         <!-- Módulo: Auditoría (Solo Admin) -->
-        <details class="collapse bg-base-100 hover:border-2 border-base-content">
+        <details class="collapse bg-base-content/10 hover:bg-base-content/20">
             <summary class="font-medium collapse-title">
                 <a wire:navigate href="{{ route('dashboard') }}" class="flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -28,7 +28,7 @@
 
         <!-- Módulo: Auditoría (Solo Admin) -->
         @can('Administrador')
-            <details class="collapse bg-base-100 hover:border-2 border-base-content">
+            <details class="collapse bg-base-content/10 hover:bg-base-content/20">
                 <summary class="font-medium collapse-title">
                     <a wire:navigate href="{{ route('auditoria') }}" class="flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -45,7 +45,7 @@
         @endcan
 
         <!-- Módulo: Usuarios y Roles -->
-        <details class="collapse collapse-arrow bg-base-100 hover:border-2 border-base-content">
+        <details class="collapse collapse-arrow bg-base-content/10 hover:bg-base-content/20">
             <summary class="font-medium collapse-title">
                 <div class="flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -70,7 +70,7 @@
         </details>
 
         <!-- Módulo: Inventario -->
-        <details class="collapse collapse-arrow bg-base-100 hover:border-2 border-base-content">
+        <details class="collapse collapse-arrow bg-base-content/10 hover:bg-base-content/20">
             <summary class="font-medium collapse-title">
                 <div class="flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -94,7 +94,7 @@
         </details>
 
         <!-- Módulo: Facturación (Archivero) -->
-        <details class="collapse collapse-arrow bg-base-100 hover:border-2 border-base-content">
+        <details class="collapse collapse-arrow bg-base-content/10 hover:bg-base-content/20">
             <summary class="font-medium collapse-title">
                 <div class="flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -117,7 +117,7 @@
         </details>
 
         <!-- Módulo: Reportes -->
-        <details class="collapse collapse-arrow bg-base-100 hover:border-2 border-base-content">
+        <details class="collapse collapse-arrow bg-base-content/10 hover:bg-base-content/20">
             <summary class="font-medium collapse-title">
                 <div class="flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -138,7 +138,7 @@
         </details>
 
         <!-- Módulo: Métricas -->
-        <details class="collapse collapse-arrow bg-base-100 hover:border-2 border-base-content">
+        <details class="collapse collapse-arrow bg-base-content/10 hover:bg-base-content/20">
             <summary class="font-medium collapse-title">
                 <div class="flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -161,7 +161,7 @@
         </details>
 
         <!-- Módulo: Configuración -->
-        <details class="collapse collapse-arrow bg-base-100 hover:border-2 border-base-content">
+        <details class="collapse collapse-arrow bg-base-content/10 hover:bg-base-content/20">
             <summary class="font-medium collapse-title">
                 <div class="flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"

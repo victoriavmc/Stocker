@@ -24,13 +24,13 @@
         <h2 class="text-3xl font-bold mb-8 text-center">Autores</h2>
 
         <!-- Primer Autor: Imagen a la izquierda, información a la derecha -->
-        <div class="card max-h-60 lg:card-side bg-base-100 shadow-xl mb-8">
-            <figure class="p-4">
+        <div class="card lg:max-h-80 lg:card-side bg-base-300 shadow-xl mb-8">
+            <figure class="py-4 px-4 lg:px-0">
                 <img src="{{ asset('storage/image/web/santi.webp') }}" alt="Foto de Santi" class="rounded-lg">
             </figure>
             <div class="card-body lg:w-1/2">
-                <h2 class="card-title">Santiago N. Aranda</h2>
-                <p>
+                <h2 class="card-title text-2xl">Santiago N. Aranda</h2>
+                <p class="md:text-lg">
                     Soy un profesional apasionado por el diseño y la experiencia de usuario, con un perfil que fusiona
                     creatividad y rigor técnico. <br>
                     Soy fan de los RPG y de la Chocotorta.
@@ -39,17 +39,16 @@
         </div>
 
         <!-- Segundo Autor: Información a la izquierda, imagen a la derecha -->
-        <div class="card max-h-60 lg:card-side bg-base-100 shadow-xl">
+        <div class="card lg:max-h-80 lg:card-side bg-base-300 shadow-xl">
             <div class="card-body lg:w-1/2">
-                <h2 class="card-title">VictoriaVMC</h2>
-                <p>
+                <h2 class="card-title text-2xl">VictoriaVMC</h2>
+                <p class="md:text-lg">
                     Soy una profesional apasionada por la programación y la gestión de bases de datos, con un enfoque sólido
                     en la creación de funcionalidades robustas y eficientes. Fusionando creatividad y rigor técnico. <br>
                     Soy fan del Cs y de la Pepsi.
                 </p>
-
             </div>
-            <figure class="p-4">
+            <figure class="py-4 px-4 lg:px-0">
                 <img src="{{ asset('storage/image/web/victoriavmc.webp') }}" alt="Foto de VictoriaVMC" class="rounded-lg">
             </figure>
         </div>

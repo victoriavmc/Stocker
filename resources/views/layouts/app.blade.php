@@ -26,7 +26,7 @@
         {{-- @livewire('navigation-menu') --}}
 
         <!-- Page Heading -->
-        <header class="navbar fixed sm:static bg-base-200 border-b border-b-base-content">
+        <header class="navbar fixed sm:static bg-base-200 shadow-lg">
             <div class="navbar-start">
                 <button class="dropdown" id="sidebarToggle">
                     <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
@@ -72,14 +72,14 @@
                         <x-slot name="trigger">
                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                                 <button
-                                    class="flex text-base-content bg-base-100 border-base-content hover:bg-base-300 text-sm border-2 rounded-full focus:outline-none focus:border-base-300 transition">
+                                    class="flex text-base-content bg-base-content/10 hover:bg-base-content/20 text-sm border-2 rounded-full focus:outline-none focus:border-base-300 transition">
                                     <img class="size-8 rounded-full object-cover"
                                         src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
                                 </button>
                             @else
                                 <span class="inline-flex rounded-md">
                                     <button type="button"
-                                        class="inline-flex items-center px-3 py-2 border-2 text-sm leading-4 font-medium rounded-lg text-base-content bg-base-100 hover:bg-base-300 border-base-content transition ease-in-out duration-150 focus:bg-base-300 active:bg-base-300">
+                                        class="inline-flex items-center px-3 py-2 text-sm leading-4 font-medium rounded-lg text-base-content bg-base-content/10 hover:bg-base-content/20 transition ease-in-out duration-150 focus:bg-base-300 active:bg-base-300">
                                         {{ Auth::user()->name }}
 
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -137,7 +137,7 @@
             @livewire('sidebar')
 
             <div id="main-content"
-                class="w-full min-h-[92vh] ml-72 bg-base-300 main-content transition-all duration-200 ease-in-out">
+                class="w-full min-h-[92vh] ml-72 bg-base-content/10 main-content transition-all duration-200 ease-in-out">
                 {{ $slot }}
             </div>
 
