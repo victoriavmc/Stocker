@@ -1,55 +1,64 @@
 <div>
-    <div class="py-12 w-full">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="w-full py-12">
+        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             {{-- Boton para crear usuario --}}
             <div class="flex justify-end p-4">
-                <x-primary-btn label="Crear persona" icon="o-plus" spinner wire:click="create()" />
+                <x-primary-btn label="Crear Trabajador" icon="o-plus" spinner wire:click="create()" />
             </div>
 
             {{-- Tabla de usuarios --}}
-            <div class="bg-base-300 shadow-xl sm:rounded-lg">
+            <div class="shadow-xl bg-base-300 sm:rounded-lg">
                 <table class="table">
                     <!-- head -->
                     <thead>
                         <tr>
-                            <th></th>
+                            <th>#</th>
                             <th>Perfil</th>
                             <th>Nombre</th>
                             <th>Posicion</th>
                             <th>Fecha de ingreso</th>
+                            <th>Fecha de salida</th>
+                            <th>Observacion</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         <!-- row 1 -->
-                        <tr>
-                            <th>1</th>
-                            <td>Cy Ganderton</td>
-                            <td>Quality Control Specialist</td>
-                            <td>Blue</td>
-                            <td>Blue</td>
-                            <td class="w-48">
-                                <x-mary-button icon="o-eye" wire:click="show()" tooltip="Ver datos" spinner
-                                    class="btn-sm bg-base-content/10 border-base-content/10 hover:bg-base-content/20" />
+                        {{-- Aqui paso los datos del amount trabajadores --}}
+                        @foreach ($trabajadores as $trabajador)
+                            <tr>
+                                <th>{{ $trabajador->idJobPosition }}</th>
+                                <td>{{ $trabajador->person->users->profile_photo_path ?? 'No' }}</td>
+                                <td>{{ $trabajador->person->personaldata->firstName . ' ' . $trabajador->person->personaldata->lastName }}
+                                </td>
+                                <td>{{ $trabajador->position }}</td>
+                                <td>{{ $trabajador->startDate }}</td>
+                                <td>{{ $trabajador->endDate }}</td>
+                                <td>{{ $trabajador->observation }}</td>
+                                <td>{{ $trabajador->status }}</td>
+                                <td class="w-48">
+                                    <x-mary-button icon="o-eye" wire:click="show()" tooltip="Ver datos" spinner
+                                        class="btn-sm bg-base-content/10 border-base-content/10 hover:bg-base-content/20" />
 
-                                <x-mary-button icon="o-pencil" wire:click="edit()" tooltip="Editar" spinner
-                                    class="btn-sm bg-base-content/10 border-base-content/10 hover:bg-base-content/20" />
+                                    <x-mary-button icon="o-pencil" wire:click="edit()" tooltip="Editar" spinner
+                                        class="btn-sm bg-base-content/10 border-base-content/10 hover:bg-base-content/20" />
 
-                                <x-mary-button icon="o-trash" wire:click="destroy()" tooltip="Eliminar" spinner
-                                    class="btn-sm bg-base-content/10 border-base-content/10 hover:bg-base-content/20" />
-                            </td>
-                        </tr>
+                                    <x-mary-button icon="o-trash" wire:click="destroy()" tooltip="Eliminar" spinner
+                                        class="btn-sm bg-base-content/10 border-base-content/10 hover:bg-base-content/20" />
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 
-    {{-- Crear usuario --}}
+    {{-- Crear Trabajador --}}
     <form>
         <x-dialog-modal wire:model="createModal">
             <x-slot name="title">
-                Crear personal
+                Crear Trabajador
             </x-slot>
 
             <x-slot name="content">

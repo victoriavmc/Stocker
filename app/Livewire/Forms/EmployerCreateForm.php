@@ -13,8 +13,6 @@ class EmployerCreateForm extends Form
     public $startDate;
     #[Validate('required', 'string', 'max:100')]
     public $position;
-    #[Validate('required', 'string', 'max:60')]
-    public $status;
 
     //Solo si tiene
     #[Validate('string', 'max:100')]
@@ -32,7 +30,8 @@ class EmployerCreateForm extends Form
         Jobposition::create([
             'starDate' => $this->startDate,
             'position' => $this->position,
-            'status' => $this->status,
+            'status' => 'Trabajando', //POR DEFECTO *SINO VACACIONES, DESPEDIDO, JUBILADO y CAMBIO PUESTO...
+            //*AL CAMBIAR DE PUESTO TIENE LA OBLIGACION DE CREAR UN NUEVO REGISTRO
             'observation' => $this->observation, //Solo si tiene
             'statuslogic' => 'Activo', //POR DEFECTO
             'idPerson' => $idPerson,

@@ -2,30 +2,33 @@
 
 namespace App\Livewire\Usuarios;
 
-use App\Models\Jobposition;
+use App\Models\Person;
+use Livewire\Component;
+
+namespace App\Livewire\Usuarios;
+
+use App\Models\Person;
 use Livewire\Component;
 
 class Trabajadores extends Component
 {
-
     public $createModal = false;
     public $showModal = false;
     public $editModal = false;
 
-    // Variable para almacenar los trabajadores
-    public $trabajadores;
+    // Variables para almacenar los trabajadores
+    public $personas;
 
-    // Variable parusuarios.createa almacenar el trabajador seleccionado
-    public $trabajador;
+    // Variable para almacenar el trabajador seleccionado
+    public $persona;
 
-    //Datos necesarios para la paginación
-    public $idJobposition; // id del trabajador
-    public $profile_photo_path; // Foto de perfil
-    public $firstName; //Nombre Completo
-    public $lastName; //Apellido Completo
-    public $position; //Nombre deL area que cubre
-    public $startDate; //Nombre del inicio que comenzo a trabajar
-    public $status; //Estado del trabajador
+    // Datos necesarios para la paginación
+    public $idPerson;
+    public $profile_photo_path;
+    public $firstName;
+    public $lastName;
+    public $statusTrabajador;
+    public $created_at;
 
     public function create()
     {
@@ -48,12 +51,44 @@ class Trabajadores extends Component
 
     public function destroy() {}
 
-
     public function mount()
     {
-        // Cargamos los datos necesarios, de todos los trabajadores
-        $this->trabajadores = Jobposition::all();
+        // Cargamos las personas con el último cargo asignado
+        $this->personas = Person::with(['jobPositions' => function ($query) {
+            $query->orderBy('endDate', 'desc')->latest(); // Traemos el último cargo asignado
+        }])->get()->map(function ($persona) {
+            $ultimoCargo = $persona->jobPositions->first(); // Obtener el más reciente
+
+            if ($ultimoCargo === null) {
+                // Si no tiene ningún cargo asignado
+                $persona->statusTrabajador = 'FALTA ASIGNAR';
+                $persona->ordenStatus = 1; // Ordenar primero
+            } elseif ($ultimoCargo->endDate === null) {
+                // Si no tiene fecha de fin, sigue trabajando
+                if ($ultimoCargo->status != 'Trabajando') {
+                    $persona->statusTrabajador = 'Trabajando (' . $ultimoCargo->status . ')';
+                } else {
+                    $persona->statusTrabajador = 'Trabajando';
+                }
+                $persona->ordenStatus = 2; // Ordenar después de "Falta Asignar"
+            } else {
+                // Si tiene un endDate, es un extrabajador
+                $persona->statusTrabajador = 'Extrabajador';
+
+                // Si el estado es "Extrabajador", le asignamos los posibles estados "Despedido" o "Jubilado"
+                if (isset($ultimoCargo->status)) {
+                    $persona->statusTrabajador = 'Extrabajador (' . $ultimoCargo->status . ')';
+                }
+                $persona->ordenStatus = 3; // Ordenar al final
+            }
+
+            return $persona;
+        });
+
+        // Ordenamos primero por 'ordenStatus' para que "Falta Asignar" salga primero, luego "Trabajando" y por último "Extrabajador"
+        $this->personas = $this->personas->sortBy('ordenStatus');
     }
+
 
     public function render()
     {
