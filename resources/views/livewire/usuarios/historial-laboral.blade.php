@@ -18,6 +18,7 @@
                             <th>Posicion</th>
                             <th>Fecha de ingreso</th>
                             <th>Fecha de salida</th>
+                            <th>Estado</th>
                             <th>Observacion</th>
                             <th>Acciones</th>
                         </tr>
@@ -34,8 +35,8 @@
                                 <td>{{ $trabajador->position }}</td>
                                 <td>{{ $trabajador->startDate }}</td>
                                 <td>{{ $trabajador->endDate }}</td>
-                                <td>{{ $trabajador->observation }}</td>
                                 <td>{{ $trabajador->status }}</td>
+                                <td>{{ $trabajador->observation ?? 'No Presenta' }}</td>
                                 <td class="w-48">
                                     <x-mary-button icon="o-eye" wire:click="show()" tooltip="Ver datos" spinner
                                         class="btn-sm bg-base-content/10 border-base-content/10 hover:bg-base-content/20" />
