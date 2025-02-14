@@ -1,4 +1,3 @@
-
 @extends('layouts.email')
 
 @section('content')

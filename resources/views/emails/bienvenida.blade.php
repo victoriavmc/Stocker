@@ -1,4 +1,3 @@
-
 @extends('layouts.email')
 
 @section('content')
@@ -15,7 +14,8 @@
                 $valorNombre
             </div>
             <p class="message">
-                Nos alegra que formes parte de nuestro equipo. Estamos seguros que lograremos grandes cosas juntos. Si surge algún problema no dudes en consultarnos. ¡Saludos y éxitos!
+                Nos alegra que formes parte de nuestro equipo. Estamos seguros que lograremos grandes cosas juntos. Si surge
+                algún problema no dudes en consultarnos. ¡Saludos y éxitos!
             </p>
         </div>
     </div>

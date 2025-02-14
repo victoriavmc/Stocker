@@ -9,12 +9,16 @@
         <section class="flex justify-center">
             @if (Route::has('login'))
                 <div class="flex justify-center flex-col gap-4">
-                    <p class="text-xl">Stocker Solutions es una empresa innovadora dedicada a transformar la gestión de inventarios y procesos logísticos en pequeñas y medianas empresas. Con un enfoque integral y personalizado, ofrecemos herramientas tecnológicas de vanguardia que facilitan el control de stock, la facturación y la administración de roles, permitiendo a nuestros clientes optimizar sus operaciones y tomar decisiones informadas de manera ágil y segura.</p>
+                    <p class="text-xl">Stocker Solutions es una empresa innovadora dedicada a transformar la gestión de
+                        inventarios y procesos logísticos en pequeñas y medianas empresas. Con un enfoque integral y
+                        personalizado, ofrecemos herramientas tecnológicas de vanguardia que facilitan el control de stock,
+                        la facturación y la administración de roles, permitiendo a nuestros clientes optimizar sus
+                        operaciones y tomar decisiones informadas de manera ágil y segura.</p>
                     <div>
                         @auth
-                            <x-primary-btn label="Dashboard" link="{{ url('/dashboard') }}"/>
+                            <x-primary-btn label="Dashboard" link="{{ url('/dashboard') }}" />
                         @else
-                            <x-primary-btn label="Iniciar sesion" link="{{ route('login') }}"/>
+                            <x-primary-btn label="Iniciar sesion" link="{{ route('login') }}" />
                         @endauth
                     </div>
                 </div>

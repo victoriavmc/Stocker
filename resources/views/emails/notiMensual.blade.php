@@ -14,7 +14,8 @@
                 [Nombre del Usuario]
             </div>
             <p class="message">
-                Este es un recordatorio sobre los informes y documentos importantes del mes que están disponibles en tu cuenta de **STOCKER**:
+                Este es un recordatorio sobre los informes y documentos importantes del mes que están disponibles en tu
+                cuenta de **STOCKER**:
             </p>
             <ul class="lista">
                 <li class="li"><strong>Facturas del mes:</strong> [Enlace a las facturas]</li>

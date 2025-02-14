@@ -14,7 +14,8 @@
                 [Nombre del Usuario]
             </div>
             <p class="message">
-                Te informamos que el stock de uno o más productos en el inventario ha caído por debajo del nivel recomendado. Aquí te dejamos los detalles:
+                Te informamos que el stock de uno o más productos en el inventario ha caído por debajo del nivel
+                recomendado. Aquí te dejamos los detalles:
             </p>
             <ul class="lista">
                 <li class="li"><strong>Producto:</strong> [Nombre del producto]</li>
