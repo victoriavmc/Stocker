@@ -34,6 +34,9 @@
                                     @elseif ($persona->statusTrabajador === 'Trabajando')
                                         <!-- Verde -->
                                         <span class="font-bold text-green-600">{{ $persona->statusTrabajador }}</span>
+                                    @elseif ($persona->statusTrabajador === 'Trabajando (Cambio de Cargo)')
+                                        <!-- Naranja para vacaciones -->
+                                        <span class="font-bold text-green-400">{{ $persona->statusTrabajador }}</span>
                                     @elseif ($persona->statusTrabajador === 'Trabajando (Vacaciones)')
                                         <!-- Naranja para vacaciones -->
                                         <span class="font-bold text-orange-600">{{ $persona->statusTrabajador }}</span>
