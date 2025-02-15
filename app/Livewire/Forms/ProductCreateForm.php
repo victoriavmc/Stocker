@@ -12,20 +12,43 @@ class ProductCreateForm extends Form
 {
     //
     #BaseProducts
-    #[Validate('required', 'string', 'max:50')]
+    #[Validate('required|string|max:50')]
     public $brand;
-    #[Validate('required', 'string', 'max:50')]
+    #[Validate('required|string|max:50')]
     public $name;
 
     #Products
-    #[Validate('required', 'interger')]
+    #[Validate('required|interger')]
     public $code;
-    #[Validate('required', 'string', 'max:100')]
+    #[Validate('required|string|max:100')]
     public $measure;
-    #[Validate('required', 'string', 'max:100')]
+    #[Validate('required|string|max:100')]
     public $productType;
-    #[Validate('required', 'string', 'max:255')]
+    #[Validate('required|string|max:255')]
     public $photo;
+
+    //Extra (Controla en el peor de los casos plis)
+    public $productTypes = []; // Lista de tipos de productos existentes (Obtenemos de la base de datos)
+    #[Validate('required|string|max:255')]
+    public $newProductType; // Nuevo tipo de producto
+
+    public $createModal = false;
+    // Modal
+    public function create()
+    {
+        $this->createModal = true;
+    }
+
+    // Cargar tipos de productos desde la base de datos
+    public function loadProductTypes()
+    {
+        $this->productTypes = Product::distinct()
+            ->orderBy('productType', 'asc')
+            ->pluck('productType')
+            ->toArray();
+    }
+
+
 
     public function save()
     {

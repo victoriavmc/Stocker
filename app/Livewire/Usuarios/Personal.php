@@ -2,11 +2,6 @@
 
 namespace App\Livewire\Usuarios;
 
-use App\Models\Person;
-use Livewire\Component;
-
-namespace App\Livewire\Usuarios;
-
 use App\Livewire\Forms\PersonCreateForm;
 use App\Models\Person;
 use Livewire\Component;
