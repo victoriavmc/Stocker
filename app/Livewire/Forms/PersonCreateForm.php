@@ -18,52 +18,40 @@ class PersonCreateForm extends Form
     // Datos personales
     #[Validate('required|string|max:100')]
     public $firstName;
-
     #[Validate('required|string|max:100')]
     public $lastName;
-
     #[Validate('required|string|max:100')]
     public $nationality;
-
     #[Validate('required|string|digits:11')]
     public $cuit;
-
     #[Validate('required|string|max:50')]
     public $gender;
-
     #[Validate('required|date|before:today|after:1900-01-01')]
     public $birthdate;
 
     // Datos de la dirección
     #[Validate('required|string|max:100')]
     public $street;
-
     #[Validate('required|string|max:100')]
     public $neighborhood;
-
-    #[Validate('required|integer|min:1|max:100')]
+    #[Validate('required|integer|min:1|max:3000')]
     public $house;
-
     #[Validate('required|string|max:100')]
     public $streetBlock;
-
     #[Validate('required|string|max:100')]
     public $sector;
-
-    #[Validate('required|integer')]
+    #[Validate('required|integer|min:1|max:3000')]
     public $number;
-
-    public $createModal = false;
 
     // Datos del usuario
     #[Validate('required|string|max:100|regex:/^[a-zA-Z\s]+$/')]
     public $name;
-
     #[Validate('required|max:250|email')]
     public $email;
-
-    #[Validate('required|string|min:8|max:100|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/')]
+    #[Validate('required|string|min:8|max:100')]
     public $password;
+
+    public $createModal = false;
 
     public function createPersonalData(): int
     {

@@ -26,14 +26,6 @@ class Personal extends Component
 
     public $persona;
 
-    // Datos necesarios para la paginación
-    // public $idPerson;
-    // public $profile_photo_path;
-    // public $firstName;
-    // public $lastName;
-    // public $statusTrabajador;
-    // public $created_at;
-
     public function create()
     {
         $this->personCreate->create();

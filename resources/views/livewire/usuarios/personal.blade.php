@@ -79,33 +79,33 @@
                 <x-mary-errors title="Oops!" description="Porfavor, corrija los errores." icon="o-face-frown" />
 
                 <div class="grid grid-cols-2 mt-2">
-                    <div class="border-r-2 border-base-content/20 pr-4">
+                    <div class="pr-4 border-r-2 border-base-content/20">
                         <x-mary-header title="Datos Personales" class="mb-5" size="text-xl" separator />
 
                         <div>
                             <x-mary-input wire:model="personCreate.firstName" inline label="Nombre"
-                                class="block mt-1 w-full" type="text" :value="old('personCreate.firstName')" />
+                                class="block w-full mt-1" type="text" :value="old('personCreate.firstName')" />
                         </div>
 
                         <div class="mt-3">
                             <x-mary-input wire:model="personCreate.lastName" inline label="Apellido"
-                                class="block mt-1 w-full" type="text" :value="old('personCreate.lastName')" />
+                                class="block w-full mt-1" type="text" :value="old('personCreate.lastName')" />
                         </div>
 
                         <div class="mt-3">
                             <x-mary-input wire:model="personCreate.nationality" inline label="Nacionalidad"
-                                class="block mt-1 w-full" type="text" :value="old('personCreate.nationality')" />
+                                class="block w-full mt-1" type="text" :value="old('personCreate.nationality')" />
                         </div>
 
                         <div class="mt-3">
-                            <x-mary-input wire:model="personCreate.cuit" inline label="Cuit" class="block mt-1 w-full"
+                            <x-mary-input wire:model="personCreate.cuit" inline label="Cuit" class="block w-full mt-1"
                                 type="text" :value="old('personCreate.cuit')" />
                         </div>
 
                         <div class="mt-3">
-                            <label class="form-control w-full max-w-xs block mt-1">
-                                <select class="select select-bordered w-full" wire:model="personCreate.genero">
-                                    <option disabled selected>Selecciona un genero</option>
+                            <label class="block w-full max-w-xs mt-1 form-control">
+                                <select class="w-full select select-bordered" wire:model="personCreate.gender">
+                                    <option selected hidden>Selecciona un genero</option>
                                     <option value="Masculino">Masculino</option>
                                     <option value="Femenino">Femenino</option>
                                     <option value="Otro">Otro</option>
@@ -115,7 +115,7 @@
 
                         <div class="mt-3">
                             <x-mary-input wire:model="personCreate.birthdate" inline label="Fecha de Nacimiento"
-                                class="block mt-1 w-full" type="date" :value="old('personCreate.birthdate')" />
+                                class="block w-full mt-1" type="date" :value="old('personCreate.birthdate')" />
                         </div>
                     </div>
 
@@ -124,52 +124,52 @@
 
                         <div>
                             <x-mary-input icon="o-map-pin" wire:model="personCreate.street" inline label="Calle"
-                                class="block mt-1 w-full" type="text" :value="old('personCreate.street')" />
+                                class="block w-full mt-1" type="text" :value="old('personCreate.street')" />
                         </div>
 
                         <div class="mt-3">
                             <x-mary-input icon="o-map-pin" wire:model="personCreate.neighborhood" inline label="Barrio"
-                                class="block mt-1 w-full" type="text" :value="old('personCreate.neighborhood')" />
+                                class="block w-full mt-1" type="text" :value="old('personCreate.neighborhood')" />
                         </div>
 
                         <div class="mt-3">
                             <x-mary-input icon="o-map-pin" wire:model="personCreate.house" inline label="Casa"
-                                class="block mt-1 w-full" type="text" :value="old('personCreate.house')" />
+                                class="block w-full mt-1" type="text" :value="old('personCreate.house')" />
                         </div>
 
                         <div class="mt-3">
                             <x-mary-input icon="o-map-pin" wire:model="personCreate.streetBlock" inline label="Manzana"
-                                class="block mt-1 w-full" type="text" :value="old('personCreate.streetBlock')" />
+                                class="block w-full mt-1" type="text" :value="old('personCreate.streetBlock')" />
                         </div>
 
                         <div class="mt-3">
                             <x-mary-input icon="o-map-pin" wire:model="personCreate.sector" inline label="Sector"
-                                class="block mt-1 w-full" type="text" :value="old('personCreate.sector')" />
+                                class="block w-full mt-1" type="text" :value="old('personCreate.sector')" />
                         </div>
 
                         <div class="mt-3">
                             <x-mary-input icon="o-map-pin" wire:model="personCreate.number" inline label="Numero"
-                                class="block mt-1 w-full" type="text" :value="old('personCreate.number')" />
+                                class="block w-full mt-1" type="text" :value="old('personCreate.number')" />
                         </div>
                     </div>
                 </div>
 
-                <div class="border-t-2 border-base-content/20 mt-4 pt-4">
+                <div class="pt-4 mt-4 border-t-2 border-base-content/20">
                     <x-mary-header title="Datos de usuario" class="mb-5" size="text-xl" separator />
 
                     <div>
                         <x-mary-input wire:model="personCreate.name" inline label="Usuario" icon="o-user"
-                            class="block mt-1 w-full" type="text" />
+                            class="block w-full mt-1" type="text" />
                     </div>
 
                     <div class="mt-3">
                         <x-mary-input wire:model="personCreate.email" inline label="Email" icon="o-envelope"
-                            class="block mt-1 w-full" type="email" :value="old('email')" />
+                            class="block w-full mt-1" type="email" :value="old('email')" />
                     </div>
 
                     <div class="mt-3">
                         <x-mary-password wire:model="personCreate.password" inline label="Contraseña"
-                            class="block mt-1 w-full" type="password" password-icon="o-lock-closed"
+                            class="block w-full mt-1" type="password" password-icon="o-lock-closed"
                             password-visible-icon="o-lock-open" />
                     </div>
                 </div>
