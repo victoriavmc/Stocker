@@ -23,10 +23,9 @@
     <x-banner />
 
     <div class="min-h-screen">
-        {{-- @livewire('navigation-menu') --}}
-
+        <x-mary-toast />
         <!-- Page Heading -->
-        <header class="navbar fixed sm:static bg-base-200 shadow-lg">
+        <header class="navbar fixed sm:static bg-base-300/10 shadow-xl border-b border-base-content/30">
             <div class="navbar-start">
                 <button class="dropdown" id="sidebarToggle">
                     <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
@@ -137,7 +136,7 @@
             @livewire('sidebar')
 
             <div id="main-content"
-                class="w-full min-h-[92vh] ml-72 bg-base-content/10 main-content transition-all duration-200 ease-in-out">
+                class="w-full min-h-[92vh] ml-72 bg-base-300/10 main-content transition-all duration-200 ease-in-out">
                 {{ $slot }}
             </div>
 

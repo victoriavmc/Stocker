@@ -7,51 +7,45 @@
             </div>
 
             {{-- Tabla de usuarios --}}
-            <div class="shadow-xl bg-base-300 sm:rounded-lg">
-                <table class="table">
-                    <!-- head -->
-                    <thead>
+            <x-table>
+                <x-slot name="header">
+                    <th>#</th>
+                    <th>Perfil</th>
+                    <th>Nombre</th>
+                    <th>Posicion</th>
+                    <th>Fecha de ingreso</th>
+                    <th>Fecha de salida</th>
+                    <th>Estado</th>
+                    <th>Observacion</th>
+                    <th>Acciones</th>
+                </x-slot>
+
+                <x-slot name="body">
+                    @foreach ($trabajadores as $trabajador)
                         <tr>
-                            <th>#</th>
-                            <th>Perfil</th>
-                            <th>Nombre</th>
-                            <th>Posicion</th>
-                            <th>Fecha de ingreso</th>
-                            <th>Fecha de salida</th>
-                            <th>Estado</th>
-                            <th>Observacion</th>
-                            <th>Acciones</th>
+                            <th>{{ $trabajador->idJobPosition }}</th>
+                            <td>{{ $trabajador->person->users->profile_photo_path ?? 'No' }}</td>
+                            <td>{{ $trabajador->person->personaldata->firstName . ' ' . $trabajador->person->personaldata->lastName }}
+                            </td>
+                            <td>{{ $trabajador->position }}</td>
+                            <td>{{ $trabajador->startDate }}</td>
+                            <td>{{ $trabajador->endDate }}</td>
+                            <td>{{ $trabajador->status }}</td>
+                            <td>{{ $trabajador->observation ?? 'No Presenta' }}</td>
+                            <td class="w-48">
+                                <x-mary-button icon="o-eye" wire:click="show()" tooltip="Ver datos" spinner
+                                    class="btn-sm bg-base-content/10 border-base-content/10 hover:bg-base-content/20" />
+
+                                <x-mary-button icon="o-pencil" wire:click="edit()" tooltip="Editar" spinner
+                                    class="btn-sm bg-base-content/10 border-base-content/10 hover:bg-base-content/20" />
+
+                                <x-mary-button icon="o-trash" wire:click="destroy()" tooltip="Eliminar" spinner
+                                    class="btn-sm bg-base-content/10 border-base-content/10 hover:bg-base-content/20" />
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <!-- row 1 -->
-                        {{-- Aqui paso los datos del amount trabajadores --}}
-                        @foreach ($trabajadores as $trabajador)
-                            <tr>
-                                <th>{{ $trabajador->idJobPosition }}</th>
-                                <td>{{ $trabajador->person->users->profile_photo_path ?? 'No' }}</td>
-                                <td>{{ $trabajador->person->personaldata->firstName . ' ' . $trabajador->person->personaldata->lastName }}
-                                </td>
-                                <td>{{ $trabajador->position }}</td>
-                                <td>{{ $trabajador->startDate }}</td>
-                                <td>{{ $trabajador->endDate }}</td>
-                                <td>{{ $trabajador->status }}</td>
-                                <td>{{ $trabajador->observation ?? 'No Presenta' }}</td>
-                                <td class="w-48">
-                                    <x-mary-button icon="o-eye" wire:click="show()" tooltip="Ver datos" spinner
-                                        class="btn-sm bg-base-content/10 border-base-content/10 hover:bg-base-content/20" />
-
-                                    <x-mary-button icon="o-pencil" wire:click="edit()" tooltip="Editar" spinner
-                                        class="btn-sm bg-base-content/10 border-base-content/10 hover:bg-base-content/20" />
-
-                                    <x-mary-button icon="o-trash" wire:click="destroy()" tooltip="Eliminar" spinner
-                                        class="btn-sm bg-base-content/10 border-base-content/10 hover:bg-base-content/20" />
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+                    @endforeach
+                </x-slot>
+            </x-table>
         </div>
     </div>
 

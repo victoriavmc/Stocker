@@ -17,7 +17,7 @@ use App\Livewire\Reportes\RegistroPerdidas;
 use App\Livewire\Usuarios\AsignarPermisos;
 use App\Livewire\Usuarios\Bajas;
 use App\Livewire\Usuarios\HistorialLaboral;
-use App\Livewire\Usuarios\Trabajadores;
+use App\Livewire\Usuarios\Personal;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -50,7 +50,7 @@ Route::middleware([
     Route::get('/users/asignar-permisos', AsignarPermisos::class)->name('asignarPermisos');
     Route::get('/users/bajas', Bajas::class)->name('bajas');
     Route::get('/users/historial-laboral', HistorialLaboral::class)->name('historialLaboral');
-    Route::get('/users/trabajadores', Trabajadores::class)->name('trabajadores');
+    Route::get('/users/personal', Personal::class)->name('personal');
 
     // Productos
     Route::get('/inventario/productos', Productos::class)->name('productos');

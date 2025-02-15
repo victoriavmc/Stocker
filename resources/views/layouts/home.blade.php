@@ -1218,7 +1218,7 @@
 <body class="font-sans antialiased text-base-content">
     <div class="relative w-full">
         <header
-            class="sm:grid items-center w-full grid-cols-2 gap-2 px-4 sm:px-6 pt-4 sm:pt-4 pb-4 sm:pb-4 lg:px-0 bg-black/50 border-b border-base-content">
+            class="sm:grid items-center w-full grid-cols-2 gap-2 px-4 sm:px-6 pt-4 sm:pt-4 pb-4 sm:pb-4 lg:px-0 bg-base-300 shadow-xl">
             <div class="mb-2 sm:mb-0">
                 <a class="flex justify-center items-center" href="/">
                     <img src="{{ asset('storage/image/web/stocker.ico') }}" alt="Stocker" class="w-16 h-16 mr-2">
@@ -1244,11 +1244,11 @@
             </nav>
         </header>
 
-        <main class="min-h-[83.6vh] flex flex-col items-center justify-center bg-base-100 px-8 py-4">
+        <main class="min-h-[83.6vh] flex flex-col items-center justify-center bg-base-content/10 px-8 py-4">
             @yield('content')
         </main>
 
-        <footer class="w-full pt-4 pb-4 text-sm text-center bg-black/50 border-t border-base-content">
+        <footer class="w-full pt-4 pb-4 text-sm text-center bg-base-300 shadow-xl">
             <p>
                 &copy; {{ date('Y') }} Stocker. All rights reserved.
             </p>

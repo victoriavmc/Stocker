@@ -1,5 +1,5 @@
 <aside id="sidebar"
-    class="absolute w-72 h-[92vh] mt-[73px] sm:mt-0 p-4 bg-base-200 border-t border-base-content/10 shadow-lg overflow-y-auto transform translate-x-0 transition-transform duration-200 ease-in-out z-50">
+    class="absolute w-72 h-[92vh] mt-[73px] sm:mt-0 p-4 bg-base-200 border-r border-base-content/30 shadow-lg overflow-y-auto transform translate-x-0 transition-transform duration-200 ease-in-out z-50">
     <!-- Logo y Nombre del Sistema -->
     <div class="flex items-center justify-center mb-6">
         <a class="text-xl btn btn-ghost">
@@ -58,8 +58,8 @@
                 </div>
             </summary>
             <ul class="collapse-content">
-                <li><a wire:navigate href="{{ route('trabajadores') }}"
-                        class="justify-start text-start btn btn-ghost btn-block">Trabajadores</a></li>
+                <li><a wire:navigate href="{{ route('personal') }}"
+                        class="justify-start text-start btn btn-ghost btn-block">Personal</a></li>
                 <li><a wire:navigate href="{{ route('asignarPermisos') }}"
                         class="justify-start text-start btn btn-ghost btn-block">Asignar Permisos</a></li>
                 <li><a wire:navigate href="{{ route('historialLaboral') }}"
