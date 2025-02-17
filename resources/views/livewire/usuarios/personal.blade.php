@@ -76,40 +76,32 @@
     <x-mary-form wire:submit="store">
         <x-dialog-modal wire:model="personCreate.createModal">
             <x-slot name="title">
-                Agregar Personal
+                <div class="flex items-center space-x-2">
+                    <x-mary-icon name="o-user-plus" class="w-6 h-6 text-primary" />
+                    <span class="text-xl font-semibold">Agregar Personal</span>
+                </div>
             </x-slot>
 
             <x-slot name="content">
                 <x-mary-errors title="Oops!" description="Porfavor, corrija los errores." icon="o-face-frown" />
 
-                <div class="grid grid-cols-2 mt-2">
-                    <div class="pr-4 border-r-2 border-base-content/20">
-                        <x-mary-header title="Datos Personales" class="mb-5" size="text-xl" separator />
-
-                        <div>
-                            <x-mary-input wire:model="personCreate.firstName" inline label="Nombre"
-                                class="block w-full mt-1" type="text" :value="old('personCreate.firstName')" />
+                <div class="grid grid-cols-1 gap-6 mt-4 md:grid-cols-2">
+                    <!-- Sección de Datos Personales -->
+                    <div class="pr-4 space-y-4 border-r border-base-content/20">
+                        <div class="flex items-center space-x-2">
+                            <x-mary-icon name="o-identification" class="w-5 h-5 text-primary" />
+                            <span class="text-lg font-medium">Datos Personales</span>
                         </div>
 
-                        <div class="mt-3">
-                            <x-mary-input wire:model="personCreate.lastName" inline label="Apellido"
-                                class="block w-full mt-1" type="text" :value="old('personCreate.lastName')" />
-                        </div>
-
-                        <div class="mt-3">
-                            <x-mary-select label="Nacionalidad" icon="o-flag" :options="$countries"
-                                wire:model="personCreate.nationality" option-value="value" option-label="value"
-                                inline />
-                        </div>
-
-                        <div class="mt-3">
-                            <x-mary-input wire:model="personCreate.cuit" inline label="Cuit" class="block w-full mt-1"
-                                type="text" :value="old('personCreate.cuit')" />
-                        </div>
-
+                        <x-mary-input wire:model="personCreate.firstName" label="Nombre" right-icon="o-user" inline />
+                        <x-mary-input wire:model="personCreate.lastName" label="Apellido" right-icon="o-user" inline />
+                        <x-mary-select wire:model="personCreate.nationality" label="Nacionalidad" right-icon="o-flag"
+                            :options="$countries" option-value="value" option-label="value" inline />
+                        <x-mary-input wire:model="personCreate.cuit" label="CUIT" right-icon="o-identification"
+                            inline />
                         <div class="mt-3">
                             <label class="block w-full max-w-xs mt-1 form-control">
-                                <select class="w-full select select-bordered" wire:model="personCreate.gender">
+                                <select class="w-full select select-bordered" wire:model="personEdit.gender">
                                     <option selected hidden>Selecciona un genero</option>
                                     <option value="Masculino">Masculino</option>
                                     <option value="Femenino">Femenino</option>
@@ -117,83 +109,60 @@
                                 </select>
                             </label>
                         </div>
-
-                        <div class="mt-3">
-                            <x-mary-input wire:model="personCreate.birthdate" inline label="Fecha de Nacimiento"
-                                class="block w-full mt-1" type="date" :value="old('personCreate.birthdate')" />
-                        </div>
+                        <x-mary-input wire:model="personCreate.birthdate" label="Fecha de Nacimiento"
+                            right-icon="o-calendar-days" type="date" inline />
                     </div>
 
-                    <div class="pl-4">
-                        <x-mary-header title="Direccion" class="mb-5" size="text-xl" separator />
-
-                        <div>
-                            <x-mary-input icon="o-map-pin" wire:model="personCreate.street" inline label="Calle"
-                                class="block w-full mt-1" type="text" :value="old('personCreate.street')" />
+                    <!-- Sección de Dirección -->
+                    <div class="pl-4 space-y-4">
+                        <div class="flex items-center space-x-2">
+                            <x-mary-icon name="o-home" class="w-5 h-5 text-primary" />
+                            <span class="text-lg font-medium">Dirección</span>
                         </div>
 
-                        <div class="mt-3">
-                            <x-mary-input icon="o-map-pin" wire:model="personCreate.neighborhood" inline label="Barrio"
-                                class="block w-full mt-1" type="text" :value="old('personCreate.neighborhood')" />
-                        </div>
-
-                        <div class="mt-3">
-                            <x-mary-input icon="o-map-pin" wire:model="personCreate.house" inline label="Casa"
-                                class="block w-full mt-1" type="text" :value="old('personCreate.house')" />
-                        </div>
-
-                        <div class="mt-3">
-                            <x-mary-input icon="o-map-pin" wire:model="personCreate.streetBlock" inline label="Manzana"
-                                class="block w-full mt-1" type="text" :value="old('personCreate.streetBlock')" />
-                        </div>
-
-                        <div class="mt-3">
-                            <x-mary-input icon="o-map-pin" wire:model="personCreate.sector" inline label="Sector"
-                                class="block w-full mt-1" type="text" :value="old('personCreate.sector')" />
-                        </div>
-
-                        <div class="mt-3">
-                            <x-mary-input icon="o-map-pin" wire:model="personCreate.number" inline label="Altura"
-                                class="block w-full mt-1" type="text" :value="old('personCreate.number')" />
-                        </div>
+                        <x-mary-input wire:model="personCreate.street" label="Calle" right-icon="o-map-pin" inline />
+                        <x-mary-input wire:model="personCreate.neighborhood" label="Barrio" right-icon="o-map-pin"
+                            inline />
+                        <x-mary-input wire:model="personCreate.house" label="Casa" right-icon="o-map-pin" inline />
+                        <x-mary-input wire:model="personCreate.streetBlock" label="Manzana" right-icon="o-map-pin"
+                            inline />
+                        <x-mary-input wire:model="personCreate.sector" label="Sector" right-icon="o-map-pin" inline />
+                        <x-mary-input wire:model="personCreate.number" label="Altura" right-icon="o-map-pin" inline />
                     </div>
                 </div>
 
-                <div class="pt-4 mt-4 border-t-2 border-base-content/20">
-                    <x-mary-header title="Datos de usuario" class="mb-5" size="text-xl" separator />
-
-                    <div>
-                        <x-mary-input wire:model="personCreate.name" inline label="Usuario" icon="o-user"
-                            class="block w-full mt-1" type="text" />
+                <!-- Sección de Datos de Usuario -->
+                <div class="pt-6 mt-6 border-t border-base-content/20">
+                    <div class="flex items-center space-x-2">
+                        <x-mary-icon name="o-at-symbol" class="w-5 h-5 text-primary" />
+                        <span class="text-lg font-medium">Datos de Usuario</span>
                     </div>
 
-                    <div class="mt-3">
-                        <x-mary-input wire:model="personCreate.email" inline label="Email" icon="o-envelope"
-                            class="block w-full mt-1" type="email" :value="old('email')" />
-                    </div>
-
-                    <div class="mt-3">
-                        <x-mary-password wire:model="personCreate.password" inline label="Contraseña"
-                            class="block w-full mt-1" type="password" password-icon="o-lock-closed"
-                            password-visible-icon="o-lock-open" />
+                    <div class="space-y-4">
+                        <x-mary-input wire:model="personCreate.name" label="Usuario" right-icon="o-user" inline />
+                        <x-mary-input wire:model="personCreate.email" label="Email" right-icon="o-envelope"
+                            inline />
+                        <x-mary-password wire:model="personCreate.password" label="Contraseña"
+                            right-icon="o-lock-closed" inline />
                     </div>
                 </div>
             </x-slot>
 
             <x-slot name="footer">
-                <div class="space-x-2">
-                    <x-danger-button type="button" wire:click="$set('personCreate.createModal', false)">
-                        Cancelar
+                <div class="flex justify-end space-x-2">
+                    <x-danger-button type="button" wire:click="$set('personCreate.createModal', false)"
+                        class="flex items-center space-x-2">
+                        <x-mary-icon name="o-x-mark" class="w-5 h-5" />
+                        <span>Cancelar</span>
                     </x-danger-button>
-
-                    <x-button type="submit">
-                        Crear
+                    <x-button type="submit" class="flex items-center space-x-2">
+                        <x-mary-icon name="o-check" class="w-5 h-5" />
+                        <span>Crear</span>
                     </x-button>
                 </div>
             </x-slot>
         </x-dialog-modal>
     </x-mary-form>
-
     {{-- Ver usuario --}}
     <x-dialog-modal wire:model="personShow.showModal">
         <x-slot name="title">
@@ -218,7 +187,8 @@
                         @endif
                     </div>
                     <div>
-                        <p class="text-lg font-semibold">{{ $personShow->firstName }} {{ $personShow->lastName }}</p>
+                        <p class="text-lg font-semibold">{{ $personShow->firstName }} {{ $personShow->lastName }}
+                        </p>
                         <p class="text-sm text-gray-500">CUIT: {{ $personShow->cuit }}</p>
                     </div>
                 </div>
@@ -230,8 +200,7 @@
                         <span class="font-medium">Datos Personales</span>
                     </div>
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                        <x-mary-input readonly icon="o-calendar-days" label="Fecha de Nacimiento"
-                            :value="$personShow->birthdate" />
+                        <x-mary-input readonly icon="o-calendar-days" label="Fecha de Nacimiento" :value="$personShow->birthdate" />
                         <x-mary-input readonly icon="o-user" label="Género" :value="$personShow->gender" />
                         <x-mary-input readonly icon="o-flag" label="Nacionalidad" :value="$personShow->nationality" />
                     </div>
@@ -282,37 +251,29 @@
     <x-mary-form wire:submit="update">
         <x-dialog-modal wire:model="personEdit.editModal">
             <x-slot name="title">
-                Editar Persona
+                <div class="flex items-center space-x-2">
+                    <x-mary-icon name="o-pencil" class="w-6 h-6 text-primary" />
+                    <span class="text-xl font-semibold">Editar Persona</span>
+                </div>
             </x-slot>
 
             <x-slot name="content">
                 <x-mary-errors title="Oops!" description="Porfavor, corrija los errores." icon="o-face-frown" />
 
-                <div class="grid grid-cols-2 mt-2">
-                    <div class="pr-4 border-r-2 border-base-content/20">
-                        <x-mary-header title="Datos Personales" class="mb-5" size="text-xl" separator />
-
-                        <div>
-                            <x-mary-input wire:model="personEdit.firstName" inline label="Nombre"
-                                class="block w-full mt-1" type="text" :value="old('personEdit.firstName')" />
+                <div class="grid grid-cols-1 gap-6 mt-4 md:grid-cols-2">
+                    <!-- Sección de Datos Personales -->
+                    <div class="pr-4 space-y-4 border-r border-base-content/20">
+                        <div class="flex items-center space-x-2">
+                            <x-mary-icon name="o-identification" class="w-5 h-5 text-primary" />
+                            <span class="text-lg font-medium ">Datos Personales</span>
                         </div>
 
-                        <div class="mt-3">
-                            <x-mary-input wire:model="personEdit.lastName" inline label="Apellido"
-                                class="block w-full mt-1" type="text" :value="old('personEdit.lastName')" />
-                        </div>
-
-                        <div class="mt-3">
-                            <x-mary-select label="Nacionalidad" icon="o-flag" :options="$countries"
-                                wire:model="personEdit.nationality" option-value="value" option-label="value"
-                                inline />
-                        </div>
-
-                        <div class="mt-3">
-                            <x-mary-input wire:model="personEdit.cuit" inline label="Cuit"
-                                class="block w-full mt-1" type="text" :value="old('personEdit.cuit')" />
-                        </div>
-
+                        <x-mary-input wire:model="personEdit.firstName" label="Nombre" right-icon="o-user" inline />
+                        <x-mary-input wire:model="personEdit.lastName" label="Apellido" right-icon="o-user" inline />
+                        <x-mary-select wire:model="personEdit.nationality" label="Nacionalidad" right-icon="o-flag"
+                            :options="$countries" option-value="value" option-label="value" inline />
+                        <x-mary-input wire:model="personEdit.cuit" label="CUIT" right-icon="o-identification"
+                            inline />
                         <div class="mt-3">
                             <label class="block w-full max-w-xs mt-1 form-control">
                                 <select class="w-full select select-bordered" wire:model="personEdit.gender">
@@ -324,76 +285,52 @@
                             </label>
                         </div>
 
-                        <div class="mt-3">
-                            <x-mary-input wire:model="personEdit.birthdate" inline label="Fecha de Nacimiento"
-                                class="block w-full mt-1" type="date" :value="old('personEdit.birthdate')" />
-                        </div>
+                        <x-mary-input wire:model="personEdit.birthdate" label="Fecha de Nacimiento"
+                            right-icon="o-calendar-days" type="date" inline />
                     </div>
 
-                    <div class="pl-4">
-                        <x-mary-header title="Direccion" class="mb-5" size="text-xl" separator />
-
-                        <div>
-                            <x-mary-input icon="o-map-pin" wire:model="personEdit.street" inline label="Calle"
-                                class="block w-full mt-1" type="text" :value="old('personEdit.street')" />
+                    <!-- Sección de Dirección -->
+                    <div class="pl-4 space-y-4">
+                        <div class="flex items-center space-x-2">
+                            <x-mary-icon name="o-home" class="w-5 h-5 text-primary" />
+                            <span class="text-lg font-medium">Dirección</span>
                         </div>
 
-                        <div class="mt-3">
-                            <x-mary-input icon="o-map-pin" wire:model="personEdit.neighborhood" inline label="Barrio"
-                                class="block w-full mt-1" type="text" :value="old('personEdit.neighborhood')" />
-                        </div>
-
-                        <div class="mt-3">
-                            <x-mary-input icon="o-map-pin" wire:model="personEdit.house" inline label="Casa"
-                                class="block w-full mt-1" type="text" :value="old('personEdit.house')" />
-                        </div>
-
-                        <div class="mt-3">
-                            <x-mary-input icon="o-map-pin" wire:model="personEdit.streetBlock" inline label="Manzana"
-                                class="block w-full mt-1" type="text" :value="old('personEdit.streetBlock')" />
-                        </div>
-
-                        <div class="mt-3">
-                            <x-mary-input icon="o-map-pin" wire:model="personEdit.sector" inline label="Sector"
-                                class="block w-full mt-1" type="text" :value="old('personEdit.sector')" />
-                        </div>
-
-                        <div class="mt-3">
-                            <x-mary-input icon="o-map-pin" wire:model="personEdit.number" inline label="Numero"
-                                class="block w-full mt-1" type="text" :value="old('personEdit.number')" />
-                        </div>
+                        <x-mary-input wire:model="personEdit.street" label="Calle" right-icon="o-map-pin" inline />
+                        <x-mary-input wire:model="personEdit.neighborhood" label="Barrio" right-icon="o-map-pin"
+                            inline />
+                        <x-mary-input wire:model="personEdit.house" label="Casa" right-icon="o-map-pin" inline />
+                        <x-mary-input wire:model="personEdit.streetBlock" label="Manzana" right-icon="o-map-pin"
+                            inline />
+                        <x-mary-input wire:model="personEdit.sector" label="Sector" right-icon="o-map-pin" inline />
+                        <x-mary-input wire:model="personEdit.number" label="Número" right-icon="o-map-pin" inline />
                     </div>
                 </div>
 
-                <div class="pt-4 mt-4 border-t-2 border-base-content/20">
-                    <x-mary-header title="Datos de usuario" class="mb-5" size="text-xl" separator />
-
-                    <div>
-                        <x-mary-input wire:model="personEdit.name" inline label="Usuario" icon="o-user"
-                            class="block w-full mt-1" type="text" />
+                <!-- Sección de Datos de Usuario -->
+                <div class="pt-6 mt-6 border-t border-base-content/20">
+                    <div class="flex items-center space-x-2">
+                        <x-mary-icon name="o-at-symbol" class="w-5 h-5 text-primary" />
+                        <span class="text-lg font-medium">Datos de Usuario</span>
                     </div>
 
-                    <div class="mt-3">
-                        <x-mary-input wire:model="personEdit.email" inline label="Email" icon="o-envelope"
-                            class="block w-full mt-1" type="email" :value="old('personEdit.email')" />
-                    </div>
-
-                    <div class="mt-3">
-                        <x-mary-password wire:model="personEdit.password" inline label="Contraseña"
-                            class="block w-full mt-1" type="password" password-icon="o-lock-closed"
-                            password-visible-icon="o-lock-open" />
+                    <div class="space-y-4">
+                        <x-mary-input wire:model="personEdit.name" label="Usuario" right-icon="o-user" inline />
+                        <x-mary-input wire:model="personEdit.email" label="Email" right-icon="o-envelope" inline />
                     </div>
                 </div>
             </x-slot>
 
             <x-slot name="footer">
-                <div class="space-x-2">
-                    <x-danger-button type="button" wire:click="$set('personEdit.editModal', false)">
-                        Cancelar
+                <div class="flex justify-end space-x-2">
+                    <x-danger-button type="button" wire:click="$set('personEdit.editModal', false)"
+                        class="flex items-center space-x-2">
+                        <x-mary-icon name="o-x-mark" class="w-5 h-5" />
+                        <span>Cancelar</span>
                     </x-danger-button>
-
-                    <x-button type="submit">
-                        Editar
+                    <x-button type="submit" class="flex items-center space-x-2">
+                        <x-mary-icon name="o-check" class="w-5 h-5" />
+                        <span>Guardar Cambios</span>
                     </x-button>
                 </div>
             </x-slot>
