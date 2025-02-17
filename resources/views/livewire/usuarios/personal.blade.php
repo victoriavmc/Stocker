@@ -207,33 +207,67 @@
         <x-slot name="content">
             <div class="space-y-6">
                 <!-- Sección de Foto y Nombre -->
-                <div class="flex items-center space-x-4">
-                    <div class="w-16 h-16 overflow-hidden rounded-full">
-                        @if ($personShow->profile_photo_path)
-                            <x-mary-avatar :image="$personShow->profile_photo_path" class="object-cover w-full h-full" />
-                        @else
-                            <div class="flex items-center justify-center w-full h-full bg-gray-200">
-                                <x-mary-icon name="o-user" class="w-8 h-8 text-gray-500" />
-                            </div>
-                        @endif
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-16 h-16 overflow-hidden rounded-full">
+                            @if ($personShow->profile_photo_path)
+                                <x-mary-avatar :image="$personShow->profile_photo_path" class="object-cover w-full h-full" />
+                            @else
+                                <div class="flex items-center justify-center w-full h-full bg-gray-200">
+                                    <x-mary-icon name="o-user" class="w-8 h-8 text-gray-500" />
+                                </div>
+                            @endif
+                        </div>
+                        <div class="space-y-1">
+                            <p class="text-lg font-semibold">{{ $personShow->firstName }} {{ $personShow->lastName }}
+                            </p>
+                            <p class="text-sm text-gray-500">CUIT: {{ $personShow->cuit }}</p>
+                        </div>
                     </div>
+
                     <div>
-                        <p class="text-lg font-semibold">{{ $personShow->firstName }} {{ $personShow->lastName }}</p>
-                        <p class="text-sm text-gray-500">CUIT: {{ $personShow->cuit }}</p>
+                        <h1 class="text-lg font-semibold">Estado: </h1>
+                        @switch($persona->statusTrabajador)
+                            @case('FALTA ASIGNAR')
+                                <span class="font-bold text-lg text-red-600">{{ $persona->statusTrabajador }}</span>
+                            @break
+
+                            @case('Trabajando')
+                                <span class="font-bold text-lg text-green-600">{{ $persona->statusTrabajador }}</span>
+                            @break
+
+                            @case('Trabajando (Cambio de Cargo)')
+                                <span class="font-bold text-lg text-green-400">{{ $persona->statusTrabajador }}</span>
+                            @break
+
+                            @case('Trabajando (Vacaciones)')
+                                <span class="font-bold text-lg text-orange-600">{{ $persona->statusTrabajador }}</span>
+                            @break
+
+                            @case('Extrabajador (Jubilado)')
+                                <span class="font-bold text-lg text-blue-600">{{ $persona->statusTrabajador }}</span>
+                            @break
+
+                            @default
+                                <span class="font-bold text-lg text-gray-600">{{ $persona->statusTrabajador }}</span>
+                        @endswitch
                     </div>
+
                 </div>
 
                 <!-- Sección de Datos Personales -->
                 <div class="space-y-4">
                     <div class="flex items-center space-x-2">
                         <x-mary-icon name="o-identification" class="w-5 h-5 text-primary" />
-                        <span class="font-medium">Datos Personales</span>
+                        <span class="font-semibold text-lg">Datos Personales</span>
                     </div>
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                        <x-mary-input readonly icon="o-calendar-days" label="Fecha de Nacimiento"
-                            :value="$personShow->birthdate" />
-                        <x-mary-input readonly icon="o-user" label="Género" :value="$personShow->gender" />
-                        <x-mary-input readonly icon="o-flag" label="Nacionalidad" :value="$personShow->nationality" />
+                        <x-mary-input disabled style="cursor: default" icon="o-calendar-days"
+                            label="Fecha de Nacimiento" :value="$personShow->birthdate" />
+                        <x-mary-input disabled style="cursor: default" icon="o-user" label="Género"
+                            :value="$personShow->gender" />
+                        <x-mary-input disabled style="cursor: default" icon="o-flag" label="Nacionalidad"
+                            :value="$personShow->nationality" />
                     </div>
                 </div>
 
@@ -241,11 +275,13 @@
                 <div class="space-y-4">
                     <div class="flex items-center space-x-2">
                         <x-mary-icon name="o-at-symbol" class="w-5 h-5 text-primary" />
-                        <span class="font-medium">Información de Usuario</span>
+                        <span class="font-semibold text-lg">Información de Usuario</span>
                     </div>
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                        <x-mary-input readonly icon="o-user" label="Usuario" :value="$personShow->name" />
-                        <x-mary-input readonly icon="o-at-symbol" label="Email" :value="$personShow->email" />
+                        <x-mary-input disabled style="cursor: default" icon="o-user" label="Usuario"
+                            :value="$personShow->name" />
+                        <x-mary-input disabled style="cursor: default" icon="o-at-symbol" label="Email"
+                            :value="$personShow->email" />
                     </div>
                 </div>
 
@@ -253,15 +289,15 @@
                 <div class="space-y-4">
                     <div class="flex items-center space-x-2">
                         <x-mary-icon name="o-home" class="w-5 h-5 text-primary" />
-                        <span class="font-medium">Domicilio</span>
+                        <span class="font-semibold text-lg">Domicilio</span>
                     </div>
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                        <x-mary-input readonly label="Calle" :value="$personShow->street" />
-                        <x-mary-input readonly label="Barrio" :value="$personShow->neighborhood" />
-                        <x-mary-input readonly label="Casa" :value="$personShow->house" />
-                        <x-mary-input readonly label="Manzana" :value="$personShow->streetBlock" />
-                        <x-mary-input readonly label="Sector" :value="$personShow->sector" />
-                        <x-mary-input readonly label="Altura" :value="$personShow->number" />
+                        <x-mary-input disabled style="cursor: default" label="Calle" :value="$personShow->street" />
+                        <x-mary-input disabled style="cursor: default" label="Barrio" :value="$personShow->neighborhood" />
+                        <x-mary-input disabled style="cursor: default" label="Casa" :value="$personShow->house" />
+                        <x-mary-input disabled style="cursor: default" label="Manzana" :value="$personShow->streetBlock" />
+                        <x-mary-input disabled style="cursor: default" label="Sector" :value="$personShow->sector" />
+                        <x-mary-input disabled style="cursor: default" label="Altura" :value="$personShow->number" />
                     </div>
                 </div>
             </div>
