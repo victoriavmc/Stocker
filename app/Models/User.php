@@ -42,7 +42,7 @@ class User extends Authenticatable
         'email',
         'password',
         'profile_photo_path',
-        'theme'
+        'theme',
     ];
 
     /**

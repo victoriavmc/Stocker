@@ -2,7 +2,7 @@
     <div class="w-full py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
 
-            <div class="flex justify-end items-center gap-2 mb-4">
+            <div class="flex items-center justify-end gap-2 mb-4">
                 <x-mary-input class="px-4 py-2 w-96" label="Buscar..." wire:model.live="search" icon="o-magnifying-glass"
                     clearable inline />
 
@@ -153,7 +153,7 @@
                         </div>
 
                         <div class="mt-3">
-                            <x-mary-input icon="o-map-pin" wire:model="personCreate.number" inline label="Numero"
+                            <x-mary-input icon="o-map-pin" wire:model="personCreate.number" inline label="Altura"
                                 class="block w-full mt-1" type="text" :value="old('personCreate.number')" />
                         </div>
                     </div>
@@ -197,33 +197,56 @@
     {{-- Ver usuario --}}
     <x-dialog-modal wire:model="personShow.showModal">
         <x-slot name="title">
-            Persona: {{ $personShow->firstName }} {{ $personShow->lastName }}
+            Perfil de {{ $personShow->firstName }} {{ $personShow->lastName }}
         </x-slot>
 
         <x-slot name="content">
-            <div class="grid grid-cols-2 gap-4">
-                @if ($personShow->profile_photo_path)
-                    <x-mary-avatar :image="$personShow->profile_photo_path" />
-                @endif
-                <x-mary-input label="Nombre" value="{{ $personShow->firstName }}" readonly />
-                <x-mary-input label="Apellido" value="{{ $personShow->lastName }}" readonly />
-                <x-mary-input label="Nacionalidad" value="{{ $personShow->nationality }}" readonly />
-                <x-mary-input label="Cuit" value="{{ $personShow->cuit }}" readonly />
-                <x-mary-input label="Genero" value="{{ $personShow->gender }}" readonly />
-                <x-mary-input label="Fecha de Nacimiento" value="{{ $personShow->birthdate }}" readonly />
-                <x-mary-input label="Calle" value="{{ $personShow->street }}" readonly />
-                <x-mary-input label="Barrio" value="{{ $personShow->neighborhood }}" readonly />
-                <x-mary-input label="Casa" value="{{ $personShow->house }}" readonly />
-                <x-mary-input label="Manzana" value="{{ $personShow->streetBlock }}" readonly />
-                <x-mary-input label="Sector" value="{{ $personShow->sector }}" readonly />
-                <x-mary-input label="Numero" value="{{ $personShow->number }}" readonly />
-                <x-mary-input label="Usuario" value="{{ $personShow->name }}" readonly />
-                <x-mary-input label="Email" value="{{ $personShow->email }}" readonly />
-                <x-mary-input label="Contraseña" value="{{ $personShow->password }}" password-icon="o-lock-closed"
-                    password-visible-icon="o-lock-open" readonly />
+            <div class="flex flex-col">
+                <div class="flex items-center">
+                    <div class="w-16 h-16 mr-3 rounded-full skeleton shrink-0">
+                        @if ($personShow->profile_photo_path)
+                            <x-mary-avatar :image="$personShow->profile_photo_path" />
+                        @else
+                            No
+                        @endif
+                    </div>
+                    <div class="flex flex-col">
+                        <div class="h-4">
+                            <p>{{ $personShow->firstName }} {{ $personShow->lastName }}.</p>
+                        </div>
+                        <div class="h-4">
+                            <p>CUIT: {{ $personShow->cuit }}.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full h-32">
+                    <div class="flex flex-col">
+                        <div class="h-4">
+                            <x-mary-input readonly icon="o-identification">Datos Personales</x-mary-input>
+                            <x-mary-input readonly icon='o-calendar-days'>Fecha de Nacimiento:
+                                {{ $personShow->birthdate }} .</x-mary-input>
+                            <x-mary-input readonly icon="o-user">Genero: {{ $personShow->gender }}
+                                .</x-mary-input>
+                            <x-mary-input readonly icon="o-flag">Nacionalidad: '{{ $personShow->nationality }}'
+                                .</x-mary-input>
+                            <hr>
+                            <x-mary-input readonly icon="o-user">Usuario: {{ $personShow->name }} .</x-mary-input>
+                            <x-mary-input readonly icon="o-at-symbol">Email: {{ $personShow->email }} .</x-mary-input>
+                            <hr>
+                            <div>
+                                <x-mary-input readonly icon="o-home">Domicilio</x-mary-input>
+                                <x-mary-input>Calle: {{ $personShow->street }} .</x-mary-input>
+                                <x-mary-input>Barrio: {{ $personShow->neighborhood }} .</x-mary-input>
+                                <x-mary-input>Casa: {{ $personShow->house }} .</x-mary-input>
+                                <x-mary-input>Manzana: {{ $personShow->streetBlock }} .</x-mary-input>
+                                <x-mary-input>Sector: {{ $personShow->sector }} .</x-mary-input>
+                                <x-mary-input>Altura: {{ $personShow->number }} .</x-mary-input>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </x-slot>
-
         <x-slot name="footer">
             <div class="space-x-2">
                 <x-danger-button type="button" wire:click="$set('personShow.showModal', false)">
