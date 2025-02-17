@@ -3,23 +3,38 @@
 namespace App\Livewire\Usuarios;
 
 use App\Livewire\Forms\PersonCreateForm;
+use App\Livewire\Forms\PersonEditForm;
+use App\Livewire\Forms\PersonShow;
+use App\Models\Country;
 use App\Models\Person;
+use Exception;
 use Livewire\Component;
 use Mary\Traits\Toast;
 
+use function Laravel\Prompts\error;
+
 class Personal extends Component
 {
-
     use Toast;
 
     public PersonCreateForm $personCreate;
-
-    public $showModal = false;
-    public $editModal = false;
+    public PersonEditForm $personEdit;
+    public PersonShow $personShow;
 
     public $personas;
 
-    public $persona;
+    public $countries;
+
+    public $search = '';
+
+    public function mount()
+    {
+        $this->countries = Country::all()->map(function ($country) {
+            return [
+                'value' => $country->name,
+            ];
+        });
+    }
 
     public function create()
     {
@@ -29,23 +44,29 @@ class Personal extends Component
     public function store()
     {
         $this->personCreate->save();
-
         $this->success('Persona agregada al sistema correctamente');
     }
 
-    public function show()
+    public function show($id)
     {
-        $this->showModal = true;
+        $this->personShow->show($id);
     }
 
-    public function edit()
+    public function edit($id)
     {
-        $this->editModal = true;
+        $this->personEdit->edit($id);
     }
 
-    public function update() {}
+    public function update()
+    {
+        $this->personEdit->update();
+        $this->success('Persona actualizada correctamente');
+    }
 
-    public function destroy() {}
+    public function destroy($id)
+    {
+        $this->success('Persona eliminada correctamente');
+    }
 
     public function determinarOrdenStatus($cargo)
     {
@@ -68,17 +89,20 @@ class Personal extends Component
     public function render()
     {
         $this->personas = Person::with(['jobPositions' => function ($query) {
-            $query->orderBy('endDate', 'desc')->latest(); // Traemos el último cargo asignado
-        }])->get()->map(function ($persona) {
-            $ultimoCargo = $persona->jobPositions->first(); // Obtener el más reciente
+            $query->orderBy('endDate', 'desc')->latest();
+        }])
+            ->whereHas('personaldata', function ($query) {
+                $query->where('firstName', 'like', '%' . $this->search . '%')
+                    ->orWhere('lastName', 'like', '%' . $this->search . '%');
+            })
+            ->get()
+            ->map(function ($persona) {
+                $ultimoCargo = $persona->jobPositions->first();
+                $persona->ordenStatus = $this->determinarOrdenStatus($ultimoCargo);
+                $persona->statusTrabajador = $this->determinarStatusTrabajador($ultimoCargo);
+                return $persona;
+            });
 
-            $persona->ordenStatus = $this->determinarOrdenStatus($ultimoCargo);
-            $persona->statusTrabajador = $this->determinarStatusTrabajador($ultimoCargo);
-
-            return $persona;
-        });
-
-        // Ordenamos primero por 'ordenStatus' para que "Falta Asignar" salga primero, luego "Trabajando" y por último "Extrabajador"
         $this->personas = $this->personas->sortBy('ordenStatus');
 
         return view('livewire.usuarios.personal', ['personas' => $this->personas]);

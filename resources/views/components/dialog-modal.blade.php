@@ -13,7 +13,14 @@
         </div>
     </div>
 
-    <div class="flex flex-row justify-end px-6 py-4 bg-base-300/10 text-end border-t border-base-content/30">
-        {{ $footer }}
+
+    <div class="  pb-4 bg-base-300/10">
+        <div class="h-[2px] border border-t-base-100">
+            <progress class="progress progress-primary hidden h-[1px]" wire:loading.class="!h-[2px] !block"></progress>
+        </div>
+        <div class="px-6 flex flex-row justify-end gap-2 text-end mt-4">
+            {{ $footer }}
+        </div>
+
     </div>
 </x-modal>

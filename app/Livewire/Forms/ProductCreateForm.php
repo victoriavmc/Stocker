@@ -48,8 +48,6 @@ class ProductCreateForm extends Form
             ->toArray();
     }
 
-
-
     public function save()
     {
         $this->validate();

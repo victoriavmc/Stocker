@@ -2,11 +2,10 @@
     <div class="w-full py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             {{-- Buscador y Boton para ver --}}
-            <div class="flex flex-row justify-end gap-2">
-                {{-- Buscar --}}
-                <input type="text" class="px-4 py-2 border border-gray-300 rounded-md w-96"
-                    placeholder="Buscar Producto">
-                {{-- Boton --}}
+            <div class="flex justify-end items-center gap-2 mb-4">
+                <x-mary-input class="px-4 py-2" label="Buscar..." wire:model.live="search" icon="o-magnifying-glass"
+                    clearable inline />
+
                 <x-primary-btn label="Agregar Producto" icon="o-plus" spinner wire:click="create()" />
             </div>
 
