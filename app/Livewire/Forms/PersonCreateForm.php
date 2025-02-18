@@ -28,7 +28,7 @@ class PersonCreateForm extends Form
     public $nationality;
     #[Validate('required|string|digits:11', as: "CUIT")]
     public $cuit;
-    #[Validate('required|string|max:50', as: "Sexo")]
+    #[Validate('required|string|max:50', as: "Genero")]
     public $gender;
     #[Validate('required|date|before:today|after:1900-01-01', as: "Fecha de nacimiento")]
     public $birthdate;

@@ -39,7 +39,7 @@ class Person extends Model
     // Relación enviando a otro modelo
     public function userHistories()
     {
-        return $this->hasMany(UserHistory::class, 'idPerson', 'idPerson');
+        return $this->belongsTo(UserHistory::class, 'idPerson', 'idPerson');
     }
 
     public function audits()
