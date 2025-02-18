@@ -54,7 +54,6 @@ class Productos extends Component
     public function render()
     {
         $this->productCreate->loadProductTypes(); // Cargar antes de renderizar
-
         return view('livewire.inventario.productos', [
             'productTypes' => $this->productCreate->productTypes, // Pasar los tipos de productos a la vista
         ]);

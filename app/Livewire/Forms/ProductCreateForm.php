@@ -46,6 +46,11 @@ class ProductCreateForm extends Form
             ->orderBy('productType', 'asc')
             ->pluck('productType')
             ->toArray();
+
+        // Si no hay tipos de producto, usa un array predeterminado
+        if (empty($this->productTypes)) {
+            $this->productTypes = ['Sin tipos disponibles'];
+        }
     }
 
     public function save()
