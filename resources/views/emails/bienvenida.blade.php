@@ -11,7 +11,7 @@
                 </div>
             </h1>
             <div class="user-name">
-                $valorNombre
+                {{ $personaldata->firstName }}
             </div>
             <p class="message">
                 Nos alegra que formes parte de nuestro equipo. Estamos seguros que lograremos grandes cosas juntos. Si surge

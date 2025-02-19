@@ -24,9 +24,9 @@ class PersonCreateForm extends Form
     public $firstName;
     #[Validate('required|string|max:100', as: "Apellido")]
     public $lastName;
-    #[Validate('required', as: "Nacionalidad")]
+    #[Validate('required|string|max:100', as: "Nacionalidad")]
     public $nationality;
-    #[Validate('required|string|digits:11', as: "CUIT")]
+    #[Validate('required|string|digits:11|unique:personaldata,cuit', as: "CUIT")]
     public $cuit;
     #[Validate('required|string|max:50', as: "Genero")]
     public $gender;
@@ -88,7 +88,7 @@ class PersonCreateForm extends Form
     }
 
     //Una vez todos los datos solicitados en el formulario, se procede a crear la persona
-    public function save()
+    public function save(): Person
     {
         $this->validate();
 
@@ -125,10 +125,11 @@ class PersonCreateForm extends Form
 
             $this->createModal = false;
             $this->reset();
-
-            return $persona;
         } catch (Exception $e) {
             DB::rollBack();
+            throw $e;
         }
+
+        return $persona;
     }
 }

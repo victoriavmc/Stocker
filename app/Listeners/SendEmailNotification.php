@@ -37,43 +37,43 @@ class SendEmailNotification
     {
         switch ($event->emailType) {
             case 'bajaPersonal':
-                Mail::to($event->data['email'])->send(new BajaPersonal($event->data));
+                Mail::to($event->data['user']->email)->send(new BajaPersonal($event->data['personaldata']));
                 break;
 
             case 'bienvenida':
-                Mail::to($event->data['email'])->send(new Bienvenida($event->data));
+                Mail::to($event->data['user']->email)->send(new Bienvenida($event->data['personaldata']));
                 break;
 
             case 'confirBaja':
-                Mail::to($event->data['email'])->send(new ConfirBaja($event->data));
+                Mail::to($event->data['user']->email)->send(new ConfirBaja($event->data['personaldata']));
                 break;
 
             case 'confirCambios':
-                Mail::to($event->data['email'])->send(new ConfirCambios($event->data));
+                Mail::to($event->data['user']->email)->send(new ConfirCambios($event->data['personaldata']));
                 break;
 
             case 'notiAreaLaburo':
-                Mail::to($event->data['email'])->send(new NotiAreaLaburo($event->data));
+                Mail::to($event->data['user']->email)->send(new NotiAreaLaburo($event->data['personaldata']));
                 break;
 
             case 'notiAsignarAreaLaburo':
-                Mail::to($event->data['email'])->send(new NotiAsignarAreaLaburo($event->data));
+                Mail::to($event->data['user']->email)->send(new NotiAsignarAreaLaburo($event->data['personaldata']));
                 break;
 
             case 'notiInventario':
-                Mail::to($event->data['email'])->send(new NotiInventario($event->data));
+                Mail::to($event->data['user']->email)->send(new NotiInventario($event->data['personaldata']));
                 break;
 
             case 'notiMensual':
-                Mail::to($event->data['email'])->send(new NotiMensual($event->data));
+                Mail::to($event->data['user']->email)->send(new NotiMensual($event->data['personaldata']));
                 break;
 
             case 'notiPermisos':
-                Mail::to($event->data['email'])->send(new NotiPermisos($event->data));
+                Mail::to($event->data['user']->email)->send(new NotiPermisos($event->data['personaldata']));
                 break;
 
             default:
-                Mail::to($event->data['email'])->send(new SolicitudBaja($event->data));
+                Mail::to($event->data['user']->email)->send(new SolicitudBaja($event->data['personaldata']));
                 break;
         }
     }

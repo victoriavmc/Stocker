@@ -55,12 +55,12 @@ class Personal extends Component
 
     public function store()
     {
-        $person = $this->personCreate->save();
+        $persona = $this->personCreate->save();
         $this->success('Persona agregada al sistema correctamente');
 
-        dd($person);
+        event(new EmailNotification('bienvenida', ['personaldata' => $persona->personaldata, 'user' => $persona->user]));
 
-        event(new EmailNotification('bienvenida', $person));
+        // Enviar email de notiAsignarAreaLaburo a todos los usuarios con el rol de RRHH
     }
 
     public function show($id)
