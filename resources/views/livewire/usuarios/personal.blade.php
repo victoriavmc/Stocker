@@ -94,7 +94,7 @@
             <x-slot name="content">
                 <x-mary-errors title="Oops!" description="Porfavor, corrija los errores." icon="o-face-frown" />
 
-                <div class="grid grid-cols-1 gap-6 mt-4 md:grid-cols-2">
+                <div class="grid grid-cols-1 mt-4 md:grid-cols-2">
                     <!-- Sección de Datos Personales -->
                     <div class="pr-4 space-y-4 border-r border-base-content/20">
                         <div class="flex items-center space-x-2">
@@ -103,13 +103,23 @@
                         </div>
 
                         <x-mary-input wire:model="personCreate.firstName" label="Nombre" right-icon="o-user" inline />
+
                         <x-mary-input wire:model="personCreate.lastName" label="Apellido" right-icon="o-user" inline />
-                        <x-mary-select wire:model.live="personCreate.nationality" label="Nacionalidad"
-                            right-icon="o-flag" :options="$countries" option-value="value" option-label="value" inline />
+
+                        <select wire:model="personCreate.nationality"
+                            class="select select-primary w-full font-normal h-14 pt-3">
+                            <option selected hidden>Seleccione una nacionalidad</option>
+                            @foreach ($countries as $country)
+                                <option value="{{ $country->name }}">{{ $country->name }}</option>
+                            @endforeach
+                        </select>
+
                         <x-mary-input wire:model="personCreate.cuit" label="CUIT" right-icon="o-identification"
                             inline />
+
                         <x-mary-select wire:model="personCreate.gender" label="Genero" right-icon="o-user"
                             :options="$genders" option-value="value" option-label="value" inline />
+
                         <x-mary-input wire:model="personCreate.birthdate" label="Fecha de Nacimiento"
                             right-icon="o-calendar-days" type="date" inline />
                     </div>

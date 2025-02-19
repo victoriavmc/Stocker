@@ -84,15 +84,24 @@
                         <!-- Selector de Tipo de Producto -->
                         <div class="mt-3">
                             <!-- Selector de Tipo de Producto -->
-                            <x-mary-select wire:model.live="productCreate.productType" label="Tipo de Producto"
-                                :options="$productTypes" option-value="value" option-label="label" inline />
+                            <label class="block w-full max-w-xs mt-1 form-control">
+                                <select class="select select-primary w-full font-normal h-14 pt-3"
+                                    wire:model.live="productCreate.productType">
+                                    <option value="" selected hidden>Seleccione un tipo de producto</option>
+                                    @foreach ($productTypes as $type)
+                                        <option value="{{ $type }}">{{ $type }}</option>
+                                    @endforeach
+                                    <option value="other">Otro</option>
+                                </select>
+                            </label>
 
                             <!-- Campo para nuevo tipo de producto (si se selecciona "Otro") -->
                             @if ($productCreate->newProductTypeCampo)
                                 <div class="mt-3">
                                     <label class="block w-full max-w-xs mt-1 form-control">
-                                        <x-mary-input wire:model="productCreate.newProductType"
-                                            label="Nuevo Tipo de Producto" inline />
+                                        <input type="text" class="w-full input input-bordered"
+                                            wire:model="productCreate.newProductType"
+                                            placeholder="Nuevo Tipo de Producto" />
                                     </label>
                                 </div>
                             @endif

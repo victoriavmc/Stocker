@@ -45,11 +45,7 @@ class Personal extends Component
 
     public function mount()
     {
-        $this->countries = Country::all()->map(function ($country) {
-            return [
-                'value' => $country->name,
-            ];
-        });
+        $this->countries = Country::all();
     }
 
     public function create()

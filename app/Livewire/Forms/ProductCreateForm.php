@@ -49,24 +49,10 @@ class ProductCreateForm extends Form
             ->pluck('productType')
             ->toArray();
 
-        // Si no hay tipos de producto, inicializa con array vacío en lugar de valor predeterminado
+        // Si no hay tipos de producto, usa un array predeterminado
         if (empty($this->productTypes)) {
             $this->productTypes = ['Sin tipos disponibles'];
         }
-
-        // Convierte los tipos existentes al formato deseado
-        $this->productTypes = collect($this->productTypes)->map(function ($type) {
-            return [
-                'value' => $type,
-                'label' => $type,
-            ];
-        })->toArray();
-
-        // Agrega la opción "Otro" al final del array
-        $this->productTypes[] = [
-            'value' => 'other',
-            'label' => 'Otro'
-        ];
     }
 
     public function save()
