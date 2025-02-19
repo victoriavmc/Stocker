@@ -5,11 +5,13 @@ namespace App\Livewire\Inventario;
 use App\Livewire\Forms\ProductCreateForm;
 use App\Models\Product;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use Mary\Traits\Toast;
 
 class Productos extends Component
 {
     use Toast;
+    use WithFileUploads;
 
     public ProductCreateForm $productCreate;
 
@@ -19,6 +21,15 @@ class Productos extends Component
     public $productos;
 
     public $producto;
+
+    public function updating($property, $value)
+    {
+        if ($property === 'productCreate.productType' && $value === 'other') {
+            $this->productCreate->newProductTypeCampo = true;
+        } else {
+            $this->productCreate->newProductTypeCampo = false;
+        }
+    }
 
     public function create()
     {

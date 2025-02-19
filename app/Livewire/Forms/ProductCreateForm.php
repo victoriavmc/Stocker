@@ -10,21 +10,21 @@ use Illuminate\Support\Facades\DB;
 
 class ProductCreateForm extends Form
 {
-    //
+
     #BaseProducts
-    #[Validate('required|string|max:50')]
+    #[Validate('required|string|max:50, as:Marca')]
     public $brand;
-    #[Validate('required|string|max:50')]
+    #[Validate('required|string|max:50, as:Nombre')]
     public $name;
 
     #Products
-    #[Validate('required|interger')]
+    #[Validate('required|integer, as:Código')]
     public $code;
-    #[Validate('required|string|max:100')]
+    #[Validate('required|integer|max:100, as:Medida')]
     public $measure;
-    #[Validate('required|string|max:100')]
+    #[Validate('required|string|max:100, as:Tipo')]
     public $productType;
-    #[Validate('required|string|max:255')]
+    #[Validate('required|image|max:1024, as:Foto')]
     public $photo;
 
     //Extra (Controla en el peor de los casos plis)
@@ -32,8 +32,10 @@ class ProductCreateForm extends Form
     #[Validate('required|string|max:255')]
     public $newProductType; // Nuevo tipo de producto
 
+    public $newProductTypeCampo = false;
+
     public $createModal = false;
-    // Modal
+
     public function create()
     {
         $this->createModal = true;
@@ -47,10 +49,24 @@ class ProductCreateForm extends Form
             ->pluck('productType')
             ->toArray();
 
-        // Si no hay tipos de producto, usa un array predeterminado
+        // Si no hay tipos de producto, inicializa con array vacío en lugar de valor predeterminado
         if (empty($this->productTypes)) {
             $this->productTypes = ['Sin tipos disponibles'];
         }
+
+        // Convierte los tipos existentes al formato deseado
+        $this->productTypes = collect($this->productTypes)->map(function ($type) {
+            return [
+                'value' => $type,
+                'label' => $type,
+            ];
+        })->toArray();
+
+        // Agrega la opción "Otro" al final del array
+        $this->productTypes[] = [
+            'value' => 'other',
+            'label' => 'Otro'
+        ];
     }
 
     public function save()

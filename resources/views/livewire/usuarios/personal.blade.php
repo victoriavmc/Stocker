@@ -104,8 +104,8 @@
 
                         <x-mary-input wire:model="personCreate.firstName" label="Nombre" right-icon="o-user" inline />
                         <x-mary-input wire:model="personCreate.lastName" label="Apellido" right-icon="o-user" inline />
-                        <x-mary-select wire:model="personCreate.nationality" label="Nacionalidad" right-icon="o-flag"
-                            :options="$countries" option-value="value" option-label="value" inline />
+                        <x-mary-select wire:model.live="personCreate.nationality" label="Nacionalidad"
+                            right-icon="o-flag" :options="$countries" option-value="value" option-label="value" inline />
                         <x-mary-input wire:model="personCreate.cuit" label="CUIT" right-icon="o-identification"
                             inline />
                         <x-mary-select wire:model="personCreate.gender" label="Genero" right-icon="o-user"

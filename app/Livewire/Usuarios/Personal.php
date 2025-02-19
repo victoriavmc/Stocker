@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Usuarios;
 
+use App\Events\EmailNotification;
 use App\Livewire\Forms\PersonCreateForm;
 use App\Livewire\Forms\PersonEditForm;
 use App\Livewire\Forms\PersonShow;
@@ -58,8 +59,12 @@ class Personal extends Component
 
     public function store()
     {
-        $this->personCreate->save();
+        $person = $this->personCreate->save();
         $this->success('Persona agregada al sistema correctamente');
+
+        dd($person);
+
+        event(new EmailNotification('bienvenida', $person));
     }
 
     public function show($id)
