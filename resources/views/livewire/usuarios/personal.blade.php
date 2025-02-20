@@ -13,11 +13,11 @@
             <x-table>
                 <x-slot name="header">
                     <th>#</th>
-                    <th>Perfil</th>
-                    <th>Nombre Completo</th>
-                    <th>Estado en la Empresa</th>
-                    <th>Fecha Agregado al Sistema</th>
-                    <th>Acciones</th>
+                    <th class="text-base text-base-content">Perfil</th>
+                    <th class="text-base text-base-content">Nombre Completo</th>
+                    <th class="text-base text-base-content">Estado en la Empresa</th>
+                    <th class="text-base text-base-content">Fecha Agregado al Sistema</th>
+                    <th class="text-base text-base-content">Acciones</th>
                 </x-slot>
 
                 <x-slot name="body">
@@ -25,7 +25,37 @@
                         @foreach ($personas as $persona)
                             <tr>
                                 <th>{{ $persona->idPerson }}</th>
-                                <td>{{ $persona->users->profile_photo_path ?? 'No' }}</td>
+                                @if ($persona->user->profile_photo_path)
+                                    <td>
+                                        <button id="avatar-button" onclick="openImageModal()">
+                                            <img src="{{ asset('storage/' . str_replace('storage/', '', $persona->user->profile_photo_path)) }}"
+                                                alt="{{ $persona->user->name }}" class="w-12 h-12 rounded-full">
+                                        </button>
+                                    </td>
+
+                                    <div id="image-modal" class="fixed inset-0 z-50 hidden">
+                                        <div class="absolute inset-0 bg-black bg-opacity-75"></div>
+                                        <div class="flex items-center justify-center min-h-screen">
+                                            <div class="relative">
+                                                <img id="modal-image"
+                                                    src="{{ asset('storage/' . str_replace('storage/', '', $persona->user->profile_photo_path)) }}"
+                                                    class="max-w-3xl max-h-[80vh]" />
+                                                <button onclick="closeImageModal()"
+                                                    class="absolute top-4 right-4 text-white">
+                                                    <x-mary-icon name="o-x-mark" class="w-8 h-8" />
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @else
+                                    <td><svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12" viewBox="0 0 24 24"
+                                            fill="currentColor" class="size-8">
+                                            <path fill-rule="evenodd"
+                                                d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </td>
+                                @endif
                                 <td>{{ $persona->personaldata->firstName . ' ' . $persona->personaldata->lastName }}
                                 <td>
                                     @switch($persona->statusTrabajador)
@@ -78,6 +108,9 @@
                     @endif
                 </x-slot>
             </x-table>
+            <div class="mt-3">
+                {{ $personasPaginadas->links() }}
+            </div>
         </div>
     </div>
 
@@ -142,7 +175,8 @@
                             <span class="text-lg font-medium">Dirección</span>
                         </div>
 
-                        <x-mary-input wire:model="personCreate.street" label="Calle" right-icon="o-map-pin" inline />
+                        <x-mary-input wire:model="personCreate.street" label="Calle" right-icon="o-map-pin"
+                            inline />
 
                         <x-mary-input wire:model="personCreate.neighborhood" label="Barrio" right-icon="o-map-pin"
                             inline />
@@ -152,9 +186,11 @@
                         <x-mary-input wire:model="personCreate.streetBlock" label="Manzana" right-icon="o-map-pin"
                             inline />
 
-                        <x-mary-input wire:model="personCreate.sector" label="Sector" right-icon="o-map-pin" inline />
+                        <x-mary-input wire:model="personCreate.sector" label="Sector" right-icon="o-map-pin"
+                            inline />
 
-                        <x-mary-input wire:model="personCreate.number" label="Altura" right-icon="o-map-pin" inline />
+                        <x-mary-input wire:model="personCreate.number" label="Altura" right-icon="o-map-pin"
+                            inline />
                     </div>
                 </div>
 
@@ -214,7 +250,11 @@
                         <div class="flex items-center space-x-4">
                             <div class="w-16 h-16 overflow-hidden rounded-full">
                                 @if ($personShow->profile_photo_path)
-                                    <x-mary-avatar :image="$personShow->profile_photo_path" class="object-cover w-full h-full" />
+                                    <button id="avatar-button" onclick="openImageModalShow()">
+                                        <x-mary-avatar :image="asset(
+                                            'storage/' . str_replace('storage/', '', $personShow->profile_photo_path),
+                                        )" class="object-cover w-full h-full" />
+                                    </button>
                                 @else
                                     <div class="flex items-center justify-center w-full h-full bg-gray-200">
                                         <x-mary-icon name="o-user" class="w-8 h-8 text-gray-500" />
@@ -392,9 +432,31 @@
                         <span class="text-lg font-medium">Datos de Usuario</span>
                     </div>
 
+                    @if ($personEdit->profile_photo_path)
+                        <div class="flex justify-center relative">
+                            <div class="relative">
+                                <div class="absolute flex w-full justify-end">
+                                    <button type="button" wire:click="deleteImage"
+                                        class="normal-case rounded-md transition-all duration-300 !inline-flex lg:tooltip lg:tooltip-top bg-red-600 hover:bg-red-500 p-2"
+                                        data-tip="Eliminar imagen">
+                                        <svg class="inline w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                            aria-hidden="true" data-slot="icon">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <img src="{{ asset('storage/' . str_replace('storage/', '', $personEdit->profile_photo_path)) }}"
+                                    alt="{{ $personEdit->name }}" class="w-28 h-28 rounded-full">
+                            </div>
+                        </div>
+                    @endif
+
                     <x-mary-input wire:model="personEdit.name" label="Usuario" right-icon="o-user" inline />
                     <x-mary-input wire:model="personEdit.email" label="Email" right-icon="o-envelope" inline />
-                </div>
+
             </x-slot>
 
             <x-slot name="footer">
@@ -444,4 +506,42 @@
         </x-slot>
     </x-dialog-modal>
 
+    {{-- Modal de imagen --}}
+    <div id="image-modal-show" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black bg-opacity-75"></div>
+        <div class="flex items-center justify-center min-h-screen">
+            <div class="relative">
+                <img id="modal-image-show"
+                    src="{{ asset('storage/' . str_replace('storage/', '', $personShow->profile_photo_path)) }}"
+                    class="max-w-3xl max-h-[80vh]" />
+                <button onclick="closeImageModalShow()" class="absolute top-4 right-4 text-white">
+                    <x-mary-icon name="o-x-mark" class="w-8 h-8" />
+                </button>
+            </div>
+        </div>
+    </div>
+
+    @push('js')
+        <script>
+            function openImageModal() {
+                document.getElementById('image-modal').classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function openImageModalShow() {
+                document.getElementById('image-modal-show').classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeImageModal() {
+                document.getElementById('image-modal').classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+
+            function closeImageModalShow() {
+                document.getElementById('image-modal-show').classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        </script>
+    @endpush
 </div>

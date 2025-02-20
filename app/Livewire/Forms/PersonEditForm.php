@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Traits\CapitalizeFields;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
@@ -60,6 +61,7 @@ class PersonEditForm extends Form
     public $email;
     #[Validate('nullable|string|min:8|max:100', as: 'Contraseña')]
     public $password;
+    public $profile_photo_path;
 
     public $editModal = false;
 
@@ -72,6 +74,15 @@ class PersonEditForm extends Form
         $this->fillFormData();
 
         $this->editModal = true;
+    }
+
+    public function deleteImage()
+    {
+        $path = $this->profile_photo_path;
+
+        $this->profile_photo_path = null;
+
+        return $path;
     }
 
     public function update()
@@ -147,6 +158,7 @@ class PersonEditForm extends Form
         $this->name = $this->user->name;
         $this->email = $this->user->email;
         $this->password = $this->user->password;
+        $this->profile_photo_path = $this->user->profile_photo_path;
     }
 
     private function updatePersonalData()
@@ -178,6 +190,7 @@ class PersonEditForm extends Form
         $this->person->user->update([
             'name' => $this->name,
             'email' => $this->email,
+            'profile_photo_path' => $this->profile_photo_path,
             'password' => $this->password,
         ]);
     }
