@@ -138,60 +138,75 @@ class PersonEditForm extends Form
 
     private function fillFormData()
     {
-        // Datos personales
-        $this->firstName = $this->personalData->firstName;
-        $this->lastName = $this->personalData->lastName;
-        $this->nationality = $this->personalData->nationality;
-        $this->cuit = $this->personalData->cuit;
-        $this->gender = $this->personalData->gender;
-        $this->birthdate = $this->personalData->birthdate;
+        $this->fillPersonalData();
+        $this->fillAddressData();
+        $this->fillUserData();
+    }
 
-        // Datos de dirección
-        $this->street = $this->address->street;
-        $this->neighborhood = $this->address->neighborhood;
-        $this->house = $this->address->house;
-        $this->streetBlock = $this->address->streetBlock;
-        $this->sector = $this->address->sector;
-        $this->number = $this->address->number;
+    private function fillPersonalData()
+    {
+        $fields = [
+            'firstName',
+            'lastName',
+            'nationality',
+            'cuit',
+            'gender',
+            'birthdate'
+        ];
 
-        // Datos de usuario
-        $this->name = $this->user->name;
-        $this->email = $this->user->email;
-        $this->password = $this->user->password;
-        $this->profile_photo_path = $this->user->profile_photo_path;
+        foreach ($fields as $field) {
+            $this->$field = $this->personalData->$field;
+        }
+    }
+
+    private function fillAddressData()
+    {
+        $fields = [
+            'street',
+            'neighborhood',
+            'house',
+            'streetBlock',
+            'sector',
+            'number'
+        ];
+
+        foreach ($fields as $field) {
+            $this->$field = $this->address->$field;
+        }
+    }
+
+    private function fillUserData()
+    {
+        $fields = [
+            'name',
+            'email',
+            'password',
+            'profile_photo_path'
+        ];
+
+        foreach ($fields as $field) {
+            $this->$field = $this->user->$field;
+        }
     }
 
     private function updatePersonalData()
     {
-        $this->person->personalData->update([
-            'firstName' => $this->firstName,
-            'lastName' => $this->lastName,
-            'nationality' => $this->nationality,
-            'cuit' => $this->cuit,
-            'gender' => $this->gender,
-            'birthdate' => $this->birthdate,
-        ]);
+        $this->person->personalData->update(
+            $this->only('firstName', 'lastName', 'nationality', 'cuit', 'gender', 'birthdate')
+        );
     }
 
     private function updateAddress()
     {
-        $this->person->address->update([
-            'street' => $this->street,
-            'neighborhood' => $this->neighborhood,
-            'house' => $this->house,
-            'streetBlock' => $this->streetBlock,
-            'sector' => $this->sector,
-            'number' => $this->number,
-        ]);
+        $this->person->address->update(
+            $this->only('street', 'neighborhood', 'house', 'streetBlock', 'sector', 'number')
+        );
     }
 
     private function updateUser()
     {
-        $this->person->user->update([
-            'name' => $this->name,
-            'email' => $this->email,
-            'profile_photo_path' => $this->profile_photo_path,
-            'password' => $this->password,
-        ]);
+        $this->person->address->update(
+            $this->only('name', 'email', 'password', 'profile_photo_path')
+        );
     }
 }

@@ -14,6 +14,9 @@
                 </div>
             </label>
         @endif
+
+        {{-- Tema --}}
+        @livewire('theme-selector')
     </div>
 
     <div class="navbar-center">
@@ -44,10 +47,6 @@
                 <span class="badge badge-xs badge-primary indicator-item"></span>
             </div>
         </button>
-        {{-- Tema --}}
-        <div class="ms-2">
-            @livewire('theme-selector')
-        </div>
         <!-- Settings Dropdown -->
         <div class="ms-2 relative">
             <x-dropdown align="right" width="48">

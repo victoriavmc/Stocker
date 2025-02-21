@@ -27,7 +27,7 @@
                                 <th>{{ $persona->idPerson }}</th>
                                 @if ($persona->user->profile_photo_path)
                                     <td>
-                                        <button id="avatar-button" onclick="openImageModal()">
+                                        <button id="avatar-button" class="avatar-button">
                                             <img src="{{ asset('storage/' . str_replace('storage/', '', $persona->user->profile_photo_path)) }}"
                                                 alt="{{ $persona->user->name }}" class="w-12 h-12 rounded-full">
                                         </button>
@@ -40,8 +40,7 @@
                                                 <img id="modal-image"
                                                     src="{{ asset('storage/' . str_replace('storage/', '', $persona->user->profile_photo_path)) }}"
                                                     class="max-w-3xl max-h-[80vh]" />
-                                                <button onclick="closeImageModal()"
-                                                    class="absolute top-4 right-4 text-white">
+                                                <button data-close-modal class="absolute top-4 right-4 text-white">
                                                     <x-mary-icon name="o-x-mark" class="w-8 h-8" />
                                                 </button>
                                             </div>
@@ -233,124 +232,112 @@
             <div class="flex items-center space-x-2">
                 <x-mary-icon name="o-user" class="w-6 h-6 text-primary" />
                 <span class="text-xl font-semibold">
-                    @if (isset($personShow) && $personShow->firstName)
-                        Perfil de {{ $personShow->firstName }} {{ $personShow->lastName }}
-                    @else
-                        Perfil de Usuario
-                    @endif
+                    Perfil de {{ $personShow->firstName }} {{ $personShow->lastName }}
                 </span>
             </div>
         </x-slot>
 
         <x-slot name="content">
-            @if (isset($personShow) && $personShow->firstName)
-                <div class="space-y-6">
-                    <!-- Sección de Foto y Nombre -->
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-4">
-                            <div class="w-16 h-16 overflow-hidden rounded-full">
-                                @if ($personShow->profile_photo_path)
-                                    <button id="avatar-button" onclick="openImageModalShow()">
-                                        <x-mary-avatar :image="asset(
-                                            'storage/' . str_replace('storage/', '', $personShow->profile_photo_path),
-                                        )" class="object-cover w-full h-full" />
-                                    </button>
-                                @else
-                                    <div class="flex items-center justify-center w-full h-full bg-gray-200">
-                                        <x-mary-icon name="o-user" class="w-8 h-8 text-gray-500" />
-                                    </div>
-                                @endif
-                            </div>
-                            <div class="space-y-1">
-                                <p class="text-lg font-semibold">{{ $personShow->firstName }}
-                                    {{ $personShow->lastName }}
-                                </p>
-                                <p class="text-sm text-gray-500">CUIT: {{ $personShow->cuit }}</p>
-                            </div>
+            <div class="space-y-6">
+                <!-- Sección de Foto y Nombre -->
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-16 h-16 overflow-hidden rounded-full">
+                            @if ($personShow->profile_photo_path)
+                                <img src="{{ asset('storage/' . str_replace('storage/', '', $personShow->profile_photo_path)) }}"
+                                    alt="{{ $personShow->name }}" class="w-full h-full object-cover">
+                            @else
+                                <div class="flex items-center justify-center w-full h-full bg-gray-200">
+                                    <x-mary-icon name="o-user" class="w-8 h-8 text-gray-500" />
+                                </div>
+                            @endif
                         </div>
+                        <div class="space-y-1">
+                            <p class="text-lg font-semibold">{{ $personShow->firstName }}
+                                {{ $personShow->lastName }}
+                            </p>
+                            <p class="text-sm text-gray-500">CUIT: {{ $personShow->cuit }}</p>
+                        </div>
+                    </div>
 
-                        <div>
-                            <h1 class="text-lg font-semibold">Estado: </h1>
-                            @switch($persona->statusTrabajador)
+                    <div>
+                        <h1 class="text-lg font-semibold">Estado: </h1>
+                        @if (isset($personShow->statusTrabajador))
+                            @switch($personShow->statusTrabajador)
                                 @case('FALTA ASIGNAR')
-                                    <span class="font-bold text-lg text-red-600">{{ $persona->statusTrabajador }}</span>
+                                    <span class="font-bold text-lg text-red-600">{{ $personShow->statusTrabajador }}</span>
                                 @break
 
                                 @case('Trabajando')
-                                    <span class="font-bold text-lg text-green-600">{{ $persona->statusTrabajador }}</span>
+                                    <span class="font-bold text-lg text-green-600">{{ $personShow->statusTrabajador }}</span>
                                 @break
 
                                 @case('Trabajando (Cambio de Cargo)')
-                                    <span class="font-bold text-lg text-green-400">{{ $persona->statusTrabajador }}</span>
+                                    <span class="font-bold text-lg text-green-400">{{ $personShow->statusTrabajador }}</span>
                                 @break
 
                                 @case('Trabajando (Vacaciones)')
-                                    <span class="font-bold text-lg text-orange-600">{{ $persona->statusTrabajador }}</span>
+                                    <span class="font-bold text-lg text-orange-600">{{ $personShow->statusTrabajador }}</span>
                                 @break
 
                                 @case('Extrabajador (Jubilado)')
-                                    <span class="font-bold text-lg text-blue-600">{{ $persona->statusTrabajador }}</span>
+                                    <span class="font-bold text-lg text-blue-600">{{ $personShow->statusTrabajador }}</span>
                                 @break
 
                                 @default
-                                    <span class="font-bold text-lg text-gray-600">{{ $persona->statusTrabajador }}</span>
+                                    <span class="font-bold text-lg text-gray-600">{{ $personShow->statusTrabajador }}</span>
                             @endswitch
-                        </div>
-
+                        @endif
                     </div>
 
-                    <!-- Sección de Datos Personales -->
-                    <div class="space-y-4">
-                        <div class="flex items-center space-x-2">
-                            <x-mary-icon name="o-identification" class="w-5 h-5 text-primary" />
-                            <span class="font-semibold text-lg">Datos Personales</span>
-                        </div>
-                        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                            <x-mary-input disabled style="cursor: default" icon="o-calendar-days"
-                                label="Fecha de Nacimiento" :value="$personShow->birthdate" />
-                            <x-mary-input disabled style="cursor: default" icon="o-user" label="Género"
-                                :value="$personShow->gender" />
-                            <x-mary-input disabled style="cursor: default" icon="o-flag" label="Nacionalidad"
-                                :value="$personShow->nationality" />
-                        </div>
-                    </div>
+                </div>
 
-                    <!-- Sección de Usuario y Email -->
-                    <div class="space-y-4">
-                        <div class="flex items-center space-x-2">
-                            <x-mary-icon name="o-at-symbol" class="w-5 h-5 text-primary" />
-                            <span class="font-semibold text-lg">Información de Usuario</span>
-                        </div>
-                        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                            <x-mary-input disabled style="cursor: default" icon="o-user" label="Usuario"
-                                :value="$personShow->name" />
-                            <x-mary-input disabled style="cursor: default" icon="o-at-symbol" label="Email"
-                                :value="$personShow->email" />
-                        </div>
+                <!-- Sección de Datos Personales -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-2">
+                        <x-mary-icon name="o-identification" class="w-5 h-5 text-primary" />
+                        <span class="font-semibold text-lg">Datos Personales</span>
                     </div>
-
-                    <!-- Sección de Domicilio -->
-                    <div class="space-y-4">
-                        <div class="flex items-center space-x-2">
-                            <x-mary-icon name="o-home" class="w-5 h-5 text-primary" />
-                            <span class="font-semibold text-lg">Domicilio</span>
-                        </div>
-                        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                            <x-mary-input disabled style="cursor: default" label="Calle" :value="$personShow->street" />
-                            <x-mary-input disabled style="cursor: default" label="Barrio" :value="$personShow->neighborhood" />
-                            <x-mary-input disabled style="cursor: default" label="Casa" :value="$personShow->house" />
-                            <x-mary-input disabled style="cursor: default" label="Manzana" :value="$personShow->streetBlock" />
-                            <x-mary-input disabled style="cursor: default" label="Sector" :value="$personShow->sector" />
-                            <x-mary-input disabled style="cursor: default" label="Altura" :value="$personShow->number" />
-                        </div>
+                    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                        <x-mary-input disabled style="cursor: default" icon="o-calendar-days"
+                            label="Fecha de Nacimiento" :value="$personShow->birthdate" />
+                        <x-mary-input disabled style="cursor: default" icon="o-user" label="Género"
+                            :value="$personShow->gender" />
+                        <x-mary-input disabled style="cursor: default" icon="o-flag" label="Nacionalidad"
+                            :value="$personShow->nationality" />
                     </div>
                 </div>
-            @else
-                <div class="text-center py-4">
-                    <x-mary-icon name="o-exclamation-triangle" class="w-16 h-16 mx-auto text-warning" />
-                    <p class="mt-4 text-lg text-gray-600">No se encontraron datos del usuario</p>
+
+                <!-- Sección de Usuario y Email -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-2">
+                        <x-mary-icon name="o-at-symbol" class="w-5 h-5 text-primary" />
+                        <span class="font-semibold text-lg">Información de Usuario</span>
+                    </div>
+                    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                        <x-mary-input disabled style="cursor: default" icon="o-user" label="Usuario"
+                            :value="$personShow->name" />
+                        <x-mary-input disabled style="cursor: default" icon="o-at-symbol" label="Email"
+                            :value="$personShow->email" />
+                    </div>
                 </div>
-            @endif
+
+                <!-- Sección de Domicilio -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-2">
+                        <x-mary-icon name="o-home" class="w-5 h-5 text-primary" />
+                        <span class="font-semibold text-lg">Domicilio</span>
+                    </div>
+                    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                        <x-mary-input disabled style="cursor: default" label="Calle" :value="$personShow->street" />
+                        <x-mary-input disabled style="cursor: default" label="Barrio" :value="$personShow->neighborhood" />
+                        <x-mary-input disabled style="cursor: default" label="Casa" :value="$personShow->house" />
+                        <x-mary-input disabled style="cursor: default" label="Manzana" :value="$personShow->streetBlock" />
+                        <x-mary-input disabled style="cursor: default" label="Sector" :value="$personShow->sector" />
+                        <x-mary-input disabled style="cursor: default" label="Altura" :value="$personShow->number" />
+                    </div>
+                </div>
+            </div>
         </x-slot>
 
         <x-slot name="footer">
@@ -453,10 +440,9 @@
                             </div>
                         </div>
                     @endif
-
                     <x-mary-input wire:model="personEdit.name" label="Usuario" right-icon="o-user" inline />
                     <x-mary-input wire:model="personEdit.email" label="Email" right-icon="o-envelope" inline />
-
+                </div>
             </x-slot>
 
             <x-slot name="footer">
@@ -505,43 +491,4 @@
             </div>
         </x-slot>
     </x-dialog-modal>
-
-    {{-- Modal de imagen --}}
-    <div id="image-modal-show" class="fixed inset-0 z-50 hidden">
-        <div class="absolute inset-0 bg-black bg-opacity-75"></div>
-        <div class="flex items-center justify-center min-h-screen">
-            <div class="relative">
-                <img id="modal-image-show"
-                    src="{{ asset('storage/' . str_replace('storage/', '', $personShow->profile_photo_path)) }}"
-                    class="max-w-3xl max-h-[80vh]" />
-                <button onclick="closeImageModalShow()" class="absolute top-4 right-4 text-white">
-                    <x-mary-icon name="o-x-mark" class="w-8 h-8" />
-                </button>
-            </div>
-        </div>
-    </div>
-
-    @push('js')
-        <script>
-            function openImageModal() {
-                document.getElementById('image-modal').classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-            }
-
-            function openImageModalShow() {
-                document.getElementById('image-modal-show').classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-            }
-
-            function closeImageModal() {
-                document.getElementById('image-modal').classList.add('hidden');
-                document.body.style.overflow = 'auto';
-            }
-
-            function closeImageModalShow() {
-                document.getElementById('image-modal-show').classList.add('hidden');
-                document.body.style.overflow = 'auto';
-            }
-        </script>
-    @endpush
 </div>

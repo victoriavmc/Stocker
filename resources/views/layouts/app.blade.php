@@ -35,13 +35,13 @@
         <!-- Page Content -->
         <main class="min-h-[92vh] bg-base-300">
             <!-- Barra Lateral (Sidebar) -->
-            <div id="main-content">
+            <div id="main-content" class="relative">
                 <div class="drawer">
                     <input id="my-drawer" type="checkbox" class="drawer-toggle" />
-                    <div class="drawer-content">
+                    <div class="drawer-content w-full">
                         {{ $slot }}
                     </div>
-                    <div class="drawer-side">
+                    <div class="drawer-side fixed top-0 right-0 z-50">
                         <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
 
                         <ul class="menu bg-base-200 text-base-content space-y-4 min-h-full w-80 p-4 shadow-lg">
