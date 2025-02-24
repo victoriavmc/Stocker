@@ -3,6 +3,8 @@
 namespace App\Livewire\Inventario;
 
 use App\Livewire\Forms\ProductCreateForm;
+use App\Livewire\Forms\ProductEditForm;
+use App\Livewire\Forms\ProductShow;
 use App\Models\Product;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -14,6 +16,8 @@ class Productos extends Component
     use WithFileUploads;
 
     public ProductCreateForm $productCreate;
+    public ProductEditForm $productEdit;
+    public ProductShow $productShow;
 
     public $showModal = false;
     public $editModal = false;

@@ -27,6 +27,9 @@ class EmployeeCreateForm extends Form
     #[Validate('required')]
     public $observation;
 
+    #[Validate('required|integer')]
+    public $idPerson;
+
     public $statusLogic = 'Activo';
 
     public $createModal = false;

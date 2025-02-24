@@ -24,15 +24,15 @@
                 </x-slot>
 
                 <x-slot name="body">
-                    @if ($trabajadores->count() > 0)
-                        @foreach ($trabajadores as $trabajador)
+                    @if ($employees->count() > 0)
+                        @foreach ($employees as $employee)
                             <tr>
-                                <th>{{ $trabajador->idJobPosition }}</th>
-                                @if ($trabajador->person->users->profile_photo_path)
+                                <th>{{ $employee->idJobPosition }}</th>
+                                @if ($employee->person->users->profile_photo_path)
                                     <td>
                                         <button id="avatar-button" onclick="openImageModal()">
-                                            <img src="{{ asset('storage/' . str_replace('storage/', '', $trabajador->person->users->profile_photo_path)) }}"
-                                                alt="{{ $trabajador->person->users->name }}"
+                                            <img src="{{ asset('storage/' . str_replace('storage/', '', $employee->person->users->profile_photo_path)) }}"
+                                                alt="{{ $employee->person->users->name }}"
                                                 class="w-12 h-12 rounded-full">
                                         </button>
                                     </td>
@@ -42,7 +42,7 @@
                                         <div class="flex items-center justify-center min-h-screen">
                                             <div class="relative">
                                                 <img id="modal-image"
-                                                    src="{{ asset('storage/' . str_replace('storage/', '', $trabajador->person->users->profile_photo_path)) }}"
+                                                    src="{{ asset('storage/' . str_replace('storage/', '', $employee->person->users->profile_photo_path)) }}"
                                                     class="max-w-3xl max-h-[80vh]" />
                                                 <button onclick="closeImageModal()"
                                                     class="absolute top-4 right-4 text-white">
@@ -60,13 +60,13 @@
                                         </svg>
                                     </td>
                                 @endif
-                                <td>{{ $trabajador->person->personaldata->firstName . ' ' . $trabajador->person->personaldata->lastName }}
+                                <td>{{ $employee->person->personaldata->firstName . ' ' . $employee->person->personaldata->lastName }}
                                 </td>
-                                <td>{{ $trabajador->position }}</td>
-                                <td>{{ $trabajador->startDate }}</td>
-                                <td>{{ $trabajador->endDate }}</td>
-                                <td>{{ $trabajador->status }}</td>
-                                <td>{{ $trabajador->observation ?? 'No Presenta' }}</td>
+                                <td>{{ $employee->position }}</td>
+                                <td>{{ $employee->startDate }}</td>
+                                <td>{{ $employee->endDate }}</td>
+                                <td>{{ $employee->status }}</td>
+                                <td>{{ $employee->observation ?? 'No Presenta' }}</td>
                                 <td class="w-48">
                                     <x-mary-button icon="o-eye" wire:click="show()" tooltip="Ver datos" spinner
                                         class="btn-sm bg-base-content/10 border-base-content/10 hover:bg-base-content/20" />
@@ -90,14 +90,45 @@
     </div>
 
     {{-- Crear Trabajador --}}
-    <form>
+    <x-mary-form>
         <x-dialog-modal wire:model="employeeCreate.createModal">
             <x-slot name="title">
                 Crear Trabajador
             </x-slot>
 
             <x-slot name="content">
-                hola
+                <x-mary-errors title="Oops!" description="Porfavor, corrija los errores." icon="o-face-frown" />
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-2">
+                        <x-mary-icon name="o-wrench-screwdriver" class="w-5 h-5 text-primary" />
+                        <span class="text-lg font-medium">Datos del trabajador</span>
+                    </div>
+
+                    <x-mary-input wire:model="employeeCreate.startDate" label="Fecha de inicio" icon="o-calendar-days"
+                        type="date" inline />
+
+                    <x-mary-input wire:model="employeeCreate.position" label="Posicion" icon="o-wrench" inline />
+
+                    <x-mary-select />
+
+                    <x-mary-input wire:model="employeeCreate.status" label="Estado" icon="o-wrench" inline />
+
+                    <x-mary-textarea label="Observacion" wire:model="employeeCreate.observation"
+                        placeholder="Tu observacion ..." hint="Maximo 1000 caracteres" rows="5" icon="o-wrench"
+                        inline />
+
+                    <select icon="o-user" wire:model="employeeCreate.idPerson"
+                        class="select {{ $errors->has('employeeCreate.idPerson') ? 'select-error' : 'select-primary' }} w-full font-normal h-14 pt-3">
+                        <option selected hidden>Seleccione a la persona</option>
+                        @foreach ($persons as $person)
+                            <option value="{{ $person->idPerson }}">
+                                {{ $person->personaldata->firstName . ' ' . $person->personaldata->lastName }}</option>
+                        @endforeach
+                    </select>
+                    @error('employeeCreate.idPerson')
+                        <span class="text-red-500 label-text-alt p-1">{{ $message }}</span>
+                    @enderror
+                </div>
             </x-slot>
 
             <x-slot name="footer">
@@ -115,133 +146,130 @@
                 </div>
             </x-slot>
         </x-dialog-modal>
-    </form>
+    </x-mary-form>
 
-    {{-- Ver usuario --}}
-    {{-- <form>
-        <x-dialog-modal wire:model="employeeShow.showModal">
-            <x-slot name="title">
-                Ver Trabajador
-            </x-slot>
+    {{-- Ver trabajador --}}
+    <x-dialog-modal wire:model="employeeShow.showModal">
+        <x-slot name="title">
+            Ver Trabajador
+        </x-slot>
 
-            <x-slot name="content">
-                <div class="space-y-6">
-                    <!-- Sección de Foto y Nombre -->
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-4">
-                            <div class="w-16 h-16 overflow-hidden rounded-full">
-                                @if ($employeeShow->person->user->profile_photo_path)
-                                    <img src="{{ asset('storage/' . str_replace('storage/', '', $employeeShow->person->user->profile_photo_path)) }}"
-                                        alt="{{ $employeeShow->person->user->name }}"
-                                        class="w-full h-full object-cover">
-                                @else
-                                    <div class="flex items-center justify-center w-full h-full bg-gray-200">
-                                        <x-mary-icon name="o-user" class="w-8 h-8 text-gray-500" />
-                                    </div>
-                                @endif
-                            </div>
-                            <div class="space-y-1">
-                                <p class="text-lg font-semibold">
-                                    {{ $employeeShow->person->personaldata->firstName }}
-                                    {{ $employeeShow->person->personaldata->lastName }}
-                                </p>
-                                <p class="text-sm text-gray-500">CUIT:
-                                    {{ $employeeShow->person->personaldata->cuit }}
-                                </p>
-                            </div>
+        <x-slot name="content">
+            <div class="space-y-6">
+                <!-- Sección de Foto y Nombre -->
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-16 h-16 overflow-hidden rounded-full">
+                            @if ($employeeShow->profile_photo_path)
+                                <img src="{{ asset('storage/' . str_replace('storage/', '', $employeeShow->profile_photo_path)) }}"
+                                    alt="{{ $employeeShow->name }}" class="w-full h-full object-cover">
+                            @else
+                                <div class="flex items-center justify-center w-full h-full bg-gray-200">
+                                    <x-mary-icon name="o-user" class="w-8 h-8 text-gray-500" />
+                                </div>
+                            @endif
                         </div>
-
-                        <div>
-                            <h1 class="text-lg font-semibold">Estado: </h1>
-                            @switch($employeeShow->status)
-                                @case('FALTA ASIGNAR')
-                                    <span class="font-bold text-lg text-red-600">{{ $employeeShow->status }}</span>
-                                @break
-
-                                @case('Trabajando')
-                                    <span class="font-bold text-lg text-green-600">{{ $employeeShow->status }}</span>
-                                @break
-
-                                @case('Trabajando (Cambio de Cargo)')
-                                    <span class="font-bold text-lg text-green-400">{{ $employeeShow->status }}</span>
-                                @break
-
-                                @case('Trabajando (Vacaciones)')
-                                    <span class="font-bold text-lg text-orange-600">{{ $employeeShow->status }}</span>
-                                @break
-
-                                @case('Extrabajador (Jubilado)')
-                                    <span class="font-bold text-lg text-blue-600">{{ $employeeShow->status }}</span>
-                                @break
-
-                                @default
-                                    <span class="font-bold text-lg text-gray-600">{{ $employeeShow->status }}</span>
-                            @endswitch
-                        </div>
-
-                    </div>
-
-                    <!-- Sección de Datos Personales -->
-                    <div class="space-y-4">
-                        <div class="flex items-center space-x-2">
-                            <x-mary-icon name="o-identification" class="w-5 h-5 text-primary" />
-                            <span class="font-semibold text-lg">Datos Personales</span>
-                        </div>
-                        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                            <x-mary-input disabled style="cursor: default" icon="o-calendar-days"
-                                label="Fecha de Nacimiento" :value="$employeeShow->person->personaldata->birthdate" />
-                            <x-mary-input disabled style="cursor: default" icon="o-user" label="Género"
-                                :value="$employeeShow->person->personaldata->gender" />
-                            <x-mary-input disabled style="cursor: default" icon="o-flag" label="Nacionalidad"
-                                :value="$employeeShow->person->personaldata->nationality" />
+                        <div class="space-y-1">
+                            <p class="text-lg font-semibold">
+                                {{ $employeeShow->firstName }}
+                                {{ $employeeShow->lastName }}
+                            </p>
+                            <p class="text-sm text-gray-500">CUIT:
+                                {{ $employeeShow->cuit }}
+                            </p>
                         </div>
                     </div>
 
-                    <!-- Sección de Usuario y Email -->
-                    <div class="space-y-4">
-                        <div class="flex items-center space-x-2">
-                            <x-mary-icon name="o-at-symbol" class="w-5 h-5 text-primary" />
-                            <span class="font-semibold text-lg">Información de Usuario</span>
-                        </div>
-                        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                            <x-mary-input disabled style="cursor: default" icon="o-user" label="Usuario"
-                                :value="$employeeShow->person->users->name" />
-                            <x-mary-input disabled style="cursor: default" icon="o-at-symbol" label="Email"
-                                :value="$employeeShow->person->users->email" />
-                        </div>
+                    <div>
+                        <h1 class="text-lg font-semibold">Estado: </h1>
+                        @switch($employeeShow->status)
+                            @case('FALTA ASIGNAR')
+                                <span class="font-bold text-lg text-red-600">{{ $employeeShow->status }}</span>
+                            @break
+
+                            @case('Trabajando')
+                                <span class="font-bold text-lg text-green-600">{{ $employeeShow->status }}</span>
+                            @break
+
+                            @case('Trabajando (Cambio de Cargo)')
+                                <span class="font-bold text-lg text-green-400">{{ $employeeShow->status }}</span>
+                            @break
+
+                            @case('Trabajando (Vacaciones)')
+                                <span class="font-bold text-lg text-orange-600">{{ $employeeShow->status }}</span>
+                            @break
+
+                            @case('Extrabajador (Jubilado)')
+                                <span class="font-bold text-lg text-blue-600">{{ $employeeShow->status }}</span>
+                            @break
+
+                            @default
+                                <span class="font-bold text-lg text-gray-600">{{ $employeeShow->status }}</span>
+                        @endswitch
                     </div>
 
-                    <!-- Sección de Domicilio -->
-                    <div class="space-y-4">
-                        <div class="flex items-center space-x-2">
-                            <x-mary-icon name="o-home" class="w-5 h-5 text-primary" />
-                            <span class="font-semibold text-lg">Domicilio</span>
-                        </div>
-                        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                            <x-mary-input disabled style="cursor: default" label="Calle" :value="$employeeShow->person->personaldata->street" />
-                            <x-mary-input disabled style="cursor: default" label="Barrio" :value="$employeeShow->person->personaldata->neighborhood" />
-                            <x-mary-input disabled style="cursor: default" label="Casa" :value="$employeeShow->person->personaldata->house" />
-                            <x-mary-input disabled style="cursor: default" label="Manzana" :value="$employeeShow->person->personaldata->streetBlock" />
-                            <x-mary-input disabled style="cursor: default" label="Sector" :value="$employeeShow->person->personaldata->sector" />
-                            <x-mary-input disabled style="cursor: default" label="Altura" :value="$employeeShow->person->personaldata->number" />
-                        </div>
+                </div>
+
+                <!-- Sección de Datos Personales -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-2">
+                        <x-mary-icon name="o-identification" class="w-5 h-5 text-primary" />
+                        <span class="font-semibold text-lg">Datos Personales</span>
+                    </div>
+                    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                        <x-mary-input disabled style="cursor: default" icon="o-calendar-days"
+                            label="Fecha de Nacimiento" :value="$employeeShow->birthdate" />
+                        <x-mary-input disabled style="cursor: default" icon="o-user" label="Género"
+                            :value="$employeeShow->gender" />
+                        <x-mary-input disabled style="cursor: default" icon="o-flag" label="Nacionalidad"
+                            :value="$employeeShow->nationality" />
                     </div>
                 </div>
-            </x-slot>
 
-            <x-slot name="footer">
-                <div class="flex justify-end space-x-2">
-                    <x-danger-button type="button" wire:click="$set('employeeShow.showModal', false)"
-                        class="flex items-center space-x-2">
-                        <x-mary-icon name="o-x-mark" class="w-5 h-5" />
-                        <span>Cerrar</span>
-                    </x-danger-button>
+                <!-- Sección de Usuario y Email -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-2">
+                        <x-mary-icon name="o-at-symbol" class="w-5 h-5 text-primary" />
+                        <span class="font-semibold text-lg">Información de Usuario</span>
+                    </div>
+                    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                        <x-mary-input disabled style="cursor: default" icon="o-user" label="Usuario"
+                            :value="$employeeShow->name" />
+                        <x-mary-input disabled style="cursor: default" icon="o-at-symbol" label="Email"
+                            :value="$employeeShow->email" />
+                    </div>
                 </div>
-            </x-slot>
-        </x-dialog-modal>
-    </form> --}}
 
-    {{-- Editar usuario --}}
+                <!-- Sección de Domicilio -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-2">
+                        <x-mary-icon name="o-home" class="w-5 h-5 text-primary" />
+                        <span class="font-semibold text-lg">Domicilio</span>
+                    </div>
+                    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                        <x-mary-input disabled style="cursor: default" label="Calle" :value="$employeeShow->street" />
+                        <x-mary-input disabled style="cursor: default" label="Barrio" :value="$employeeShow->neighborhood" />
+                        <x-mary-input disabled style="cursor: default" label="Casa" :value="$employeeShow->house" />
+                        <x-mary-input disabled style="cursor: default" label="Manzana" :value="$employeeShow->streetBlock" />
+                        <x-mary-input disabled style="cursor: default" label="Sector" :value="$employeeShow->sector" />
+                        <x-mary-input disabled style="cursor: default" label="Altura" :value="$employeeShow->number" />
+                    </div>
+                </div>
+            </div>
+        </x-slot>
+
+        <x-slot name="footer">
+            <div class="flex justify-end space-x-2">
+                <x-danger-button type="button" wire:click="$set('employeeShow.showModal', false)"
+                    class="flex items-center space-x-2">
+                    <x-mary-icon name="o-x-mark" class="w-5 h-5" />
+                    <span>Cerrar</span>
+                </x-danger-button>
+            </div>
+        </x-slot>
+    </x-dialog-modal>
+
+    {{-- Editar trabajador --}}
     <form>
         <x-dialog-modal wire:model="editModal">
             <x-slot name="title">

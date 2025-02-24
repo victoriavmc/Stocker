@@ -134,9 +134,9 @@
                             <span class="text-lg font-medium">Datos Personales</span>
                         </div>
 
-                        <x-mary-input wire:model="personCreate.firstName" label="Nombre" right-icon="o-user" inline />
+                        <x-mary-input wire:model="personCreate.firstName" label="Nombre" icon="o-user" inline />
 
-                        <x-mary-input wire:model="personCreate.lastName" label="Apellido" right-icon="o-user" inline />
+                        <x-mary-input wire:model="personCreate.lastName" label="Apellido" icon="o-user" inline />
 
                         <select wire:model="personCreate.nationality"
                             class="select {{ $errors->has('personCreate.nationality') ? 'select-error' : 'select-primary' }} w-full font-normal h-14 pt-3">
@@ -149,8 +149,7 @@
                             <span class="text-red-500 label-text-alt p-1">{{ $message }}</span>
                         @enderror
 
-                        <x-mary-input wire:model="personCreate.cuit" label="CUIT" right-icon="o-identification"
-                            inline />
+                        <x-mary-input wire:model="personCreate.cuit" label="CUIT" icon="o-identification" inline />
 
                         <select wire:model="personCreate.gender"
                             class="select {{ $errors->has('personCreate.gender') ? 'select-error' : 'select-primary' }} w-full font-normal h-14 pt-3">
@@ -164,7 +163,7 @@
                         @enderror
 
                         <x-mary-input wire:model="personCreate.birthdate" label="Fecha de Nacimiento"
-                            right-icon="o-calendar-days" type="date" inline />
+                            icon="o-calendar-days" type="date" inline />
                     </div>
 
                     <!-- Sección de Dirección -->
@@ -174,22 +173,19 @@
                             <span class="text-lg font-medium">Dirección</span>
                         </div>
 
-                        <x-mary-input wire:model="personCreate.street" label="Calle" right-icon="o-map-pin"
+                        <x-mary-input wire:model="personCreate.street" label="Calle" icon="o-map-pin" inline />
+
+                        <x-mary-input wire:model="personCreate.neighborhood" label="Barrio" icon="o-map-pin"
                             inline />
 
-                        <x-mary-input wire:model="personCreate.neighborhood" label="Barrio" right-icon="o-map-pin"
+                        <x-mary-input wire:model="personCreate.house" label="Casa" icon="o-map-pin" inline />
+
+                        <x-mary-input wire:model="personCreate.streetBlock" label="Manzana" icon="o-map-pin"
                             inline />
 
-                        <x-mary-input wire:model="personCreate.house" label="Casa" right-icon="o-map-pin" inline />
+                        <x-mary-input wire:model="personCreate.sector" label="Sector" icon="o-map-pin" inline />
 
-                        <x-mary-input wire:model="personCreate.streetBlock" label="Manzana" right-icon="o-map-pin"
-                            inline />
-
-                        <x-mary-input wire:model="personCreate.sector" label="Sector" right-icon="o-map-pin"
-                            inline />
-
-                        <x-mary-input wire:model="personCreate.number" label="Altura" right-icon="o-map-pin"
-                            inline />
+                        <x-mary-input wire:model="personCreate.number" label="Altura" icon="o-map-pin" inline />
                     </div>
                 </div>
 
@@ -200,9 +196,9 @@
                         <span class="text-lg font-medium">Datos de Usuario</span>
                     </div>
 
-                    <x-mary-input wire:model="personCreate.name" label="Usuario" right-icon="o-user" inline />
+                    <x-mary-input wire:model="personCreate.name" label="Usuario" icon="o-user" inline />
 
-                    <x-mary-input wire:model="personCreate.email" label="Email" right-icon="o-envelope" inline />
+                    <x-mary-input wire:model="personCreate.email" label="Email" icon="o-envelope" inline />
 
                     <x-mary-password wire:model="personCreate.password" label="Contraseña" right-icon="o-lock-closed"
                         inline />
@@ -372,9 +368,9 @@
                             <span class="text-lg font-medium ">Datos Personales</span>
                         </div>
 
-                        <x-mary-input wire:model="personEdit.firstName" label="Nombre" right-icon="o-user" inline />
+                        <x-mary-input wire:model="personEdit.firstName" label="Nombre" icon="o-user" inline />
 
-                        <x-mary-input wire:model="personEdit.lastName" label="Apellido" right-icon="o-user" inline />
+                        <x-mary-input wire:model="personEdit.lastName" label="Apellido" icon="o-user" inline />
 
                         <select wire:model="personEdit.nationality"
                             class="select select-primary w-full font-normal h-14 pt-3">
@@ -384,14 +380,13 @@
                             @endforeach
                         </select>
 
-                        <x-mary-input wire:model="personEdit.cuit" label="CUIT" right-icon="o-identification"
-                            inline />
+                        <x-mary-input wire:model="personEdit.cuit" label="CUIT" icon="o-identification" inline />
 
-                        <x-mary-select wire:model="personCreate.gender" label="Genero" right-icon="o-user"
+                        <x-mary-select wire:model="personCreate.gender" label="Genero" icon="o-user"
                             :options="$genders" option-value="value" option-label="value" inline />
 
                         <x-mary-input wire:model="personEdit.birthdate" label="Fecha de Nacimiento"
-                            right-icon="o-calendar-days" type="date" inline />
+                            icon="o-calendar-days" type="date" inline />
                     </div>
 
                     <!-- Sección de Dirección -->
@@ -401,14 +396,12 @@
                             <span class="text-lg font-medium">Dirección</span>
                         </div>
 
-                        <x-mary-input wire:model="personEdit.street" label="Calle" right-icon="o-map-pin" inline />
-                        <x-mary-input wire:model="personEdit.neighborhood" label="Barrio" right-icon="o-map-pin"
-                            inline />
-                        <x-mary-input wire:model="personEdit.house" label="Casa" right-icon="o-map-pin" inline />
-                        <x-mary-input wire:model="personEdit.streetBlock" label="Manzana" right-icon="o-map-pin"
-                            inline />
-                        <x-mary-input wire:model="personEdit.sector" label="Sector" right-icon="o-map-pin" inline />
-                        <x-mary-input wire:model="personEdit.number" label="Número" right-icon="o-map-pin" inline />
+                        <x-mary-input wire:model="personEdit.street" label="Calle" icon="o-map-pin" inline />
+                        <x-mary-input wire:model="personEdit.neighborhood" label="Barrio" icon="o-map-pin" inline />
+                        <x-mary-input wire:model="personEdit.house" label="Casa" icon="o-map-pin" inline />
+                        <x-mary-input wire:model="personEdit.streetBlock" label="Manzana" icon="o-map-pin" inline />
+                        <x-mary-input wire:model="personEdit.sector" label="Sector" icon="o-map-pin" inline />
+                        <x-mary-input wire:model="personEdit.number" label="Número" icon="o-map-pin" inline />
                     </div>
                 </div>
 
@@ -440,8 +433,8 @@
                             </div>
                         </div>
                     @endif
-                    <x-mary-input wire:model="personEdit.name" label="Usuario" right-icon="o-user" inline />
-                    <x-mary-input wire:model="personEdit.email" label="Email" right-icon="o-envelope" inline />
+                    <x-mary-input wire:model="personEdit.name" label="Usuario" icon="o-user" inline />
+                    <x-mary-input wire:model="personEdit.email" label="Email" icon="o-envelope" inline />
                 </div>
             </x-slot>
 

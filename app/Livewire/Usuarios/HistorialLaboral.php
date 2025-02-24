@@ -6,7 +6,7 @@ use App\Livewire\Forms\employeeCreateForm;
 use App\Livewire\Forms\employeeEditForm;
 use App\Livewire\Forms\employeeShow;
 use App\Models\Jobposition;
-
+use App\Models\Person;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Mary\Traits\Toast;
@@ -22,8 +22,9 @@ class HistorialLaboral extends Component
 
     public $deleteModal = false;
 
-    public $trabajadores;
-    public $trabajador;
+    public $persons;
+    public $employees;
+    public $employee;
 
     public function create()
     {
@@ -59,7 +60,7 @@ class HistorialLaboral extends Component
     public function destroyModal($id)
     {
         $this->deleteModal = true;
-        $this->trabajador = Jobposition::find($id);
+        $this->employees = Jobposition::find($id);
     }
 
     public function destroy() {}
@@ -68,7 +69,8 @@ class HistorialLaboral extends Component
     public function mount()
     {
         // Cargamos los datos necesarios, de todos los trabajadores
-        $this->trabajadores = Jobposition::all();
+        $this->employees = Jobposition::all();
+        $this->persons = Person::all();
     }
 
     public function render()

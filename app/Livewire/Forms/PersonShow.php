@@ -46,13 +46,10 @@ class PersonShow extends Form
         $this->showModal = true;
         $this->person = Person::with(['personalData', 'address', 'user'])->findOrFail($id);
 
-        // Cargar datos personales
         $this->loadPersonalData();
 
-        // Cargar datos de dirección  
         $this->loadAddressData();
 
-        // Cargar datos de usuario
         $this->loadUserData();
     }
 
@@ -60,20 +57,20 @@ class PersonShow extends Form
     {
         $this->personalData = $this->person->personalData;
 
-        $this->fill($this->only('firstName', 'lastName', 'nationality', 'cuit', 'gender', 'birthdate'));
+        $this->fill($this->personalData->only('firstName', 'lastName', 'nationality', 'cuit', 'gender', 'birthdate'));
     }
 
     private function loadAddressData()
     {
         $this->address = $this->person->address;
 
-        $this->fill($this->only('street', 'neighborhood', 'house', 'streetBlock', 'sector', 'number'));
+        $this->fill($this->address->only('street', 'neighborhood', 'house', 'streetBlock', 'sector', 'number'));
     }
 
     private function loadUserData()
     {
         $this->user = $this->person->user;
 
-        $this->fill($this->only('name', 'email', 'password', 'profile_photo_path'));
+        $this->fill($this->user->only('name', 'email', 'password', 'profile_photo_path'));
     }
 }
