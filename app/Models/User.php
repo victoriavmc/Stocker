@@ -9,6 +9,10 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\Facades\Image;
+use Intervention\Image\ImageManager;
 
 class User extends Authenticatable
 {
@@ -73,5 +77,41 @@ class User extends Authenticatable
         return [
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Update the user's profile photo.
+     *
+     * @param  \Illuminate\Http\UploadedFile  $photo
+     * @return void
+     */
+    public function updateProfilePhoto($photo)
+    {
+        tap($this->profile_photo_path, function ($previous) use ($photo) {
+            // Procesar la imagen con Intervention Image
+
+            $manager = new ImageManager(new Driver());
+
+            $img = $manager->read($photo->getRealPath());
+
+            // Generar nombre único para el archivo
+            $fileName = 'profile-photos/' . $this->name . '.webp';
+
+            // Guardar la imagen procesada
+            Storage::disk($this->profilePhotoDisk())->put(
+                $fileName,
+                $img->toWebp()
+            );
+
+            // Actualizar la ruta en la base de datos
+            $this->forceFill([
+                'profile_photo_path' => $fileName,
+            ])->save();
+
+            // Eliminar la foto anterior si existe
+            if ($previous) {
+                Storage::disk($this->profilePhotoDisk())->delete($previous);
+            }
+        });
     }
 }

@@ -59,37 +59,21 @@ class PersonShow extends Form
     private function loadPersonalData()
     {
         $this->personalData = $this->person->personalData;
-        $this->fill([
-            'firstName' => $this->personalData->firstName,
-            'lastName' => $this->personalData->lastName,
-            'nationality' => $this->personalData->nationality,
-            'cuit' => $this->personalData->cuit,
-            'gender' => $this->personalData->gender,
-            'birthdate' => $this->personalData->birthdate
-        ]);
+
+        $this->fill($this->only('firstName', 'lastName', 'nationality', 'cuit', 'gender', 'birthdate'));
     }
 
     private function loadAddressData()
     {
         $this->address = $this->person->address;
-        $this->fill([
-            'street' => $this->address->street,
-            'neighborhood' => $this->address->neighborhood,
-            'house' => $this->address->house,
-            'streetBlock' => $this->address->streetBlock,
-            'sector' => $this->address->sector,
-            'number' => $this->address->number
-        ]);
+
+        $this->fill($this->only('street', 'neighborhood', 'house', 'streetBlock', 'sector', 'number'));
     }
 
     private function loadUserData()
     {
         $this->user = $this->person->user;
-        $this->fill([
-            'name' => $this->user->name,
-            'email' => $this->user->email,
-            'password' => $this->user->password,
-            'profile_photo_path' => $this->user->profile_photo_path
-        ]);
+
+        $this->fill($this->only('name', 'email', 'password', 'profile_photo_path'));
     }
 }

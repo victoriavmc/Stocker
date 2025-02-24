@@ -11,11 +11,10 @@ trait toWebp
     {
         $manager = new ImageManager(new Driver());
 
-        // Leer la imagen
-        $image = $manager->read($image);
+        $img = $manager->read($image);
 
         // Convertir a WebP
-        $image->toWebp();
+        $img->toWebp();
 
         // Combinar el nombre con el sufijo que desees (por ejemplo, '-path')
         $newName = $name . '-' . $path;

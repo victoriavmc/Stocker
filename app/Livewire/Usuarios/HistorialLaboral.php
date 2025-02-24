@@ -2,50 +2,65 @@
 
 namespace App\Livewire\Usuarios;
 
+use App\Livewire\Forms\employeeCreateForm;
+use App\Livewire\Forms\employeeEditForm;
+use App\Livewire\Forms\employeeShow;
 use App\Models\Jobposition;
 
 use Livewire\Component;
+use Livewire\WithPagination;
+use Mary\Traits\Toast;
 
 class HistorialLaboral extends Component
 {
+    use Toast;
+    use WithPagination;
 
-    public $createModal = false;
-    public $showModal = false;
-    public $editModal = false;
+    public employeeCreateForm $employeeCreate;
+    public employeeEditForm $employeeEdit;
+    public employeeShow $employeeShow;
 
-    // Variable para almacenar los trabajadores
+    public $deleteModal = false;
+
     public $trabajadores;
-
-    // Variable parusuarios.createa almacenar el trabajador seleccionado
     public $trabajador;
-
-    //Datos necesarios para la paginación
-    public $idJobposition; // id del trabajador
-    public $profile_photo_path; // Foto de perfil
-    public $firstName; //Nombre Completo
-    public $lastName; //Apellido Completo
-    public $position; //Nombre deL area que cubre
-    public $startDate; //Nombre del inicio que comenzo a trabajar
-    public $status; //Estado del trabajador
 
     public function create()
     {
-        $this->createModal = true;
+        $this->employeeCreate->create();
     }
 
-    public function store() {}
-
-    public function show()
+    public function store()
     {
-        $this->showModal = true;
+        $this->employeeCreate->save();
+        $this->success('Historial laboral creado correctamente');
+
+        $this->resetPage();
+
+        // event(new EmailNotification('historial-laboral', ['employee' => $this->employeeCreate->employee]));
     }
 
-    public function edit()
+    public function show($id)
     {
-        $this->editModal = true;
+        $this->employeeShow->show($id);
     }
 
-    public function update() {}
+    public function edit($id)
+    {
+        $this->employeeEdit->edit($id);
+    }
+
+    public function update()
+    {
+        $this->employeeEdit->update();
+        $this->success('Historial laboral actualizado correctamente');
+    }
+
+    public function destroyModal($id)
+    {
+        $this->deleteModal = true;
+        $this->trabajador = Jobposition::find($id);
+    }
 
     public function destroy() {}
 

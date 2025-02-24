@@ -8,12 +8,16 @@ use App\Livewire\Forms\PersonEditForm;
 use App\Livewire\Forms\PersonShow;
 use App\Models\Country;
 use App\Models\Person;
+use Illuminate\Support\Facades\Storage;
+use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\WithPagination;
 use Mary\Traits\Toast;
 
 class Personal extends Component
 {
     use Toast;
+    use WithPagination;
 
     public PersonCreateForm $personCreate;
     public PersonEditForm $personEdit;
@@ -58,6 +62,8 @@ class Personal extends Component
         $persona = $this->personCreate->save();
         $this->success('Persona agregada al sistema correctamente');
 
+        $this->resetPage();
+
         event(new EmailNotification('bienvenida', ['personaldata' => $persona->personaldata, 'user' => $persona->user]));
 
         // Enviar email de notiAsignarAreaLaburo a todos los usuarios con el rol de RRHH
@@ -77,6 +83,8 @@ class Personal extends Component
     {
         $this->personEdit->update();
         $this->success('Persona actualizada correctamente');
+
+        $this->dispatch('personUpdated');
     }
 
     public function destroyModal($id)
@@ -96,6 +104,24 @@ class Personal extends Component
         $this->deleteModal = false;
 
         $this->success('Persona eliminada correctamente');
+    }
+
+    public function deleteImage()
+    {
+        $path = $this->personEdit->deleteImage();
+
+        session(['image_path_to_delete' => $path]);
+    }
+
+    #[On('personUpdated')]
+    public function deleteImageFromStorage()
+    {
+        if (session()->has('image_path_to_delete')) {
+            Storage::disk('public')->delete(session()->get('image_path_to_delete'));
+            session()->forget('image_path_to_delete');
+        }
+
+        $this->success('Imagen eliminada correctamente');
     }
 
     public function determinarOrdenStatus($cargo)
@@ -118,7 +144,7 @@ class Personal extends Component
 
     public function render()
     {
-        $this->personas = Person::with(['jobPositions' => function ($query) {
+        $personas = Person::with(['jobPositions' => function ($query) {
             $query->orderBy('endDate', 'desc')->latest();
         }])
             ->whereHas('personaldata', function ($query) {
@@ -127,17 +153,22 @@ class Personal extends Component
             })
             ->whereHas('userHistories', function ($query) {
                 $query->where('statusLogic', '!=', 'Inactivo');
-            })
-            ->get()
+            });
+
+        $personasPaginadas = $personas->paginate(6);
+
+        $this->personas = collect($personasPaginadas->items())
             ->map(function ($persona) {
                 $ultimoCargo = $persona->jobPositions->first();
                 $persona->ordenStatus = $this->determinarOrdenStatus($ultimoCargo);
                 $persona->statusTrabajador = $this->determinarStatusTrabajador($ultimoCargo);
                 return $persona;
-            });
+            })
+            ->sortBy('ordenStatus');
 
-        $this->personas = $this->personas->sortBy('ordenStatus');
-
-        return view('livewire.usuarios.personal', ['personas' => $this->personas]);
+        return view('livewire.usuarios.personal', [
+            'personas' => $this->personas,
+            'personasPaginadas' => $personasPaginadas
+        ]);
     }
 }
