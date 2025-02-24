@@ -15,50 +15,36 @@ class ProductCreateForm extends Form
     use CapitalizeFields;
 
     #BaseProducts
-    #[Validate('required|string|max:50')]
+    #[Validate('required|string|max:50', as: 'Marca')]
     public $brand;
 
-    #[Validate('required|string|max:50')]
+    #[Validate('required|string|max:50', as: 'Nombre')]
     public $name;
 
     #Products
-    #[Validate('required|integer')]
+    #[Validate('required|integer', as: 'Código')]
     public $code;
 
-    #[Validate('required|integer|max:100')]
+    #[Validate('required|integer|max:100', as: 'Medida')]
     public $measure;
 
-    #[Validate('required|string')]
+    #[Validate('required|string', as: 'Unidad de Medida')]
     public $measureUnit;
 
-    #[Validate('required|string|max:100')]
+    #[Validate('required|string|max:100', as: 'Tipo')]
     public $productType;
 
-    #[Validate('nullable|image|max:1024')]
+    #[Validate('nullable|image|max:1024', as: 'Imagen')]
     public $photo;
 
     // Extra
     public $productTypes = [];
 
-    #[Validate('nullable|string|max:255')]
+    #[Validate('nullable|string|max:255', as: 'Nuevo Tipo de Producto')]
     public $newProductType;
 
     public $newProductTypeCampo = false;
     public $createModal = false;
-
-    // Personalizar nombres de campos en mensajes de error
-    public function attributes()
-    {
-        return [
-            'brand' => 'Marca',
-            'name' => 'Nombre',
-            'code' => 'Código',
-            'measure' => 'Medida',
-            'productType' => 'Tipo',
-            'photo' => 'Foto',
-            'newProductType' => 'Nuevo Tipo de Producto',
-        ];
-    }
 
     public function createBaseProduct(): int
     {

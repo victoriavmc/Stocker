@@ -61,7 +61,7 @@
                         <x-mary-input wire:model="productCreate.measure" label="Medida">
                             <x-slot:prepend>
                                 <x-mary-select wire:model="productCreate.measureUnit" :options="[
-                                    ['value' => '', 'label' => 'Seleccione:', 'disabled' => true, 'selected' => true], // Opción deshabilitada y seleccionada por defecto
+                                    ['value' => '', 'label' => 'Seleccione:', 'selected' => true], // Opción deshabilitada y seleccionada por defecto
                                     ['value' => 'G.', 'label' => 'Gramos'],
                                     ['value' => 'Kg.', 'label' => 'Kilogramos'],
                                     ['value' => 'Cm3.', 'label' => 'Centímetros Cúbicos'],
