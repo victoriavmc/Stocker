@@ -61,12 +61,14 @@
                         <x-mary-input wire:model="productCreate.measure" label="Medida">
                             <x-slot:prepend>
                                 <x-mary-select wire:model="productCreate.measureUnit" :options="[
-                                    ['value' => 'g', 'label' => 'Gramos'],
-                                    ['value' => 'kg', 'label' => 'Kilogramos'],
-                                    ['value' => 'cm3', 'label' => 'Centímetros Cúbicos'],
-                                    ['value' => 'l', 'label' => 'Litros'],
-                                    ['value' => 'm', 'label' => 'Metros'],
-                                    ['value' => 'cm', 'label' => 'Centímetros'],
+                                    ['value' => '', 'label' => 'Seleccione:', 'disabled' => true, 'selected' => true], // Opción deshabilitada y seleccionada por defecto
+                                    ['value' => 'G.', 'label' => 'Gramos'],
+                                    ['value' => 'Kg.', 'label' => 'Kilogramos'],
+                                    ['value' => 'Cm3.', 'label' => 'Centímetros Cúbicos'],
+                                    ['value' => 'L.', 'label' => 'Litros'],
+                                    ['value' => 'M.', 'label' => 'Metros'],
+                                    ['value' => 'mm.', 'label' => 'Milímetros'],
+                                    ['value' => 'Cm.', 'label' => 'Centímetros'],
                                 ]"
                                     option-value="value" option-label="label" class="rounded-e-none bg-base-200"
                                     icon="o-scale" />
@@ -85,7 +87,7 @@
                         <div class="mt-3">
                             <!-- Selector de Tipo de Producto -->
                             <label class="block w-full max-w-xs mt-1 form-control">
-                                <select class="select select-primary w-full font-normal h-14 pt-3"
+                                <select class="w-full pt-3 font-normal select select-primary h-14"
                                     wire:model.live="productCreate.productType">
                                     <option value="" selected hidden>Seleccione un tipo de producto</option>
                                     @foreach ($productTypes as $type)
@@ -96,10 +98,10 @@
                             </label>
 
                             <!-- Campo para nuevo tipo de producto (si se selecciona "Otro") -->
-                            @if ($productCreate->newProductTypeCampo)
+                            @if ($productCreate->productType === 'other')
                                 <div class="mt-3">
                                     <label class="block w-full max-w-xs mt-1 form-control">
-                                        <input type="text" class="w-full input input-bordered"
+                                        <input required type="text" class="w-full input input-bordered"
                                             wire:model="productCreate.newProductType"
                                             placeholder="Nuevo Tipo de Producto" />
                                     </label>
@@ -109,16 +111,15 @@
 
                         <div class="space-y-2">
                             <span class="text-sm font-bold">Foto del producto</span>
-                            <input type="file" class="file-input file-input-bordered file-input-primary w-full"
+                            <input type="file" class="w-full file-input file-input-bordered file-input-primary"
                                 wire:model="productCreate.photo" accept="image/*" />
-
                         </div>
 
-                        {{-- Previsualizacion de la foto --}}
+                        {{-- Previsualización de la foto (solo si existe) --}}
                         @if ($productCreate->photo)
                             <div class="mt-4">
                                 <img src="{{ $productCreate->photo->temporaryUrl() }}" alt="Foto del producto"
-                                    class="w-full h-48 object-cover rounded-md" />
+                                    class="object-cover w-full h-48 rounded-md" />
                             </div>
                         @endif
 

@@ -7,34 +7,65 @@ use App\Models\Product;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 use Illuminate\Support\Facades\DB;
+use App\Traits\CapitalizeFields;
+use Exception;
 
 class ProductCreateForm extends Form
 {
+    use CapitalizeFields;
 
     #BaseProducts
-    #[Validate('required|string|max:50, as:Marca')]
+    #[Validate('required|string|max:50')]
     public $brand;
-    #[Validate('required|string|max:50, as:Nombre')]
+
+    #[Validate('required|string|max:50')]
     public $name;
 
     #Products
-    #[Validate('required|integer, as:Código')]
+    #[Validate('required|integer')]
     public $code;
-    #[Validate('required|integer|max:100, as:Medida')]
+
+    #[Validate('required|integer|max:100')]
     public $measure;
-    #[Validate('required|string|max:100, as:Tipo')]
+
+    #[Validate('required|string')]
+    public $measureUnit;
+
+    #[Validate('required|string|max:100')]
     public $productType;
-    #[Validate('required|image|max:1024, as:Foto')]
+
+    #[Validate('nullable|image|max:1024')]
     public $photo;
 
-    //Extra (Controla en el peor de los casos plis)
-    public $productTypes = []; // Lista de tipos de productos existentes (Obtenemos de la base de datos)
-    #[Validate('required|string|max:255')]
-    public $newProductType; // Nuevo tipo de producto
+    // Extra
+    public $productTypes = [];
+
+    #[Validate('nullable|string|max:255')]
+    public $newProductType;
 
     public $newProductTypeCampo = false;
-
     public $createModal = false;
+
+    // Personalizar nombres de campos en mensajes de error
+    public function attributes()
+    {
+        return [
+            'brand' => 'Marca',
+            'name' => 'Nombre',
+            'code' => 'Código',
+            'measure' => 'Medida',
+            'productType' => 'Tipo',
+            'photo' => 'Foto',
+            'newProductType' => 'Nuevo Tipo de Producto',
+        ];
+    }
+
+    public function createBaseProduct(): int
+    {
+        return BaseProduct::create(
+            $this->only(['brand', 'name'])
+        )->idBaseProduct;
+    }
 
     public function create()
     {
@@ -42,6 +73,7 @@ class ProductCreateForm extends Form
     }
 
     // Cargar tipos de productos desde la base de datos
+
     public function loadProductTypes()
     {
         $this->productTypes = Product::distinct()
@@ -58,27 +90,51 @@ class ProductCreateForm extends Form
     public function save()
     {
         $this->validate();
-        // Save data
 
-        // Se usa una transacción para evitar datos inconsistentes
-        DB::transaction(function () {
-            // Guardar datos baseProducts
-            $baseProduct = BaseProduct::create([
-                'brand' => $this->brand,
-                'name' => $this->name,
-            ]);
+        // Save data
+        $fieldsToCapitalize = [
+            'brand',
+            'name',
+            'productType',
+            'photo',
+            'statusLogic',
+            'newProductType'
+        ];
+
+        $this->capitalizeFields($fieldsToCapitalize);
+
+        // Si el usuario selecciona "Otro" y escribe un nuevo tipo de producto
+        if ($this->productType === 'Other' && !empty($this->newProductType)) {
+            $this->productType = $this->newProductType;
+        }
+
+        // Combinar measure y measureUnit
+        $measureWithUnit = $this->measure . ' ' . $this->measureUnit;
+
+        try {
+            DB::beginTransaction();
+
+            $idBaseProduct = $this->createBaseProduct();
+
             // Guardar datos Product
-            Product::create([
+            $product = Product::create([
                 'code' => $this->code,
-                'measure' => $this->measure,
+                'measure' => $measureWithUnit,
                 'productType' => $this->productType,
                 'photo' => $this->photo,
                 'statusLogic' => 'Activo',
-                'idBaseProduct' => $baseProduct->idBaseProduct,
+                'idBaseProduct' => $idBaseProduct,
             ]);
-        });
 
-        // Se limpian los campos
-        $this->reset();
+            DB::commit();
+
+            $this->createModal = false;
+            $this->reset();
+        } catch (Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+
+        return $product;
     }
 }

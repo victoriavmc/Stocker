@@ -9,6 +9,8 @@ class BaseProduct extends Model
     // Definir el nombre de la tabla
     protected $table = 'baseproducts';
 
+    public $timestamps = false;
+
     // Especifico la clave primaria
     protected $primaryKey = 'idBaseProduct';
 
